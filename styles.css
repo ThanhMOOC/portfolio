@@ -1,24 +1,26 @@
-/* styles.css */
 :root {
-  --primary-color: #FF6B6B;
-  --secondary-color: #4ECDC4;
-  --text-color: #333;
+  --text-color: #c54646;
   --bg-light: #FAFAFA;
+  --primary-color: rgba(78,205,196,0.6);
+  --secondary-color: rgba(255,107,107,0.6);
 }
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   color: var(--text-color);
   background: var(--bg-light);
 }
+
 header.hero {
   position: relative;
-  background: url('images/hero.jpg') center/cover no-repeat;
+  background: url('img/cover.jpg') center/cover no-repeat;
   height: 60vh;
   display: flex;
   flex-direction: column;
@@ -27,15 +29,19 @@ header.hero {
   color: white;
   text-shadow: 0 1px 3px rgba(0,0,0,0.6);
 }
+
 header.hero .overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(135deg, rgba(255,107,107,0.6), rgba(78,205,196,0.6));
 }
-header.hero h1, header.hero .tagline, header.hero nav {
+
+header.hero h1,
+header.hero .tagline,
+header.hero nav {
   position: relative;
   z-index: 1;
 }
+
 header.hero nav a {
   margin: 0 10px;
   color: white;
@@ -43,27 +49,38 @@ header.hero nav a {
   padding: 8px 12px;
   border: 2px solid white;
   border-radius: 4px;
-  transition: background 0.3s, color 0.3s;
+  transition: background 0.3s, color 0.3s, font-weight 0.3s;
 }
+
 header.hero nav a:hover {
-  background: white;
-  color: var(--primary-color);
+  background: var(--primary-color);
+  color: var(--text-color);
+  font-weight: bold;
 }
-.gallery-section, .about-section, .contact-section {
-  padding: 40px 20px;
+
+.contact-section {
+  padding: 60px 20px;
   max-width: 1000px;
-  margin: auto;
-  background: white;
+  margin: 80px auto 40px;
+  background: linear-gradient(
+    133deg,
+    rgba(211,230,215,1) 0%,
+    rgba(232,213,213,1) 25%,
+    rgba(211,230,215,1) 50%,
+    rgba(232,213,213,1) 75%,
+    rgba(211,230,215,1) 100%
+  );
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  margin-bottom: 40px;
 }
-.gallery-section h2, .about-section h2, .contact-section h2 {
-  color: var(--primary-color);
+
+.contact-section h2 {
+  color: var(--text-color);
   margin-bottom: 20px;
   position: relative;
 }
-.gallery-section h2::after, .about-section h2::after, .contact-section h2::after {
+
+.contact-section h2::after {
   content: '';
   display: block;
   width: 60px;
@@ -72,44 +89,30 @@ header.hero nav a:hover {
   margin-top: 8px;
   border-radius: 2px;
 }
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 15px;
+
+html {
+  scroll-behavior: smooth;
 }
-.gallery-item {
-  position: relative;
-  overflow: hidden;
+
+.contact-section.highlight {
+  animation: highlight 0.6s ease forwards;
+  border: 2px solid var(--secondary-color);
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transform: scale(1.02);
+  transition: transform 0.3s ease, border 0.3s ease;
 }
-.gallery-item img {
-  width: 100%;
-  display: block;
-  transition: transform 0.3s, filter 0.3s;
-}
-.gallery-item:hover img {
-  transform: scale(1.1);
-  filter: brightness(1.1) contrast(1.05) saturate(1.1);
-}
-.about-content {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.portrait {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid var(--secondary-color);
-}
-footer {
-  text-align: center;
-  padding: 20px;
-  background: var(--primary-color);
-  color: white;
-}
-footer p {
-  margin: 0;
+
+@keyframes highlight {
+  0% {
+    transform: scale(1);
+    border-color: transparent;
+  }
+  50% {
+    transform: scale(1.02);
+    border-color: var(--secondary-color);
+  }
+  100% {
+    transform: scale(1);
+    border-color: transparent;
+  }
 }

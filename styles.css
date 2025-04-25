@@ -59,6 +59,32 @@ header.hero nav a:hover {
   font-weight: bold;
 }
 
+/* Cho phần hero của portfolio.html (slideshow) */
+.portfolio-hero {
+  position: relative;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.portfolio-hero .overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+}
+
+.portfolio-hero img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+}
+
 .contact-section {
   padding: 60px 20px;
   max-width: 1000px;

@@ -1,9 +1,3 @@
-// Chỉ cho phép duy nhất trang chính portfolio/
-if (window.location.pathname !== "/portfolio/" && window.location.pathname !== "/portfolio/index.html") {
-  window.location.href = "/portfolio/";
-}
-
-
 document.addEventListener('DOMContentLoaded', function () {
   // Smooth scroll cho các liên kết trong menu
   const links = document.querySelectorAll('header.hero nav a');
@@ -19,6 +13,15 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
     // Nếu không bắt đầu bằng # thì là link ra file khác, không ngăn hành vi mặc định
+
+    const allowedPaths = ['/portfolio/', '/portfolio']; // Cho phép duy nhất truy cập gốc
+
+    const currentPath = window.location.pathname;
+  
+    if (!allowedPaths.includes(currentPath)) {
+      // Chỉ redirect nếu không phải đường dẫn gốc
+      window.location.href = '/portfolio/';
+    }
   });
 
   const contactBtn = document.getElementById('nav-contact');

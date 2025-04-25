@@ -1,3 +1,9 @@
+// Chỉ cho phép duy nhất trang chính portfolio/
+if (window.location.pathname !== "/portfolio/" && window.location.pathname !== "/portfolio/index.html") {
+  window.location.href = "/portfolio/";
+}
+
+
 document.addEventListener('DOMContentLoaded', function () {
   // Smooth scroll cho các liên kết trong menu
   const links = document.querySelectorAll('header.hero nav a');

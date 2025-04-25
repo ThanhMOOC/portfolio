@@ -13,16 +13,22 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
     // Nếu không bắt đầu bằng # thì là link ra file khác, không ngăn hành vi mặc định
-
-    const allowedPaths = ['/portfolio/', '/portfolio']; // Cho phép duy nhất truy cập gốc
-
-    const currentPath = window.location.pathname;
-  
-    if (!allowedPaths.includes(currentPath)) {
-      // Chỉ redirect nếu không phải đường dẫn gốc
-      window.location.href = '/portfolio/';
-    }
   });
+
+  // Cập nhật để chỉ cho phép truy cập vào /portfolio/ và không cho phép truy cập trực tiếp vào các file .html
+  const currentPath = window.location.pathname;
+
+  // Kiểm tra nếu đường dẫn là file .html (index.html, portfolio.html, v.v.)
+  if (currentPath.endsWith('.html')) {
+    // Redirect về /portfolio/
+    window.location.href = '/portfolio/';
+  }
+
+  // Kiểm tra nếu người dùng không truy cập vào /portfolio/
+  const allowedPaths = ['/portfolio/', '/portfolio']; // Chỉ cho phép /portfolio/
+  if (!allowedPaths.includes(currentPath)) {
+    window.location.href = '/portfolio/'; // Redirect về trang chính
+  }
 
   const contactBtn = document.getElementById('nav-contact');
   const contactSection = document.getElementById('contact');

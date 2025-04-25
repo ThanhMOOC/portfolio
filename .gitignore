@@ -1,3 +1,4 @@
 # folder or file not tracking by git
 
 /img/*
+/img/library/*

@@ -15,14 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Nếu không bắt đầu bằng # thì là link ra file khác, không ngăn hành vi mặc định
   });
 
-  const currentPath = window.location.pathname;
-  const allowedPaths = ['/portfolio', '/portfolio/'];
-  const filePattern = /\/portfolio\/.*\.[a-z0-9]+$/i;
-
-  if (!allowedPaths.includes(currentPath) || filePattern.test(currentPath)) {
-    window.location.href = '/portfolio/';
-  }
-
   const contactBtn = document.getElementById('nav-contact');
   const contactSection = document.getElementById('contact');
 

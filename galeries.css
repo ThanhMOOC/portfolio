@@ -1,20 +1,25 @@
 :root {
-  --light-bg: #fefefe;
-  --accent-color: #444;
-  --highlight: #ddd;
+  --light-background: #fefefe;
+  --accent-text-color: #444;
+  --highlight-color: #ddd;
+  --gradient-start: #e0f7fa;
+  --gradient-end: #fce4ec;
+  --popup-background: rgba(0, 0, 0, 0.6);
+  --transition-duration: 0.2s;
 }
 
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: var(--light-bg);
-  color: var(--accent-color);
+  background: var(--light-background);
+  color: var(--accent-text-color);
+  transition: background-color var(--transition-duration) ease;
 }
 
 .gallery-header {
   text-align: center;
   padding: 2rem 1rem;
-  background: linear-gradient(90deg, #e0f7fa, #fce4ec);
+  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
 }
 
 .gallery-tagline {
@@ -31,14 +36,14 @@ body {
 
 .gallery-nav button {
   background: white;
-  border: 1px solid var(--highlight);
+  border: 1px solid var(--highlight-color);
   padding: 0.5rem 1rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background-color var(--transition-duration) ease;
 }
 
 .gallery-nav button:hover {
-  background: var(--highlight);
+  background: var(--highlight-color);
 }
 
 .gallery-main {
@@ -53,43 +58,42 @@ body {
   width: 100%;
   border-radius: 6px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform var(--transition-duration) ease; /* Smooth transition */
 }
 
 .gallery-main img:hover {
   transform: scale(1.05);
 }
 
-/* Popup */
 .popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.6);
+  background: var(--popup-background);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 100;
 }
 
-.popup-overlay.hidden {
-  display: none;
-}
-
+/* Popup content area */
 .popup-content {
   position: relative;
   background: white;
   padding: 1rem;
   max-width: 90%;
   max-height: 90%;
-  border-radius: 8px;
+  border-radius: 8px; /* Rounded corners */
+  & img {
+    width: 100%;
+    height: auto;
+  }
 }
 
-.popup-content img {
-  width: 100%;
-  height: auto;
+.popup-overlay.hidden {
+  display: none;
 }
 
 #popupClose {

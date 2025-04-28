@@ -1,12 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Smooth scroll cho các liên kết trong menu
-  const links = document.querySelectorAll('header.hero nav a');
+  const links = document.querySelectorAll('header.hero nav a[href^="#"]');
   links.forEach(link => {
     const href = link.getAttribute('href');
-    if (href.startsWith('#')) {
+    
       const targetElement = document.querySelector(href);
       if (targetElement) {
-        link.addEventListener('click', function (e) {
+        link.addEventListener('click', e => {
           e.preventDefault();
           targetElement.scrollIntoView({ behavior: 'smooth' });
         });
@@ -19,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const contactSection = document.getElementById('contact');
 
   if (contactBtn && contactSection) {
-    contactBtn.addEventListener('click', function (e) {
+    contactBtn.addEventListener('click', e => {
       e.preventDefault(); // chặn hành vi mặc định
       contactSection.classList.remove('highlight');
       void contactSection.offsetWidth; // trigger reflow
@@ -27,24 +26,23 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Tạo mảng imagePaths cho slideshow của portfolio.html
-  const imagePaths = [];
-
-  // Thay đổi username và repoName thành của bạn
-  const username = 'ThanhMOOC'; // Tên người dùng GitHub của bạn
-  const repoName = 'portfolio'; // Tên repo của bạn
-
-  // GitHub API URL để lấy danh sách tệp trong thư mục 'img/library'
+  const imagePaths = []; 
+  const username = 'ThanhMOOC'; 
+  const repoName = 'portfolio'; 
   const apiUrl = `https://api.github.com/repos/${username}/${repoName}/contents/img/library`;
 
-  // Fetch danh sách các tệp trong thư mục 'img/library'
+
   fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
-      // Lọc ra các tệp hình ảnh (jpg, jpeg, png, gif)
       const imageFiles = data.filter(file => /\.(jpg|jpeg|png|gif)$/.test(file.name));
 
-      // Tạo mảng đường dẫn hình ảnh từ URL của GitHub
+      if(imageFiles.length ==0){
+        console.log('no image found');
+        return;
+      }
+      
+
       imageFiles.forEach(file => {
         imagePaths.push(file.download_url); // Dùng URL tải về của GitHub
       });
@@ -54,25 +52,17 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .catch(error => console.error('Lỗi khi lấy danh sách hình ảnh:', error));
 
-  // Hàm xáo trộn mảng (shuffle) sử dụng thuật toán Fisher-Yates
+
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]]; // Hoán đổi các phần tử
+      [array[i], array[j]] = [array[j], array[i]]; 
     }
   }
 
-  // Hàm bắt đầu trình chiếu hình ảnh
   function startSlideshow() {
     const heroContainer = document.querySelector('.portfolio-hero .slideshow');
     let currentIndex = 0;
-
-    // Nếu không có container slideshow, thì không làm gì
-    if (!heroContainer) {
-      return;
-    }
-
-    // Tạo hình ảnh đầu tiên cho slideshow
     const img = document.createElement('img');
     img.src = imagePaths[currentIndex];
     img.alt = "Portfolio Image";
@@ -88,16 +78,23 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+const fetchPhotos = async() => {
+  try {
+      const response = await fetch('http://localhost:3000/api/photos');
+      const photos = await response.json();
+      const gallery = document.getElementById('gallery');
 
-fetch('http://localhost:3000/api/photos')
-  .then(response => response.json())
-  .then(photos => {
-    const gallery = document.getElementById('gallery');
-    photos.forEach(photo => {
-      const img = document.createElement('img');
-      img.src = photo.secure_url;
-      img.style = 'max-width:200px;margin:10px;';
-      gallery.appendChild(img);
-    });
-  })
-  .catch(error => console.error('Lỗi:', error));
+      if(!gallery){
+        return;
+      }
+      photos.forEach(photo => {
+        const img = document.createElement('img');
+        img.src = photo.secure_url;
+        img.style = 'max-width:200px;margin:10px;';
+        gallery.appendChild(img);
+      });
+  } catch (error) {
+      console.error('Lỗi:', error);
+  }
+}
+fetchPhotos();

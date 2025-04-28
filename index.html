@@ -1,28 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name - Photography Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Your Name's Photography Portfolio showcasing visual storytelling and photography skills." />
+    <meta name="keywords" content="photography, portfolio, visual storytelling, photographer, Your Name, images" />
+    <meta name="author" content="Your Name" />
+    <title>Your Name - Photography Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="hero">
     <div class="overlay"></div>
-    <h1>Your Name</h1>
-    <p class="tagline">Visual Storyteller & Photographer</p>
-    <nav>
-      <a href="portfolio/">Portfolio</a>
-      <a href="about.html">About</a>
-      <a href="#contact" id="nav-contact">Contact</a>
-    </nav>
-    
+    <div class="hero-content">
+      <h1>Your Name</h1>
+      <p class="tagline">Visual Storyteller & Photographer</p>
+      <nav aria-label="Main Navigation">
+        <a href="portfolio.html">Portfolio</a>
+        <a href="about.html">About</a>
+        <a href="#contact" id="nav-contact">Contact</a>
+      </nav>
+    </div>
   </header>
-  <section id="contact" class="contact-section">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
-    <p>Instagram: <a href="https://instagram.com/yourhandle" target="_blank">@yourhandle</a></p>
-  </section>
+
+  <main>
+    <section id="contact" class="contact-section" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Contact</h2>
+      <p>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
+      <p>Instagram: <a href="https://instagram.com/yourhandle" target="_blank" rel="noopener noreferrer">@yourhandle</a></p>
+    </section>
+  </main>
+
+  <footer></footer>
+
+  <script src="script.js"></script>
+</body>
+
 
   <script src="script.js"></script>
 </body>

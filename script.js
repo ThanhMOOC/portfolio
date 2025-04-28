@@ -87,3 +87,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 3000);
   }
 });
+
+
+fetch('http://localhost:3000/api/photos')
+  .then(response => response.json())
+  .then(photos => {
+    const gallery = document.getElementById('gallery');
+    photos.forEach(photo => {
+      const img = document.createElement('img');
+      img.src = photo.secure_url;
+      img.style = 'max-width:200px;margin:10px;';
+      gallery.appendChild(img);
+    });
+  })
+  .catch(error => console.error('Lỗi:', error));

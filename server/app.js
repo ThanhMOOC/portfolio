@@ -6,6 +6,7 @@ const cloudinary = require('cloudinary').v2;
 const path = require('path');
 const fs = require('fs');
 const util = require('util');
+const readdir = util.promisify(fs.readdir);
 
 const app = express();
 app.use(cors());
@@ -49,8 +50,20 @@ app.get('/api/photos', async (req, res) => {
   }
 });
 
+// New route to trigger the uploadImagesToCloudinary function
+app.get('/upload', async (req, res) => {
+  await uploadImagesToCloudinary();
+  res.send('Images upload process initiated.');
+});
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server đang chạy tại http://localhost:${PORT}`);
 });
+
+
+
+// Cho phép gọi upload từ dòng lệnh: node app.js upload
+if (require.main === module && process.argv.includes('upload')) {
+  uploadImagesToCloudinary();
+}

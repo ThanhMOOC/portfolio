@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
           targetElement.scrollIntoView({ behavior: 'smooth' });
         });
       }
-    }
+    })
     // Nếu không bắt đầu bằng # thì là link ra file khác, không ngăn hành vi mặc định
   });
 
@@ -75,8 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
         currentIndex = (currentIndex + 1) % imagePaths.length;
       }
     }, 3000);
-  }
-});
+  };
 
 const fetchPhotos = async() => {
   try {

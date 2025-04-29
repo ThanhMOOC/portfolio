@@ -1,8 +1,8 @@
-# folder or file not tracking by git
-/img/*
-/img/library/*
 # Bỏ qua file log
 server/server.log
 
 # bỏ qua file .env
 server/.env
+
+# bỏ qua folder 
+server/.tmp_img/

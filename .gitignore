@@ -2,7 +2,11 @@
 server/server.log
 
 # bỏ qua file .env
+<<<<<<< Updated upstream
 server/.env
 
 # bỏ qua folder 
 server/.tmp_img/
+=======
+server/.env
+>>>>>>> Stashed changes

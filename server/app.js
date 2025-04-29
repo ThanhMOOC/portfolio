@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 app.get('/api/photos', async (req, res) => {
   try {
     const result = await cloudinary.search
-      .expression('folder:ThanhMOOC') // THAY bằng folder Cloudinary bạn đang dùng
+      .expression('folder:portfolio') // THAY bằng folder Cloudinary bạn đang dùng
       .sort_by('public_id', 'desc')
       .max_results(50)
       .execute();

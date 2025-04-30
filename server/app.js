@@ -55,6 +55,11 @@ app.get('/upload', async (req, res) => {
   await uploadImagesToCloudinary();
   res.send('Images upload process initiated.');
 });
+
+// xem frontend
+app.use(express.static(path.join(__dirname, '../')));
+
+
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

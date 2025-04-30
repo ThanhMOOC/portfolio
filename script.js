@@ -97,3 +97,16 @@ const fetchPhotos = async() => {
   }
 }
 fetchPhotos();
+
+
+// Đặt ảnh nền cho header.hero từ ảnh "cover" trong Cloudinary
+fetch('/api/photos')
+  .then(res => res.json())
+  .then(images => {
+    const cover = images.find(img => img.public_id.endsWith('cover'));
+    if (cover) {
+      const hero = document.querySelector('header.hero');
+      hero.style.backgroundImage = `url(${cover.secure_url})`;
+    }
+  })
+  .catch(err => console.error('Không lấy được ảnh cover:', err));

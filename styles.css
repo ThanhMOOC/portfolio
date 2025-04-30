@@ -37,11 +37,6 @@ header.hero,
   text-shadow: 0 1px 3px var(--shadow-color);
 }
 
-/* Hero Header Styles */
-header.hero {
-  background: url('img/cover.jpg') center/cover no-repeat;
-}
-
 /* Overlay (Common) */
 header.hero .overlay,
 .portfolio-hero .overlay {

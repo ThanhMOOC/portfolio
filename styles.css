@@ -1,12 +1,12 @@
 /* Centralized Color Variables */
 :root {
-  --main-text-color: #c54646; /* Main text color */
-  --background-light: #FAFAFA; /* Light background color */
-  --primary-accent-color: rgba(78, 205, 196, 0.6); /* Primary accent color */
-  --secondary-accent-color: rgba(255, 107, 107, 0.6); /* Secondary accent color */
-  --shadow-color: rgba(0, 0, 0, 0.6);
-  --border-color: white;
-  --light-box-shadow: rgba(0, 0, 0, 0.05);
+  --main-text-color: #4d3a3a; /* Dark Brown */
+  --background-light: #f2e8dc; /* Light Beige */
+  --primary-accent-color: #d4af37; /* Warm Gold */
+  --secondary-accent-color: #800020; /* Deep Burgundy */
+  --shadow-color: #282828; /* Very Dark Gray */
+  --border-color: #f5f5dc; /* Light Cream */
+  --light-box-shadow: rgba(0, 0, 0, 0.2);
 }
 
 /* Reset */

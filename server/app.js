@@ -1,22 +1,20 @@
 // server/app.js
 require('dotenv').config();
-const express = require('express');
+const express = require('express'); // ✅ Thêm dòng này
 const cors = require('cors');
-const cloudinary = require('cloudinary').v2;
-const { uploadImagesToCloudinary } = require('./utils/upload');
-const cloudinaryConfig = require('./config/cloudinary');
 const path = require('path');
 const fs = require('fs');
 const util = require('util');
-const photosRouter = require('./routes/photos');
+
+const photosRoute = require('./routes/photos');
+const { uploadImagesToCloudinary } = require('./utils/upload');
 
 const app = express();
 app.use(cors());
 
 // Ghi log ra file server.log
-const logFile = fs.createWriteStream(path.join(__dirname, 'server.log'), { flags: 'a' }); // 'a' = append
+const logFile = fs.createWriteStream(path.join(__dirname, 'server.log'), { flags: 'a' });
 const logStdout = process.stdout;
-
 console.log = function () {
   logFile.write(util.format.apply(null, arguments) + '\n');
   logStdout.write(util.format.apply(null, arguments) + '\n');
@@ -29,26 +27,22 @@ if (!fs.existsSync(tmpFolderPath)) {
   console.log('Created .tmp directory');
 }
 
-// Serve các file tĩnh từ thư mục cha của 'server' (chính là thư mục portfolio)
+// Serve static files
 app.use(express.static(path.join(__dirname, '..')));
 
 // Route trang chủ
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'index.html')); // Gửi file index.html từ thư mục cha
+  res.sendFile(path.join(__dirname, '..', 'public', 'html', 'index.html'));
 });
 
-// Use the photos router for /api/photos route
-app.use('/api/photos', photosRouter);
+// API route
+app.use('/api/photos', photosRoute);
 
-// New route to trigger the uploadImagesToCloudinary function
+// Trigger upload via route
 app.get('/upload', async (req, res) => {
   await uploadImagesToCloudinary();
   res.send('Images upload process initiated.');
 });
-
-// xem frontend
-app.use(express.static(path.join(__dirname, '../')));
-
 
 // Start server
 const PORT = process.env.PORT || 3000;
@@ -56,9 +50,7 @@ app.listen(PORT, () => {
   console.log(`Server đang chạy tại http://localhost:${PORT}`);
 });
 
-
-
-// Cho phép gọi upload từ dòng lệnh: node app.js upload
+// Trigger upload via CLI
 if (require.main === module && process.argv.includes('upload')) {
   uploadImagesToCloudinary();
 }

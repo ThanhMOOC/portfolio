@@ -81,8 +81,7 @@ if (require.main === module) {
     uploadImagesToCloudinary();
 }
 module.exports = {uploadImagesToCloudinary}
-```
-```javascript
+
 // server/routes/photos.js
 const cloudinary = require('../config/cloudinary');
 const express = require('express');
@@ -102,8 +101,7 @@ router.get('/', async (req, res) => {
   }
 });
 module.exports = router;
-```
-```javascript
+
 //server/app.js
 require('dotenv').config();
 const express = require('express');
@@ -166,8 +164,7 @@ app.listen(PORT, () => {
 if (require.main === module && process.argv.includes('upload')) {
   uploadImagesToCloudinary();
 }
-```
-```javascript
+
 // server/config/cloudinary.js
 require('dotenv').config();
 const cloudinary = require('cloudinary').v2;
@@ -179,9 +176,3 @@ cloudinary.config({
 });
 
 module.exports = cloudinary;
-```
-```
-.env:
-CLOUDINARY_CLOUD_NAME=
-CLOUDINARY_API_KEY=
-CLOUDINARY_API_SECRET=

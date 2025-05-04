@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vagabond Section</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: sans-serif;
+    }
+
+    .section-vagabond {
+      position: relative;
+      width: 100%;
+      height: 768px;
+      overflow: hidden;
+      background-color: #fff;
+    }
+
+    .section-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .main-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .overlay-image {
+      position: absolute;
+      top: 50px;
+      right: 100px;
+      width: 276px;
+      height: 422px;
+      z-index: 2;
+    }
+
+    .overlay-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .title {
+      position: absolute;
+      top: 80px;
+      left: 700px;
+      color: #fbf7ba;
+      font-size: 5em;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      z-index: 3;
+    }
+
+    .location {
+      position: absolute;
+      bottom: 120px;
+      left: 800px;
+      color: #fbf7ba;
+      font-size: 3em;
+      letter-spacing: 0.02em;
+      z-index: 3;
+    }
+
+    .label-wrapper {
+      position: absolute;
+      bottom: 20px;
+      right: 100px;
+      display: flex;
+      align-items: center;
+      background: rgb(113, 91, 46);
+      clip-path: ellipse(50% 50% at 50% 50%);
+      padding: 10px 20px;
+      z-index: 3;
+    }
+
+    .label-text p {
+      color: #fff;
+      letter-spacing: 0.25em;
+      font-size: 1em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="section-vagabond">
+    <div class="section-wrapper">
+      <div class="main-image">
+        <img src="https://thanhmooc-portfolio.my.canva.site/_assets/media/0c5b0f02cc1d837f7b49ff71168d7458.jpg" alt="Main Image">
+      </div>
+      <div class="overlay-image">
+        <img src="https://thanhmooc-portfolio.my.canva.site/_assets/media/0118c61c5a846f3c3b23f2207b0fb90a.jpg" alt="Overlay Image">
+      </div>
+      <div class="title">
+        <h1>Vagabond</h1>
+      </div>
+      <div class="location">
+        <h2>Provence-Alpes-Côte d'Azur</h2>
+      </div>
+      <div class="label-wrapper">
+        <div class="label-text">
+          <p>PORTFOLIO</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

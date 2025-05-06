@@ -5,5 +5,5 @@ server/server.log
 server/.env
 
 # bỏ qua folder 
-server/.tmp/
+.tmp/
 server/.env

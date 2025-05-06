@@ -123,8 +123,28 @@ app.get('/image-url/:folder', async (req, res) => {
   if (!folder) return res.status(400).json({ error: 'Folder required' });
 
   try {
-    const images = await fetchImagesFromCloudinary(folder);
-    res.json(images); // ← trả về toàn bộ hình
+ const images = await fetchImagesFromCloudinary(folder);
+
+    // Find the image with display_name "cover.jpg" or filename "cover.jpg"
+ const coverImage = images.find(img =>
+ img.display_name?.toLowerCase() === 'cover.jpg' ||
+ img.public_id.toLowerCase().endsWith('/cover.jpg') // Check if public_id ends with /cover.jpg
+ );
+
+
+ if (!coverImage) {
+      // If cover.jpg not found, try finding an image with "cover" in display_name or public_id
+ const partialMatch = images.find(img =>
+ img.display_name?.toLowerCase().includes('cover') ||
+ img.public_id.toLowerCase().includes('cover')
+ );
+ if (partialMatch) {
+ return res.json([partialMatch]); // Return the partially matched image
+      }
+ return res.status(404).json({ error: 'Cover image not found' });
+    }
+
+ res.json([coverImage]); // Return the found cover image as an array
   } catch {
     res.status(500).json({ error: 'Fetch failed' });
   }

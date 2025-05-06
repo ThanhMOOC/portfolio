@@ -20,69 +20,117 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+// Lấy danh sách hình ảnh từ Cloudinary
 async function fetchImagesFromCloudinary(folder) {
   try {
-    const result = await cloudinary.search
-      .expression(`folder:${folder}/*`)
-      .sort_by('public_id', 'desc')
-      .max_results(50)
-      .execute();
+    let imageResources = [];
+    let nextCursor = null;
 
-    const imageUrls = result.resources.map((resource) => resource.secure_url);
-    return imageUrls;
+    do {
+      const result = await cloudinary.search
+        .expression(`folder:${folder}/*`)
+        .sort_by('public_id','desc')
+        .max_results(100)
+        .next_cursor(nextCursor)
+        .execute();
+
+      const imageUrls = result.resources.map(resource => {
+        const displayName = resource.context?.custom?.display_name
+                          || `${resource.filename}.${resource.format}`;
+        return {
+          url: resource.secure_url,
+          display_name: displayName,
+          public_id: resource.public_id
+        };
+      });
+
+      imageResources = imageResources.concat(imageUrls);
+      nextCursor = result.next_cursor;
+    } while (nextCursor);
+
+    return imageResources;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Lấy danh sách hình ảnh từ Cloudinary
+async function fetchImagesFromCloudinary(folder) {
+  try {
+    let imageResources = [];
+    let nextCursor = null;
+
+    do {
+      const result = await cloudinary.search
+        .expression(`folder:${folder}/*`)
+        .sort_by('public_id', 'desc')
+        .max_results(100) 
+        .next_cursor(nextCursor)
+        .execute();
+
+      const imageUrls = result.resources.map(resource => {
+        const displayName = resource.context?.custom?.display_name || '';  
+        return {
+          url: resource.secure_url,  
+          display_name: displayName, 
+          public_id: resource.public_id 
+        };
+      });
+
+      imageResources = imageResources.concat(imageUrls);
+      nextCursor = result.next_cursor;
+    } while (nextCursor);
+
+    return imageResources; 
   } catch (error) {
     console.error('Error fetching images from Cloudinary:', error);
     throw error;
   }
 }
 
-app.get('/', (req, res) => {
-  res.send('hello');
+// Endpoint gốc
+app.get('/', async (req, res) => {
+  const filePath = path.join(__dirname, 'tua-erre.html');
+  res.sendFile(filePath);
 });
 
-app.get('/images', async (req, res) => {
-  const folder = req.query.folder;
-  if (!folder) {
-    return res.status(400).json({ error: 'Folder query parameter is required' });
-  }
+/*/ API để lấy URL của hình ảnh cần thiết (cover.jpg)
+app.get('/image-url/:folder', async (req,res) => {
+  const folder = req.params.folder;
+  if (!folder) return res.status(400).json({error:'Folder required'});
+
   try {
-    const imageUrls = await fetchImagesFromCloudinary(folder);
-    res.json(imageUrls);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch images from Cloudinary' });
+    const images = await fetchImagesFromCloudinary(folder);
+    // tìm theo display_name bây giờ đúng
+    const coverImage = images.find(img => img.display_name.toLowerCase()==='cover.jpg');
+    if (!coverImage) return res.status(404).json({error:'Cover not found'});
+    res.json({url: coverImage.url});
+  } catch {
+    res.status(500).json({error:'Fetch failed'});
   }
-});
+});*/
 
-app.post('/upload', async (req, res) => {
-  const imagePath = req.body.image;
-    if (!imagePath) {
-        return res.status(400).json({ error: 'Image path is required' });
-    }
-    const fullPath = path.join(__dirname, '.tmp', imagePath);
+app.get('/image-url/:folder', async (req, res) => {
+  const folder = req.params.folder;
+  if (!folder) return res.status(400).json({ error: 'Folder required' });
+
   try {
-    
-    if (!fs.existsSync(path.join(__dirname, '.tmp'))) {
-      fs.mkdirSync(path.join(__dirname, '.tmp'));
-    }
-    if (!fs.existsSync(fullPath))
-        return res.status(404).json({ error: 'file not found' });
-
-    const result = await cloudinary.uploader.upload(fullPath, {
-      folder: 'portfolio',
-      public_id: path.basename(imagePath, path.extname(imagePath)),
-    });
-    res.json({ url: result.secure_url });
-  } catch (error) {
-    console.error('Error uploading image to Cloudinary:', error);
-    res.status(500).json({ error: 'Failed to upload image to Cloudinary' });
+    const images = await fetchImagesFromCloudinary(folder);
+    res.json(images); // ← trả về toàn bộ hình
+  } catch {
+    res.status(500).json({ error: 'Fetch failed' });
   }
-});
-
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
 });
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+

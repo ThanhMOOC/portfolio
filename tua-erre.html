@@ -1,33 +1,69 @@
-
-<section id="tua-erre" class="section">
-  <div class="section-inner">
-    <div class="container">
-      <div class="content-wrapper">
-        <div class="image-container">
-          <div class="image-background black-overlay"></div>
-          <img
-            class="main-image"
-            src="images/cover.jpg"
-            alt="Camille"
-          />
-        </div>
-        <div class="line-separator"></div>
-        <div class="text-container">
-          <div class="name-container">
-            <h2>Camille Tua Erre</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Display</title>
+  <style>
+    .main-image {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <section id="tua-erre" class="section">
+    <div class="section-inner">
+      <div class="container">
+        <div class="content-wrapper">
+          <div class="image-container">
+            <div class="image-background black-overlay"></div>
+            <!-- Hình ảnh này sẽ được thay đổi src thông qua JavaScript -->
+            <img class="main-image" id="coverImage" alt="Camille">
           </div>
+          <div class="line-separator"></div>
+          <div class="text-container">
+            <div class="name-container">
+              <h2>Camille Tua Erre</h2>
+            </div>
 
-          <p class="description">
-            passion for photography drives me to capture every beautiful
-            expression of nature
-          </p>
+            <p class="description">
+              Passion for photography drives me to capture every beautiful
+              expression of nature.
+            </p>
 
-          <div class="title-container">
-            <p class="title">Multimedia Artist</p>
+            <div class="title-container">
+              <p class="title">Multimedia Artist</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</body>
 
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      const response = await fetch('/image-url/portfolio');
+      if (!response.ok) throw new Error('Không thể lấy danh sách hình ảnh');
+
+      const images = await response.json();
+
+      const coverImage = images.find(img =>
+        img.display_name?.toLowerCase() === 'cover.jpg'
+      );
+
+      if (!coverImage) throw new Error('Không tìm thấy cover.jpg');
+
+      const imgElement = document.getElementById('coverImage');
+      imgElement.src = coverImage.url;
+    } catch (err) {
+      console.error('Lỗi khi tải ảnh:', err);
+    }
+  });
+</script>
+
+
+</html>

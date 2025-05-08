@@ -13,6 +13,7 @@ const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '../../client')));
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -98,53 +99,17 @@ async function fetchImagesFromCloudinary(folder) {
 
 // Endpoint gốc
 app.get('/', async (req, res) => {
-  const filePath = path.join(__dirname, 'tua-erre.html');
+  const filePath = path.join(__dirname, '../../client/pages/tua-erre.html');
   res.sendFile(filePath);
 });
-
-/*/ API để lấy URL của hình ảnh cần thiết (cover.jpg)
-app.get('/image-url/:folder', async (req,res) => {
-  const folder = req.params.folder;
-  if (!folder) return res.status(400).json({error:'Folder required'});
-
-  try {
-    const images = await fetchImagesFromCloudinary(folder);
-    // tìm theo display_name bây giờ đúng
-    const coverImage = images.find(img => img.display_name.toLowerCase()==='cover.jpg');
-    if (!coverImage) return res.status(404).json({error:'Cover not found'});
-    res.json({url: coverImage.url});
-  } catch {
-    res.status(500).json({error:'Fetch failed'});
-  }
-});*/
 
 app.get('/image-url/:folder', async (req, res) => {
   const folder = req.params.folder;
   if (!folder) return res.status(400).json({ error: 'Folder required' });
 
   try {
- const images = await fetchImagesFromCloudinary(folder);
-
-    // Find the image with display_name "cover.jpg" or filename "cover.jpg"
- const coverImage = images.find(img =>
- img.display_name?.toLowerCase() === 'cover.jpg' ||
- img.public_id.toLowerCase().endsWith('/cover.jpg') // Check if public_id ends with /cover.jpg
- );
-
-
- if (!coverImage) {
-      // If cover.jpg not found, try finding an image with "cover" in display_name or public_id
- const partialMatch = images.find(img =>
- img.display_name?.toLowerCase().includes('cover') ||
- img.public_id.toLowerCase().includes('cover')
- );
- if (partialMatch) {
- return res.json([partialMatch]); // Return the partially matched image
-      }
- return res.status(404).json({ error: 'Cover image not found' });
-    }
-
- res.json([coverImage]); // Return the found cover image as an array
+    const images = await fetchImagesFromCloudinary(folder);
+    res.json(images);
   } catch {
     res.status(500).json({ error: 'Fetch failed' });
   }

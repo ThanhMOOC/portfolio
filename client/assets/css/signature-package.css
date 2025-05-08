@@ -1,0 +1,43 @@
+/* SIGNATURE PACKAGE PAGE STYLES */
+.page--signature-package {
+  background: var(--color-background-light);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.page__title--signature-package {
+  color: var(--color-text-dark);
+}
+
+.page__subtitle--signature-package {
+  color: var(--color-text-dark);
+}
+
+.page__text--signature-package {
+  color: var(--color-text-dark);
+  max-width: 500px;
+}
+
+.page__right--signature-package {
+  flex-direction: column;
+  gap: var(--flex-gap);
+}
+
+.page__image--signature-package {
+  width: 350px;
+  height: 270px;
+  object-fit: cover;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-medium);
+  background: #eee;
+}
+
+@media (max-width: 1000px) {
+  .page__image--signature-package {
+    width: 90vw;
+    max-width: 400px;
+    height: auto;
+  }
+}
+/* === END SIGNATURE PACKAGE PAGE STYLES === */ 

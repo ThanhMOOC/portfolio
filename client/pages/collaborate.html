@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Let's Collaborate</title>
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    :root {
+      --color-bg: #b6a68a;
+      --color-dark: #3a2a1a;
+      --color-btn: #2d2114;
+      --color-btn-hover: #5a3e1a;
+      --font-main: 'Josefin Sans', Arial, sans-serif;
+      --font-mono: 'Fira Code', monospace;
+      --font-script: 'Great Vibes', cursive;
+    }
+    body {
+      background: var(--color-bg);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: var(--font-main);
+    }
+    .collab-section {
+      display: flex;
+      min-height: 100vh;
+      align-items: stretch;
+    }
+    .collab-left {
+      flex: 1 1 36vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 4vw 0 7vw;
+      background: var(--color-bg);
+    }
+    .collab-title {
+      font-family: var(--font-main);
+      font-size: 3.5vw;
+      letter-spacing: 0.25em;
+      color: var(--color-dark);
+      font-weight: 700;
+      margin-bottom: 0.5vw;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+    .collab-script {
+      font-family: var(--font-script);
+      font-size: 5vw;
+      color: var(--color-dark);
+      margin-top: -1vw;
+      margin-bottom: 2vw;
+      line-height: 1;
+      display: block;
+    }
+    .collab-label {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      color: var(--color-dark);
+      margin-top: 2vw;
+      margin-bottom: 0.2vw;
+      text-transform: uppercase;
+    }
+    .collab-value {
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      color: var(--color-dark);
+      margin-bottom: 1vw;
+      letter-spacing: 0.12em;
+    }
+    .collab-btn-row {
+      margin-top: 2vw;
+      display: flex;
+      align-items: center;
+      gap: 1vw;
+    }
+    .collab-btn {
+      background: var(--color-btn);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      border-radius: 2px;
+      padding: 1vw 3vw;
+      text-decoration: none;
+      border: none;
+      transition: background 0.2s;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 500;
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    }
+    .collab-btn:hover {
+      background: var(--color-btn-hover);
+    }
+    .collab-icons {
+      display: flex;
+      align-items: center;
+      gap: 1vw;
+      margin-left: 1vw;
+    }
+    .collab-icon {
+      color: var(--color-dark);
+      font-size: 2rem;
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .collab-icon:hover {
+      color: var(--color-btn-hover);
+    }
+    .collab-center {
+      flex: 0 0 22vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg);
+    }
+    .collab-center-img {
+      width: 18vw;
+      height: 28vw;
+      object-fit: cover;
+      border-radius: 2px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      background: #eee;
+    }
+    .collab-right {
+      flex: 1 1 42vw;
+      background: #ccc center center/cover no-repeat;
+      min-height: 100vh;
+      transition: background-image 0.3s;
+    }
+    @media (max-width: 900px) {
+      .collab-section { flex-direction: column; }
+      .collab-left, .collab-center, .collab-right { flex: unset; width: 100vw; min-height: unset; }
+      .collab-center-img { width: 60vw; height: 40vw; }
+      .collab-title { font-size: 2rem; }
+      .collab-script { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+  <section class="collab-section">
+    <div class="collab-left">
+      <div class="collab-title">LET'S</div>
+      <span class="collab-script">Collaborate</span>
+      <div class="collab-label">Phone</div>
+      <div class="collab-value">07 69 69 46 55</div>
+      <div class="collab-label">Email</div>
+      <div class="collab-value">trangdoan17032408@gmail.com</div>
+      <div class="collab-btn-row">
+        <a href="mailto:trangdoan17032408@gmail.com" class="collab-btn">Contact Me</a>
+        <div class="collab-icons">
+          <a href="mailto:trangdoan17032408@gmail.com" class="collab-icon" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://instagram.com/tua" target="_blank" class="collab-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="collab-center">
+      <img id="collab-center-img" class="collab-center-img" src="" alt="Collaborate Preview">
+    </div>
+    <div id="collab-right" class="collab-right"></div>
+  </section>
+  <script>
+    function matchImage(images, baseName) {
+      baseName = baseName.toLowerCase();
+      return images.find(img => {
+        if (!img.public_id) return false;
+        const id = img.public_id.split('/').pop().toLowerCase();
+        return id === baseName || id === baseName + '.jpg' || id === baseName + '.jpeg' || id === baseName + '.png';
+      });
+    }
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const response = await fetch('/image-url/portfolio');
+        const images = await response.json();
+        const small = matchImage(images, 'collaborate-1');
+        const large = matchImage(images, 'collaborate-2');
+        if (small) document.getElementById('collab-center-img').src = small.url;
+        if (large) document.getElementById('collab-right').style.backgroundImage = `url('${large.url}')`;
+      } catch (err) {
+        console.error('Failed to load collaborate images:', err);
+      }
+    });
+  </script>
+</body>
+</html>

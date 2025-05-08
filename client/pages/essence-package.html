@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Essence Package</title>
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/essence-package.css">
+</head>
+<body class="page--essence">
+  <div class="page__container page__container--essence">
+    <div class="page__left page__left--essence">
+      <div class="page__title page__title--essence">ESSENCE PACKAGE</div>
+      <div class="page__subtitle page__subtitle--essence">The perfect introduction to my photography style</div>
+      <ul class="page__list--essence">
+        <li>2-hour photo session</li>
+        <li>1 location of your choice</li>
+        <li>20 professionally edited photos</li>
+        <li>Online gallery delivery</li>
+        <li>Personal printing rights</li>
+      </ul>
+      <div class="page__price--essence">
+        <span class="page__emoji--essence">✨</span>
+        <span class="page__price-text--essence">Starting at €350</span>
+      </div>
+    </div>
+    <div class="page__right page__right--essence">
+      <div class="page__frame--iphone">
+        <img id="essence-img" class="page__image page__image--essence" src="" alt="Essence Package Preview">
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const response = await fetch('/image-url/portfolio');
+        const images = await response.json();
+        const img = images.find(img => img.public_id && img.public_id.split('/').pop().toLowerCase() === 'essence-1');
+        if (img) document.getElementById('essence-img').src = img.url;
+      } catch (err) {
+        console.error('Failed to load essence package image:', err);
+      }
+    });
+  </script>
+</body>
+</html>
+

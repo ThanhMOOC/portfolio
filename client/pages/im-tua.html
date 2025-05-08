@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>I'm Tua</title>
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/im-tua.css">
+</head>
+<body class="page--im-tua">
+  <div class="page__container page__container--im-tua">
+    <div class="page__left page__left--im-tua">
+      <div class="page__title page__title--im-tua">I'M TUA</div>
+      <div class="page__subtitle page__subtitle--im-tua">Photographer & Visual Storyteller</div>
+      <div class="page__text page__text--im-tua">
+        <p>Based in the heart of France, I specialize in capturing authentic moments that tell your unique story. With a passion for natural light and candid photography, I create images that feel genuine and timeless.</p>
+        <p>Whether it's a portrait session, a special event, or a creative collaboration, I'm here to help bring your vision to life through my lens.</p>
+      </div>
+    </div>
+    <div class="page__right page__right--im-tua">
+      <div class="ipad-frame">
+        <img id="im-tua-img" class="page__image page__image--im-tua" src="" alt="I'm Tua">
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const response = await fetch('/image-url/portfolio');
+        const images = await response.json();
+        const img = images.find(img => img.public_id.split('/').pop().toLowerCase() === 'im-tua-1');
+        if (img) document.getElementById('im-tua-img').src = img.url;
+      } catch (err) {
+        console.error('Failed to load im-tua image:', err);
+      }
+    });
+  </script>
+</body>
+</html>

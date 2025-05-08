@@ -1,9 +1,8 @@
 # Bỏ qua file log
-server/server.log
+server/logs/server.log
 
 # bỏ qua file .env
-server/.env
+server/config/.env
 
 # bỏ qua folder 
 .tmp/
-server/.env

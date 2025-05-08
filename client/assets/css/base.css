@@ -1,0 +1,375 @@
+/* === VARIABLES === */
+:root {
+  /* Colors */
+  --color-primary: #7a5a2f;
+  --color-primary-dark: #5a3e1a;
+  --color-primary-light: #b6a68a;
+  --color-secondary: #f6f6b2;
+  --color-text-dark: #3a2a1a;
+  --color-text-medium: #4d2e1a;
+  --color-text-light: #f6f6b2;
+  --color-background-light: #e29511;
+  --color-background-lighter: #c2beaa;
+  --color-device-dark: #222;
+  --color-device-medium: #444;
+  --color-device-light: #888;
+  --color-shadow: rgba(0, 0, 0, 0.10);
+  --color-shadow-strong: rgba(0, 0, 0, 0.18);
+  --color-shadow-stronger: rgba(0, 0, 0, 0.25);
+
+  /* Typography */
+  --font-primary: 'Josefin Sans', Arial, sans-serif;
+  --font-secondary: 'Fira Code', monospace;
+  --font-script: 'Great Vibes', cursive;
+  
+  --font-size-small: 1.1rem;
+  --font-size-medium: 1.2rem;
+  --font-size-large: 3vw;
+  --font-size-xlarge: 4vw;
+  --font-size-xxlarge: 6vw;
+  
+  --letter-spacing-tight: 0.1em;
+  --letter-spacing-medium: 0.15em;
+  --letter-spacing-wide: 0.18em;
+  --letter-spacing-wider: 0.2em;
+  --letter-spacing-widest: 0.25em;
+
+  /* Spacing */
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 18px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 40px;
+  --spacing-xxxl: 60px;
+
+  /* Layout */
+  --container-max-width: 1400px;
+  --container-padding: 40px;
+  --flex-gap: 30px;
+
+  /* Effects */
+  --border-radius-sm: 2px;
+  --border-radius-md: 4px;
+  --border-radius-lg: 6px;
+  --border-radius-xl: 12px;
+  --border-radius-xxl: 18px;
+  --border-radius-device: 48px;
+  
+  --shadow-subtle: 0 2px 8px var(--color-shadow);
+  --shadow-medium: 0 4px 24px var(--color-shadow-strong);
+  --shadow-strong: 0 8px 32px var(--color-shadow-stronger);
+
+  /* Transitions */
+  --transition-fast: 0.2s;
+}
+
+/* === RESET & BASE STYLES === */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary);
+  overflow: hidden;
+}
+
+ul {
+  list-style-position: inside;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* === COMMON LAYOUT PATTERNS === */
+.page__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: var(--spacing-xxxl) var(--container-padding);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.page__left {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-right: var(--spacing-xl);
+}
+
+.page__right {
+  flex: 1.1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+/* === TYPOGRAPHY SYSTEM === */
+.page__title {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-large);
+  letter-spacing: var(--letter-spacing-wide);
+  margin-bottom: var(--spacing-md);
+}
+
+.page__subtitle {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-small);
+  margin-bottom: var(--spacing-lg);
+}
+
+.page__text {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-small);
+  line-height: 1.6;
+}
+
+/* === BUTTON STYLES === */
+.page__button {
+  display: inline-block;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-small);
+  letter-spacing: var(--letter-spacing-wide);
+  padding: var(--spacing-sm) var(--spacing-xl);
+  text-decoration: none;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  transition: background var(--transition-fast);
+  box-shadow: var(--shadow-subtle);
+}
+
+/* === DEVICE FRAMES === */
+.page__frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-device-dark);
+  box-shadow: var(--shadow-medium);
+  padding: 0;
+  box-sizing: content-box;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* iPhone Frame */
+.page__frame--iphone {
+  width: 260px;
+  height: 520px;
+  border-radius: var(--border-radius-device);
+  border: 8px solid var(--color-device-dark);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: content-box;
+}
+.page__frame--iphone img {
+  width: 94%;
+  height: 94%;
+  object-fit: cover;
+  border-radius: calc(var(--border-radius-device) * 0.85);
+  display: block;
+}
+
+.page__frame--iphone::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 16px;
+  background: var(--color-device-medium);
+  border-radius: 10px 10px 16px 16px;
+  z-index: 2;
+}
+
+/* iPad Frame */
+.page__frame--ipad {
+  width: 340px;
+  height: 240px;
+  border-radius: var(--border-radius-xxl);
+  border: 8px solid var(--color-device-light);
+  box-shadow: var(--shadow-strong), 0 1.5px 0 #fff inset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: content-box;
+}
+.page__frame--ipad img {
+  width: 94%;
+  height: 94%;
+  object-fit: cover;
+  border-radius: calc(var(--border-radius-xxl) * 0.85);
+  display: block;
+}
+
+.page__frame--ipad::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 6px;
+  background: var(--color-device-medium);
+  border-radius: var(--border-radius-sm);
+  box-shadow: 0 0 2px #000;
+  z-index: 2;
+}
+
+.page__frame--ipad::after {
+  content: '';
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  background: var(--color-device-medium);
+  border-radius: 50%;
+  box-shadow: 0 0 2px #000;
+  z-index: 2;
+}
+
+/* MacBook Frame */
+.page__frame--macbook {
+  width: 520px;
+  height: 320px;
+  border-radius: 18px 18px 12px 12px / 24px 24px 18px 18px;
+  border: 6px solid var(--color-device-light);
+  box-shadow: var(--shadow-strong), 0 1.5px 0 #fff inset;
+  margin-bottom: var(--spacing-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: content-box;
+}
+.page__frame--macbook img {
+  width: 94%;
+  height: 94%;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+
+.page__frame--macbook::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: var(--color-device-medium);
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 0 2px #000;
+}
+
+.page__frame--macbook::after {
+  content: '';
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 18px;
+  background: #bbb;
+  border-radius: 0 0 18px 18px;
+  box-shadow: var(--shadow-subtle);
+  z-index: 1;
+}
+
+/* === RESPONSIVE BREAKPOINTS === */
+@media (max-width: 1000px) {
+  :root {
+    --font-size-large: 2rem;
+    --container-padding: 20px;
+    --flex-gap: 20px;
+  }
+
+  .page__container {
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+  
+  .page__left, .page__right {
+    margin: 0;
+    align-items: center;
+  }
+  
+  .page__title {
+    font-size: var(--font-size-large);
+  }
+
+  .page__frame--iphone {
+    width: 180px;
+    height: 360px;
+  }
+
+  .page__frame--ipad {
+    width: 200px;
+    height: 120px;
+  }
+
+  .page__frame--macbook {
+    width: 320px;
+    height: 180px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .page__frame--iphone img,
+  .page__frame--ipad img,
+  .page__frame--macbook img {
+    width: 96%;
+    height: 96%;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --font-size-large: 1.5rem;
+    --container-padding: 10px;
+    --flex-gap: 15px;
+  }
+
+  .page__title {
+    font-size: var(--font-size-medium);
+  }
+
+  .page__frame--iphone {
+    width: 120px;
+    height: 240px;
+  }
+
+  .page__frame--iphone img,
+  .page__frame--ipad img,
+  .page__frame--macbook img {
+    width: 98%;
+    height: 98%;
+  }
+} 

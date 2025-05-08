@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signature Package</title>
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/signature-package.css">
+</head>
+<body class="page--signature">
+  <div class="page__container page__container--signature">
+    <div class="page__left page__left--signature">
+      <div class="page__title page__title--signature">SIGNATURE PACKAGE</div>
+      <div class="page__subtitle page__subtitle--signature">The ultimate photography experience</div>
+      <ul class="page__list--signature">
+        <li>Full-day photo session (8 hours)</li>
+        <li>Multiple locations & outfit changes</li>
+        <li>80+ professionally edited photos</li>
+        <li>Online gallery delivery</li>
+        <li>Personal printing rights</li>
+        <li>Luxury photo album</li>
+        <li>Behind-the-scenes video</li>
+      </ul>
+      <div class="page__price--signature">
+        <span class="page__emoji--signature">✨</span>
+        <span class="page__price-text--signature">Starting at €1200</span>
+      </div>
+    </div>
+    <div class="page__right page__right--signature">
+      <div class="page__frame--macbook">
+        <img id="signature-img" class="page__image page__image--signature" src="" alt="Signature Package Preview">
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const response = await fetch('/image-url/portfolio');
+        const images = await response.json();
+        const img = images.find(img => img.public_id && img.public_id.split('/').pop().toLowerCase() === 'signature-1');
+        if (img) document.getElementById('signature-img').src = img.url;
+      } catch (err) {
+        console.error('Failed to load signature package image:', err);
+      }
+    });
+  </script>
+</body>
+</html>

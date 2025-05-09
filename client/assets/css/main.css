@@ -5,10 +5,4 @@
 @import 'utilities.css';
 
 /* Page-specific styles */
-@import 'im-tua.css';
-@import 'vagabond.css';
-@import 'essence-package.css';
-@import 'soul-package.css';
-@import 'signature-package.css';
-@import 'collaborate.css';
-@import 'tuaerre-hero.css';
+@import 'pages.css';

@@ -37,6 +37,13 @@
   transform: rotate(-45deg) translate(7px, -6px);
 }
 
+/* Image Gallery */
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--spacing-md);
+  margin: var(--spacing-lg) 0;
+}
 .burger-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;

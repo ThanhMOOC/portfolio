@@ -26,45 +26,6 @@
   justify-content: flex-end;
 }
 
-/* Device frames */
-.page__frame {
-  position: relative;
-  border-radius: var(--border-radius-device);
-  overflow: hidden;
-  box-shadow: var(--shadow-medium);
-  background: var(--color-device-dark);
-}
-
-.page__frame--iphone {
-  width: 280px;
-  height: 560px;
-  border-radius: 36px;
-}
-
-.page__frame--ipad {
-  width: 400px;
-  height: 280px;
-  border-radius: 20px;
-}
-
-.page__frame--macbook {
-  width: 500px;
-  height: 300px;
-  border-radius: 12px;
-  margin-bottom: var(--spacing-lg);
-}
-
-.page__frame img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 94%;
-  height: 94%;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
 /* Responsive layout adjustments */
 @media (max-width: 1000px) {
   .page__container {

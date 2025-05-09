@@ -163,6 +163,18 @@ body {
   z-index: 2;
 }
 
+.soul-image-container {
+  position: relative;
+  margin-top: var(--spacing-lg);
+}
+
+.soul-image-overlap {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  z-index: 2;
+}
+
 @media (max-width: 1200px) {
   .soul-section {
     gap: 2.5vw;

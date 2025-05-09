@@ -393,4 +393,108 @@ a {
 }
 .burger-menu.active span:nth-child(3) {
   transform: rotate(-45deg) translate(7px, -6px);
-} 
+}  /* === COMMON UTILITY CLASSES === */
+.text-center {
+  text-align: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.img-cover {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.img-contain {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+/* Common margins */
+.mt-1 { margin-top: var(--spacing-xs); }
+.mt-2 { margin-top: var(--spacing-sm); }
+.mt-3 { margin-top: var(--spacing-md); }
+.mt-4 { margin-top: var(--spacing-lg); }
+.mt-5 { margin-top: var(--spacing-xl); }
+
+.mb-1 { margin-bottom: var(--spacing-xs); }
+.mb-2 { margin-bottom: var(--spacing-sm); }
+.mb-3 { margin-bottom: var(--spacing-md); }
+.mb-4 { margin-bottom: var(--spacing-lg); }
+.mb-5 { margin-bottom: var(--spacing-xl); }
+
+.ml-1 { margin-left: var(--spacing-xs); }
+.ml-2 { margin-left: var(--spacing-sm); }
+.ml-3 { margin-left: var(--spacing-md); }
+.ml-4 { margin-left: var(--spacing-lg); }
+.ml-5 { margin-left: var(--spacing-xl); }
+
+.mr-1 { margin-right: var(--spacing-xs); }
+.mr-2 { margin-right: var(--spacing-sm); }
+.mr-3 { margin-right: var(--spacing-md); }
+.mr-4 { margin-right: var(--spacing-lg); }
+.mr-5 { margin-right: var(--spacing-xl); }
+
+/* Common paddings */
+.p-1 { padding: var(--spacing-xs); }
+.p-2 { padding: var(--spacing-sm); }
+.p-3 { padding: var(--spacing-md); }
+.p-4 { padding: var(--spacing-lg); }
+.p-5 { padding: var(--spacing-xl); }
+
+/* Common animations */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* === OVERLAY STYLES === */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+  display: none;
+}
+
+.overlay.active {
+  display: block;
+}

@@ -1,4 +1,6 @@
 /* ESSENCE PACKAGE PAGE STYLES - Canva-inspired */
+/* Only keep styles specific to this page */
+
 .essence-bg {
   background: var(--color-device-light);
   min-height: 100vh;
@@ -28,54 +30,13 @@
 
 .essence-title {
   font-family: var(--font-primary);
-  font-size: 2.2rem;
-  font-weight: 700;
+  font-size: 2.8rem;
   letter-spacing: var(--letter-spacing-wide);
+  margin-bottom: var(--spacing-sm);
   color: var(--color-text-dark);
-  margin-bottom: var(--spacing-md);
-  text-align: left;
 }
 
-.essence-subtitle {
-  font-family: var(--font-secondary);
-  font-size: 1rem;
-  color: var(--color-text-dark);
-  margin-bottom: var(--spacing-md);
-  text-align: left;
-}
-
-.essence-list {
-  font-family: var(--font-secondary);
-  font-size: 0.95rem;
-  color: var(--color-text-dark);
-  margin-bottom: var(--spacing-md);
-  padding-left: 1.2em;
-  list-style-type: disc;
-}
-.essence-list li {
-  margin-bottom: var(--spacing-xs);
-  font-weight: 400;
-}
-
-.essence-price-row {
-  font-family: var(--font-secondary);
-  font-size: 1.25rem;
-  color: var(--color-text-dark);
-  margin-top: var(--spacing-sm);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-}
-.essence-price-icon {
-  font-size: 1.4em;
-  margin-right: var(--spacing-xs);
-}
-.essence-price-text {
-  font-weight: 500;
-}
-.essence-price-text b {
-  font-weight: 700;
-}
+/* Keep only the unique styles for this page */
 
 .essence-right {
   flex: 1.2;

@@ -67,8 +67,8 @@
 /* === RESET & BASE STYLES === */
 *, *::before, *::after {
   box-sizing: border-box;
-  margin: 0;
   padding: 0;
+  font-weight: normal;
 }
 
 html, body {
@@ -77,10 +77,17 @@ html, body {
   padding: 0;
   font-family: var(--font-primary);
   overflow: hidden;
+  font-weight: normal;
 }
 
-ul {
-  list-style-position: inside;
+/* Force normal font weight for all text elements except titles */
+p, span, div, ul, li, strong, b, em, i {
+  font-weight: normal !important;
+}
+
+/* Only allow bold for specific title elements */
+h1, h2, h3, h4, h5, h6, .page__title, .signature-title {
+  font-weight: 700;
 }
 
 img {
@@ -372,4 +379,18 @@ a {
     width: 98%;
     height: 98%;
   }
+}
+
+/* Burger menu animation update for CodePen-like effect */
+.burger-menu span {
+  transition: all 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+.burger-menu.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.burger-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+.burger-menu.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
 } 

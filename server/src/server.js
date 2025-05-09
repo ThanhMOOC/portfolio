@@ -108,7 +108,7 @@ app.get('/image-url/:folder', async (req, res) => {
   if (!folder) return res.status(400).json({ error: 'Folder required' });
 
   try {
-    const images = await fetchImagesFromCloudinary(folder);
+ const images = await fetchImagesFromCloudinary(folder);
     res.json(images);
   } catch {
     res.status(500).json({ error: 'Fetch failed' });

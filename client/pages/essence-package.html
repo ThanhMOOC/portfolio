@@ -2,32 +2,127 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Essence Package</title>
   <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/base.css">
   <link rel="stylesheet" href="../assets/css/essence-package.css">
+  <style>
+    /* Burger menu styles */
+    .burger-menu {
+      position: fixed;
+      top: 32px;
+      right: 40px;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1002;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    .burger-menu span {
+      display: block;
+      height: 4px;
+      width: 100%;
+      background: #f6f6c6;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    .burger-menu.active span:nth-child(1) {
+      transform: translateY(17px) rotate(45deg);
+    }
+    .burger-menu.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .burger-menu.active span:nth-child(3) {
+      transform: translateY(-17px) rotate(-45deg);
+    }
+    .burger-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(34, 34, 34, 0.92);
+      z-index: 1001;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s;
+    }
+    .burger-overlay.active {
+      display: flex;
+    }
+    .burger-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+      align-items: center;
+    }
+    .burger-nav a {
+      color: #f6f6c6;
+      font-family: 'Josefin Sans', Arial, sans-serif;
+      font-size: 2rem;
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      transition: color 0.2s;
+    }
+    .burger-nav a:hover {
+      color: #c2beaa;
+    }
+    @media (max-width: 600px) {
+      .burger-menu {
+        top: 18px;
+        right: 16px;
+        width: 32px;
+        height: 32px;
+      }
+      .burger-nav a {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
 </head>
-<body class="page--essence">
-  <div class="page__container page__container--essence">
-    <div class="page__left page__left--essence">
-      <div class="page__title page__title--essence">ESSENCE PACKAGE</div>
-      <div class="page__subtitle page__subtitle--essence">The perfect introduction to my photography style</div>
-      <ul class="page__list--essence">
-        <li>2-hour photo session</li>
-        <li>1 location of your choice</li>
-        <li>20 professionally edited photos</li>
-        <li>Online gallery delivery</li>
-        <li>Personal printing rights</li>
-      </ul>
-      <div class="page__price--essence">
-        <span class="page__emoji--essence">✨</span>
-        <span class="page__price-text--essence">Starting at €350</span>
+<body>
+  <div class="burger-menu" id="burger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="burger-overlay" id="burger-overlay">
+    <nav class="burger-nav">
+      <a href="/pages/im-tua.html">Home</a>
+      <a href="/pages/tua-erre.html">TUA ERRE</a>
+      <a href="/pages/vagabond.html">VAGABOND</a>
+      <a href="/pages/essence-package.html">Essence</a>
+      <a href="/pages/soul-package.html">Soul</a>
+      <a href="/pages/signature-package.html">Signature</a>
+      <a href="/pages/collaborate.html">Collaborate</a>
+    </nav>
+  </div>
+  <div class="essence-bg">
+    <div class="essence-container">
+      <div class="essence-left">
+        <h1 class="essence-title">ESSENCE PACKAGE</h1>
+        <div class="essence-subtitle">A creative portrait experience for individuals, artists, and dreamers</div>
+        <ul class="essence-list">
+          <li>2–3 hour session</li>
+          <li>Moodboard & creative direction included</li>
+          <li>30+ edited high-resolution images</li>
+          <li>2–3 outfit changes</li>
+          <li>Suitable for creatives, entrepreneurs,<br>or personal storytelling</li>
+        </ul>
+        <div class="essence-price-row">
+          <span class="essence-price-icon">✨</span>
+          <span class="essence-price-text">Starting at <b>€400</b></span>
+        </div>
       </div>
-    </div>
-    <div class="page__right page__right--essence">
-      <div class="page__frame--iphone">
-        <img id="essence-img" class="page__image page__image--essence" src="" alt="Essence Package Preview">
+      <div class="essence-right">
+        <img id="essence-img-1" class="essence-img essence-img--left" alt="Essence Portrait 1" />
+        <img id="essence-img-2" class="essence-img essence-img--right" alt="Essence Portrait 2" />
       </div>
     </div>
   </div>
@@ -36,10 +131,25 @@
       try {
         const response = await fetch('/image-url/portfolio');
         const images = await response.json();
-        const img = images.find(img => img.public_id && img.public_id.split('/').pop().toLowerCase() === 'essence-1');
-        if (img) document.getElementById('essence-img').src = img.url;
+        const img1 = images.find(img => img.public_id && img.public_id.split('/').pop().toLowerCase() === 'essence-1');
+        const img2 = images.find(img => img.public_id && img.public_id.split('/').pop().toLowerCase() === 'essence-2');
+        if (img1) document.getElementById('essence-img-1').src = img1.url;
+        if (img2) document.getElementById('essence-img-2').src = img2.url;
       } catch (err) {
-        console.error('Failed to load essence package image:', err);
+        console.error('Failed to load essence package images:', err);
+      }
+    });
+    // Burger menu toggle
+    const burgerMenu = document.getElementById('burger-menu');
+    const burgerOverlay = document.getElementById('burger-overlay');
+    burgerMenu.addEventListener('click', function() {
+      burgerOverlay.classList.toggle('active');
+      burgerMenu.classList.toggle('active');
+    });
+    burgerOverlay.addEventListener('click', function(e) {
+      if (e.target === burgerOverlay) {
+        burgerOverlay.classList.remove('active');
+        burgerMenu.classList.remove('active');
       }
     });
   </script>

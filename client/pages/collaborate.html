@@ -146,9 +146,100 @@
       .collab-title { font-size: 2rem; }
       .collab-script { font-size: 3rem; }
     }
+    /* Burger menu styles */
+    .burger-menu {
+      position: fixed;
+      top: 32px;
+      right: 40px;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1002;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    .burger-menu span {
+      display: block;
+      height: 4px;
+      width: 100%;
+      background: #f6f6c6;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    .burger-menu.active span:nth-child(1) {
+      transform: translateY(17px) rotate(45deg);
+    }
+    .burger-menu.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .burger-menu.active span:nth-child(3) {
+      transform: translateY(-17px) rotate(-45deg);
+    }
+    .burger-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(34, 34, 34, 0.92);
+      z-index: 1001;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s;
+    }
+    .burger-overlay.active {
+      display: flex;
+    }
+    .burger-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+      align-items: center;
+    }
+    .burger-nav a {
+      color: #f6f6c6;
+      font-family: 'Josefin Sans', Arial, sans-serif;
+      font-size: 2rem;
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      transition: color 0.2s;
+    }
+    .burger-nav a:hover {
+      color: #c2beaa;
+    }
+    @media (max-width: 600px) {
+      .burger-menu {
+        top: 18px;
+        right: 16px;
+        width: 32px;
+        height: 32px;
+      }
+      .burger-nav a {
+        font-size: 1.2rem;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="burger-menu" id="burger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="burger-overlay" id="burger-overlay">
+    <nav class="burger-nav">
+      <a href="/pages/im-tua.html">Home</a>
+      <a href="/pages/tua-erre.html">TUA ERRE</a>
+      <a href="/pages/vagabond.html">VAGABOND</a>
+      <a href="/pages/essence-package.html">Essence</a>
+      <a href="/pages/soul-package.html">Soul</a>
+      <a href="/pages/signature-package.html">Signature</a>
+      <a href="/pages/collaborate.html">Collaborate</a>
+    </nav>
+  </div>
   <section class="collab-section">
     <div class="collab-left">
       <div class="collab-title">LET'S</div>
@@ -167,9 +258,9 @@
     </div>
     <div class="collab-center">
       <img id="collab-center-img" class="collab-center-img" src="" alt="Collaborate Preview">
-    </div>
+  </div>
     <div id="collab-right" class="collab-right"></div>
-  </section>
+</section>
   <script>
     function matchImage(images, baseName) {
       baseName = baseName.toLowerCase();
@@ -189,6 +280,19 @@
         if (large) document.getElementById('collab-right').style.backgroundImage = `url('${large.url}')`;
       } catch (err) {
         console.error('Failed to load collaborate images:', err);
+      }
+    });
+    // Burger menu toggle
+    const burgerMenu = document.getElementById('burger-menu');
+    const burgerOverlay = document.getElementById('burger-overlay');
+    burgerMenu.addEventListener('click', function() {
+      burgerOverlay.classList.toggle('active');
+      burgerMenu.classList.toggle('active');
+    });
+    burgerOverlay.addEventListener('click', function(e) {
+      if (e.target === burgerOverlay) {
+        burgerOverlay.classList.remove('active');
+        burgerMenu.classList.remove('active');
       }
     });
   </script>

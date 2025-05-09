@@ -17,23 +17,26 @@
       display: flex;
       flex-direction: column;
       height: 100vh;
+      position: relative;
     }
     .vagabond-main {
       flex: 1 1 auto;
       display: flex;
       flex-direction: row;
       align-items: flex-start;
-      justify-content: center;
-      gap: 4vw;
+      justify-content: space-between;
+      gap: 8vw;
       width: 100vw;
       max-width: 1400px;
       margin: 0 auto;
-      padding-top: 4vh;
+      padding-top: 10vh;
+      padding-left: 5vw;
+      padding-right: 5vw;
     }
     .vagabond-titles {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
       min-width: 320px;
       max-width: 600px;
@@ -62,22 +65,28 @@
       justify-content: center;
     }
     .vagabond-img {
-      width: 350px;
-      height: 350px;
-      object-fit: cover;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
       border-radius: var(--border-radius-md);
       box-shadow: var(--shadow-medium);
       background: #eee;
     }
     .vagabond-bottom {
-      width: 100vw;
+      position: absolute;
+      top: 60vh;
+      left: 25%;
+      transform: translateX(-50%);
+      width: auto;
       max-width: 1400px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-end;
-      padding: 0 0 4vh 8vw;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
       gap: 1vw;
     }
     .vagabond-btn {
@@ -85,10 +94,10 @@
       background: var(--color-primary);
       color: var(--color-text-light);
       font-family: var(--font-secondary);
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       letter-spacing: 0.18em;
       border-radius: 22px;
-      padding: 0.9em 2.5em;
+      padding: 1em 3em;
       text-decoration: none;
       margin-top: 0.5vw;
       box-shadow: var(--shadow-subtle);
@@ -101,9 +110,9 @@
     }
     .vagabond-location {
       font-family: var(--font-script);
-      font-size: 2.2vw;
+      font-size: 3.5vw;
       color: var(--color-text-medium);
-      margin-top: 0.5vw;
+      margin-top: 1.5vw;
       letter-spacing: 0.05em;
     }
     @media (max-width: 900px) {
@@ -113,18 +122,109 @@
         padding-top: 4vh;
       }
       .vagabond-title { font-size: 2.5rem; }
-      .vagabond-img { width: 80vw; height: 40vw; }
+      .vagabond-img { width: 80vw; height: auto; }
       .vagabond-bottom { align-items: center; padding: 0 0 2vh 0; }
       .vagabond-location { font-size: 1.2rem; }
     }
     @media (max-width: 600px) {
       .vagabond-title { font-size: 1.5rem; }
-      .vagabond-img { width: 90vw; height: 50vw; }
+      .vagabond-img { width: 90vw; height: auto; }
       .vagabond-location { font-size: 1rem; }
+    }
+    /* Burger menu styles */
+    .burger-menu {
+      position: fixed;
+      top: 32px;
+      right: 40px;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1002;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    .burger-menu span {
+      display: block;
+      height: 4px;
+      width: 100%;
+      background: #f6f6c6;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    .burger-menu.active span:nth-child(1) {
+      transform: translateY(17px) rotate(45deg);
+    }
+    .burger-menu.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .burger-menu.active span:nth-child(3) {
+      transform: translateY(-17px) rotate(-45deg);
+    }
+    .burger-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(34, 34, 34, 0.92);
+      z-index: 1001;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s;
+    }
+    .burger-overlay.active {
+      display: flex;
+    }
+    .burger-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+      align-items: center;
+    }
+    .burger-nav a {
+      color: #f6f6c6;
+      font-family: 'Josefin Sans', Arial, sans-serif;
+      font-size: 2rem;
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      transition: color 0.2s;
+    }
+    .burger-nav a:hover {
+      color: #c2beaa;
+    }
+    @media (max-width: 600px) {
+      .burger-menu {
+        top: 18px;
+        right: 16px;
+        width: 32px;
+        height: 32px;
+      }
+      .burger-nav a {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
 <body class="page--vagabond">
+  <div class="burger-menu" id="burger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="burger-overlay" id="burger-overlay">
+    <nav class="burger-nav">
+      <a href="/pages/im-tua.html">Home</a>
+      <a href="/pages/tua-erre.html">TUA ERRE</a>
+      <a href="/pages/vagabond.html">VAGABOND</a>
+      <a href="/pages/essence-package.html">Essence</a>
+      <a href="/pages/soul-package.html">Soul</a>
+      <a href="/pages/signature-package.html">Signature</a>
+      <a href="/pages/collaborate.html">Collaborate</a>
+    </nav>
+  </div>
   <main class="vagabond-main">
     <div class="vagabond-titles">
       <div class="vagabond-title">VAGABOND</div>
@@ -135,7 +235,6 @@
     </div>
   </main>
   <div class="vagabond-bottom">
-    <a href="/pages/portfolio.html" class="vagabond-btn">PORTFOLIO</a>
     <div class="vagabond-location">Provence – Alpes – Côte d'Azur</div>
   </div>
   <script>
@@ -149,6 +248,19 @@
         if (side) document.getElementById('vagabond-side-img').src = side.url;
       } catch (err) {
         console.error('Failed to load vagabond images:', err);
+      }
+    });
+    // Burger menu toggle
+    const burgerMenu = document.getElementById('burger-menu');
+    const burgerOverlay = document.getElementById('burger-overlay');
+    burgerMenu.addEventListener('click', function() {
+      burgerOverlay.classList.toggle('active');
+      burgerMenu.classList.toggle('active');
+    });
+    burgerOverlay.addEventListener('click', function(e) {
+      if (e.target === burgerOverlay) {
+        burgerOverlay.classList.remove('active');
+        burgerMenu.classList.remove('active');
       }
     });
   </script>

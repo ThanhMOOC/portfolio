@@ -1,4 +1,21 @@
-/* SOUL PACKAGE PAGE STYLES */
+/* SOUL PACKAGE PAGE STYLES - Canva Reference */
+:root {
+  --soul-bg: #7a5a1a;
+  --soul-text: #f6e7b6;
+  --soul-border: #44423c;
+  --soul-shadow: 0 6px 32px 0 rgba(0,0,0,0.18);
+  --soul-title-size: 3.6rem;
+  --soul-subtitle-size: 1.25rem;
+  --soul-list-size: 1.08rem;
+  --soul-price-size: 1.18rem;
+  --soul-title-font: 'Josefin Sans', Arial, sans-serif;
+  --soul-body-font: 'Fira Code', monospace;
+}
+
+body {
+  background: var(--soul-bg);
+}
+
 .page--soul-package {
   background: var(--color-background-light);
   min-height: 100vh;
@@ -35,137 +52,193 @@
 
 .soul-section {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
   min-height: 100vh;
-  background: var(--color-device-light);
-  padding: 0 6vw;
-  box-sizing: border-box;
-  gap: 4vw;
+  background: var(--soul-bg);
+  color: var(--soul-text);
+  padding: 5.5rem 8vw 5.5rem 8vw;
+  gap: 5vw;
 }
 
 .soul-col {
-  flex: 1 1 0;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .soul-col--text {
-  max-width: 600px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 340px;
+}
+
+.soul-col--image {
+  flex: 1;
+  min-width: 340px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  height: 340px;
 }
 
 .soul-title {
-  font-family: var(--font-primary);
-  font-size: 3.5vw;
-  letter-spacing: var(--letter-spacing-widest);
-  font-weight: 700;
-  margin-bottom: 1.2vw;
-  color: var(--color-text-dark);
-  text-align: left;
+  font-family: var(--soul-title-font);
+  font-size: var(--soul-title-size);
+  letter-spacing: 0.18em;
+  color: var(--soul-text);
+  font-weight: 400;
+  margin-bottom: 1.2rem;
 }
 
 .soul-subtitle {
-  font-family: var(--font-secondary);
-  font-size: 1.3vw;
-  color: var(--color-text-dark);
-  margin-bottom: 2vw;
-  text-align: left;
+  font-family: var(--soul-body-font);
+  font-size: var(--soul-subtitle-size);
+  color: var(--soul-text);
+  opacity: 0.95;
+  margin-bottom: 2.2rem;
 }
 
 .soul-list {
   list-style: disc inside;
-  font-family: var(--font-secondary);
-  font-size: 1.15vw;
-  color: var(--color-text-dark);
-  margin-bottom: 2vw;
-  padding-left: 1vw;
+  font-family: var(--soul-body-font);
+  font-size: var(--soul-list-size);
+  color: var(--soul-text);
+  margin: 0 0 2.2rem 0;
+  padding: 0;
+}
+
+.soul-list li {
+  margin-bottom: 0.7rem;
+  line-height: 1.6;
 }
 
 .soul-price {
-  font-family: var(--font-secondary);
-  font-size: 1.5vw;
-  font-weight: bold;
-  color: var(--color-text-dark);
   display: flex;
   align-items: center;
-  gap: 0.5vw;
-  margin-top: 1vw;
+  gap: 0.5rem;
+  font-family: var(--soul-body-font);
+  font-size: var(--soul-price-size);
+  font-weight: bold;
+  color: var(--soul-text);
 }
 
 .soul-price-icon {
-  font-size: 1.5vw;
+  font-size: 1.3rem;
+  filter: brightness(1.2) sepia(0.7) hue-rotate(-30deg) saturate(2.5);
 }
 
-.soul-col--image {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 260px;
-  height: 260px;
-}
-
-.soul-img--overlap {
-  width: 420px;
-  height: 260px;
+.soul-img {
+  width: 100%;
+  height: auto;
   object-fit: cover;
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-strong);
-  position: relative;
-  z-index: 1;
-  background: var(--color-background-lighter);
-  border: 4px solid var(--color-background-lighter);
+  border-radius: 4px;
 }
 
 .soul-img--main {
-  width: 220px;
-  height: 140px;
+  width: 410px;
+  height: 260px;
   object-fit: cover;
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-medium);
+  border-radius: 22px;
+  border: 7px solid var(--soul-border);
+  box-shadow: var(--soul-shadow);
+  background: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.soul-img--overlap {
+  width: 270px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 7px solid var(--soul-border);
+  box-shadow: var(--soul-shadow);
+  background: #fff;
   position: absolute;
-  left: 0;
-  bottom: 0;
+  left: -60px;
+  bottom: -38px;
   z-index: 2;
-  background: var(--color-background-lighter);
-  border: 4px solid var(--color-background-lighter);
 }
 
-@media (max-width: 1000px) {
-  .page__image--soul-package {
-    width: 90vw;
-    max-width: 400px;
-    height: auto;
-  }
-}
-
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
   .soul-section {
-    flex-direction: column;
-    padding: 4vw 2vw;
-    gap: 2vw;
-  }
-  .soul-col--text, .soul-col--image {
-    max-width: 100%;
-    width: 100%;
-    align-items: center;
-    text-align: center;
-  }
-  .soul-title { font-size: 2rem; }
-  .soul-subtitle, .soul-list, .soul-price { font-size: 1rem; }
-  .soul-col--image {
-    min-height: 120px;
-    height: 120px;
-  }
-  .soul-img--overlap {
-    width: 70vw;
-    height: 40vw;
+    gap: 2.5vw;
+    padding: 3.5rem 2vw;
   }
   .soul-img--main {
-    width: 38vw;
-    height: 24vw;
+    width: 320px;
+    height: 200px;
+  }
+  .soul-img--overlap {
+    width: 180px;
+    height: 90px;
+    left: -24px;
+    bottom: -18px;
+  }
+  .soul-col--image {
+    height: 220px;
+  }
+}
+
+@media (max-width: 800px) {
+  .soul-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.2rem;
+    padding: 2.2rem 2vw;
+  }
+  .soul-col--image {
+    min-width: 0;
+    justify-content: center;
+    height: 180px;
+  }
+  .soul-img--main {
+    width: 90vw;
+    height: 120px;
+    max-width: 320px;
+    max-height: 120px;
+  }
+  .soul-img--overlap {
+    width: 60vw;
+    height: 60px;
+    max-width: 180px;
+    max-height: 60px;
+    left: 0;
+    bottom: -10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .soul-section {
+    padding: 1.1rem 0.5rem;
+    gap: 1.1rem;
+  }
+  .soul-title {
+    font-size: 2.1rem;
+  }
+  .soul-col--image {
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    justify-content: center;
+    height: auto;
+  }
+  .soul-img--main {
+    width: 98vw;
+    height: 80px;
+    max-width: 98vw;
+    max-height: 80px;
+  }
+  .soul-img--overlap {
+    position: static;
+    width: 80vw;
+    height: 40px;
+    max-width: 98vw;
+    max-height: 40px;
+    margin-top: 1.1rem;
     left: 0;
     bottom: 0;
   }

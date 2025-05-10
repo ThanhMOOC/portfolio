@@ -3,176 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <title>I'm Tua</title>
-  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/base.css">
-  <link rel="stylesheet" href="../assets/css/im-tua.css">
-  <style>
-    /* Burger menu styles */
-    .burger-menu {
-      position: fixed;
-      top: 32px;
-      right: 40px;
-      width: 38px;
-      height: 38px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      z-index: 1002;
-      cursor: pointer;
-      background: none;
-      border: none;
-    }
-    .burger-menu span {
-      display: block;
-      height: 4px;
-      width: 100%;
-      background: #f6f6c6;
-      border-radius: 2px;
-      transition: 0.3s;
-    }
-    .burger-menu.active span:nth-child(1) {
-      transform: translateY(17px) rotate(45deg);
-    }
-    .burger-menu.active span:nth-child(2) {
-      opacity: 0;
-    }
-    .burger-menu.active span:nth-child(3) {
-      transform: translateY(-17px) rotate(-45deg);
-    }
-    .burger-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(34, 34, 34, 0.92);
-      z-index: 1001;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.3s;
-    }
-    .burger-overlay.active {
-      display: flex;
-    }
-    .burger-nav {
-      display: flex;
-      flex-direction: column;
-      gap: 2.2rem;
-      align-items: center;
-    }
-    .burger-nav a {
-      color: #f6f6c6;
-      font-family: 'Josefin Sans', Arial, sans-serif;
-      font-size: 2rem;
-      text-decoration: none;
-      letter-spacing: 0.12em;
-      transition: color 0.2s;
-    }
-    .burger-nav a:hover {
-      color: #c2beaa;
-    }
-    @media (max-width: 600px) {
-      .burger-menu {
-        top: 18px;
-        right: 16px;
-        width: 32px;
-        height: 32px;
-      }
-      .burger-nav a {
-        font-size: 1.2rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="../assets/css/vintage-theme.css">
 </head>
-<body class="page--im-tua">
-  <div class="burger-menu" id="burger-menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <div class="burger-overlay" id="burger-overlay">
-    <nav class="burger-nav">
-      <a href="/pages/im-tua.html">Home</a>
-      <a href="/pages/tua-erre.html">TUA ERRE</a>
-      <a href="/pages/vagabond.html">VAGABOND</a>
-      <a href="/pages/essence-package.html">Essence</a>
-      <a href="/pages/soul-package.html">Soul</a>
-      <a href="/pages/signature-package.html">Signature</a>
-      <a href="/pages/collaborate.html">Collaborate</a>
-    </nav>
-  </div>
-  <div class="page__container page__container--im-tua">
-    <div class="page__left page__left--im-tua">
-      <div class="page__title page__title--im-tua">I'M TUA</div>
-      <div class="page__subtitle page__subtitle--im-tua">Photographer & Visual Storyteller</div>
-      <div class="page__text page__text--im-tua">
+<body class="bg-cream">
+  <nav class="vintage-nav">
+    <ul>
+      <li><a href="/pages/im-tua.html">Home</a></li>
+      <li><a href="/pages/tua-erre.html">TUA ERRE</a></li>
+      <li><a href="/pages/vagabond.html">VAGABOND</a></li>
+      <li><a href="/pages/essence-package.html">Essence</a></li>
+      <li><a href="/pages/soul-package.html">Soul</a></li>
+      <li><a href="/pages/signature-package.html">Signature</a></li>
+      <li><a href="/pages/collaborate.html">Collaborate</a></li>
+    </ul>
+  </nav>
+
+  <div class="vintage-container vintage-fade-in">
+    <div class="text-center">
+      <h1 class="text-gold">I'M TUA</h1>
+      <div class="vintage-divider"></div>
+      <p class="vintage-quote">Photographer & Visual Storyteller</p>
+    </div>
+
+    <div class="vintage-card">
+      <div class="vintage-content">
         <p>Based in the heart of France, I specialize in capturing authentic moments that tell your unique story. With a passion for natural light and candid photography, I create images that feel genuine and timeless.</p>
         <p>Whether it's a portrait session, a special event, or a creative collaboration, I'm here to help bring your vision to life through my lens.</p>
       </div>
     </div>
-    <div class="page__right page__right--im-tua">
-      <div class="ipad-frame">
-        <div class="im-tua-images-container">
-          <img id="im-tua-img-1" class="page__image page__image--im-tua" src="" alt="im-tua-img-1">
-          <img id="im-tua-img-2" class="page__image page__image--im-tua" src="" alt="im-tua-img-2">
-        </div>
+
+    <div class="vintage-gallery">
+      <div class="vintage-frame">
+        <img id="im-tua-img-1" class="vintage-img" alt="Portrait 1" />
+      </div>
+      <div class="vintage-frame">
+        <img id="im-tua-img-2" class="vintage-img" alt="Portrait 2" />
       </div>
     </div>
   </div>
-  <style>
-    .page__container--im-tua {
-      display: flex;
-      flex-direction: row;
-      min-height: 100vh;
-      padding: 5vh 5vw;
-      gap: 4vw;
-    }
-    .page__left--im-tua {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 100vh;
-    }
-    .page__text--im-tua {
-      text-align: justify;
-      line-height: 1.8;
-      margin-top: 2vh;
-    }
-    .page__text--im-tua p {
-      margin-bottom: 1.5vh;
-    }
-    .page__right--im-tua {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 10vh;
-    }
-    .ipad-frame {
-      width: 100%;
-      height: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .im-tua-images-container {
-      display: flex;
-      flex-direction: row;
-      gap: 20px;
-      width: 100%;
-      height: 100%;
-      justify-content: center;
-      align-items: center;
-    }
-    .page__image--im-tua {
-      width: 60%;
-      height: auto;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-  </style>
+
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       try {
@@ -184,19 +55,6 @@
         if (img2) document.getElementById('im-tua-img-2').src = img2.url;
       } catch (err) {
         console.error('Failed to load im-tua image:', err);
-      }
-    });
-    // Burger menu toggle
-    const burgerMenu = document.getElementById('burger-menu');
-    const burgerOverlay = document.getElementById('burger-overlay');
-    burgerMenu.addEventListener('click', function() {
-      burgerOverlay.classList.toggle('active');
-      burgerMenu.classList.toggle('active');
-    });
-    burgerOverlay.addEventListener('click', function(e) {
-      if (e.target === burgerOverlay) {
-        burgerOverlay.classList.remove('active');
-        burgerMenu.classList.remove('active');
       }
     });
   </script>

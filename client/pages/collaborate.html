@@ -2,297 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Let's Collaborate</title>
-  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Let's Collaborate - Photography Portfolio</title>
+  <meta name="description" content="Connect with me for photography collaborations, portraits, and special events in France.">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/vintage-theme.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <style>
-    :root {
-      --color-bg: #b6a68a;
-      --color-dark: #3a2a1a;
-      --color-btn: #2d2114;
-      --color-btn-hover: #5a3e1a;
-      --font-main: 'Josefin Sans', Arial, sans-serif;
-      --font-mono: 'Fira Code', monospace;
-      --font-script: 'Great Vibes', cursive;
-    }
-    body {
-      background: var(--color-bg);
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      font-family: var(--font-main);
-    }
-    .collab-section {
-      display: flex;
-      min-height: 100vh;
-      align-items: stretch;
-    }
-    .collab-left {
-      flex: 1 1 36vw;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 0 4vw 0 7vw;
-      background: var(--color-bg);
-    }
-    .collab-title {
-      font-family: var(--font-main);
-      font-size: 3.5vw;
-      letter-spacing: 0.25em;
-      color: var(--color-dark);
-      font-weight: 700;
-      margin-bottom: 0.5vw;
-      text-transform: uppercase;
-      line-height: 1;
-    }
-    .collab-script {
-      font-family: var(--font-script);
-      font-size: 5vw;
-      color: var(--color-dark);
-      margin-top: -1vw;
-      margin-bottom: 2vw;
-      line-height: 1;
-      display: block;
-    }
-    .collab-label {
-      font-family: var(--font-mono);
-      font-size: 1.1rem;
-      font-weight: bold;
-      letter-spacing: 0.1em;
-      color: var(--color-dark);
-      margin-top: 2vw;
-      margin-bottom: 0.2vw;
-      text-transform: uppercase;
-    }
-    .collab-value {
-      font-family: var(--font-mono);
-      font-size: 1.2rem;
-      color: var(--color-dark);
-      margin-bottom: 1vw;
-      letter-spacing: 0.12em;
-    }
-    .collab-btn-row {
-      margin-top: 2vw;
-      display: flex;
-      align-items: center;
-      gap: 1vw;
-    }
-    .collab-btn {
-      background: var(--color-btn);
-      color: #fff;
-      font-family: var(--font-mono);
-      font-size: 1.1rem;
-      letter-spacing: 0.2em;
-      border-radius: 2px;
-      padding: 1vw 3vw;
-      text-decoration: none;
-      border: none;
-      transition: background 0.2s;
-      text-align: center;
-      cursor: pointer;
-      font-weight: 500;
-      text-transform: uppercase;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-    }
-    .collab-btn:hover {
-      background: var(--color-btn-hover);
-    }
-    .collab-icons {
-      display: flex;
-      align-items: center;
-      gap: 1vw;
-      margin-left: 1vw;
-    }
-    .collab-icon {
-      color: var(--color-dark);
-      font-size: 2rem;
-      text-decoration: none;
-      transition: color 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .collab-icon:hover {
-      color: var(--color-btn-hover);
-    }
-    .collab-center {
-      flex: 0 0 22vw;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--color-bg);
-    }
-    .collab-center-img {
-      width: 18vw;
-      height: 28vw;
-      object-fit: cover;
-      border-radius: 2px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-      background: #eee;
-    }
-    .collab-right {
-      flex: 1 1 42vw;
-      background: #ccc center center/cover no-repeat;
-      min-height: 100vh;
-      transition: background-image 0.3s;
-    }
-    @media (max-width: 900px) {
-      .collab-section { flex-direction: column; }
-      .collab-left, .collab-center, .collab-right { flex: unset; width: 100vw; min-height: unset; }
-      .collab-center-img { width: 60vw; height: 40vw; }
-      .collab-title { font-size: 2rem; }
-      .collab-script { font-size: 3rem; }
-    }
-    /* Burger menu styles */
-    .burger-menu {
-      position: fixed;
-      top: 32px;
-      right: 40px;
-      width: 38px;
-      height: 38px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      z-index: 1002;
-      cursor: pointer;
-      background: none;
-      border: none;
-    }
-    .burger-menu span {
-      display: block;
-      height: 4px;
-      width: 100%;
-      background: #f6f6c6;
-      border-radius: 2px;
-      transition: 0.3s;
-    }
-    .burger-menu.active span:nth-child(1) {
-      transform: translateY(17px) rotate(45deg);
-    }
-    .burger-menu.active span:nth-child(2) {
-      opacity: 0;
-    }
-    .burger-menu.active span:nth-child(3) {
-      transform: translateY(-17px) rotate(-45deg);
-    }
-    .burger-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(34, 34, 34, 0.92);
-      z-index: 1001;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.3s;
-    }
-    .burger-overlay.active {
-      display: flex;
-    }
-    .burger-nav {
-      display: flex;
-      flex-direction: column;
-      gap: 2.2rem;
-      align-items: center;
-    }
-    .burger-nav a {
-      color: #f6f6c6;
-      font-family: 'Josefin Sans', Arial, sans-serif;
-      font-size: 2rem;
-      text-decoration: none;
-      letter-spacing: 0.12em;
-      transition: color 0.2s;
-    }
-    .burger-nav a:hover {
-      color: #c2beaa;
-    }
-    @media (max-width: 600px) {
-      .burger-menu {
-        top: 18px;
-        right: 16px;
-        width: 32px;
-        height: 32px;
-      }
-      .burger-nav a {
-        font-size: 1.2rem;
-      }
-    }
-  </style>
 </head>
-<body>
-  <div class="burger-menu" id="burger-menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <div class="burger-overlay" id="burger-overlay">
-    <nav class="burger-nav">
-      <a href="/pages/im-tua.html">Home</a>
-      <a href="/pages/tua-erre.html">TUA ERRE</a>
-      <a href="/pages/vagabond.html">VAGABOND</a>
-      <a href="/pages/essence-package.html">Essence</a>
-      <a href="/pages/soul-package.html">Soul</a>
-      <a href="/pages/signature-package.html">Signature</a>
-      <a href="/pages/collaborate.html">Collaborate</a>
-    </nav>
-  </div>
-  <section class="collab-section">
-    <div class="collab-left">
-      <div class="collab-title">LET'S</div>
-      <span class="collab-script">Collaborate</span>
-      <div class="collab-label">Phone</div>
-      <div class="collab-value">07 69 69 46 55</div>
-      <div class="collab-label">Email</div>
-      <div class="collab-value">trangdoan17032408@gmail.com</div>
-      <div class="collab-btn-row">
-        <a href="mailto:trangdoan17032408@gmail.com" class="collab-btn">Contact Me</a>
-        <div class="collab-icons">
-          <a href="mailto:trangdoan17032408@gmail.com" class="collab-icon" title="Email"><i class="fas fa-envelope"></i></a>
-          <a href="https://instagram.com/tua" target="_blank" class="collab-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+<body class="bg-cream">
+  <nav class="vintage-nav" role="navigation" aria-label="Main navigation">
+    <ul>
+      <li><a href="/pages/im-tua.html" aria-label="Home page">Home</a></li>
+      <li><a href="/pages/tua-erre.html" aria-label="TUA ERRE portfolio">TUA ERRE</a></li>
+      <li><a href="/pages/vagabond.html" aria-label="VAGABOND portfolio">VAGABOND</a></li>
+      <li><a href="/pages/essence-package.html" aria-label="Essence package details">Essence</a></li>
+      <li><a href="/pages/soul-package.html" aria-label="Soul package details">Soul</a></li>
+      <li><a href="/pages/signature-package.html" aria-label="Signature package details">Signature</a></li>
+      <li><a href="/pages/collaborate.html" aria-label="Contact and collaboration" aria-current="page">Collaborate</a></li>
+    </ul>
+  </nav>
+
+  <main class="vintage-container vintage-fade-in">
+    <div class="text-center">
+      <h1 class="text-gold">LET'S <span style="font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: var(--vintage-brown);">Collaborate</span></h1>
+      <div class="vintage-divider"></div>
+      <p class="vintage-quote">Let's create something beautiful together!</p>
+    </div>
+
+    <p class="vintage-quote">"Collaboration is the key to creativity. Let's connect and make something beautiful!"</p>
+
+    <div class="vintage-gallery" style="justify-content: center; margin: 2rem 0;">
+      <div class="vintage-frame" style="max-width: 400px; margin: 0 auto;">
+        <img id="collaborate-img-1" class="vintage-img" alt="Photography collaboration" />
+        <div class="vintage-caption" style="text-align: center; margin-top: 1rem; font-family: var(--font-vintage-script); color: var(--vintage-brown);">
+          Capturing moments, creating memories
         </div>
       </div>
     </div>
-    <div class="collab-center">
-      <img id="collab-center-img" class="collab-center-img" src="" alt="Collaborate Preview">
-  </div>
-    <div id="collab-right" class="collab-right"></div>
-</section>
+
+    <div class="vintage-card">
+      <div class="vintage-content">
+        <div class="vintage-list">
+          <div><b>Phone:</b> <a href="tel:0769694655" class="vintage-link">07 69 69 46 55</a></div>
+          <div><b>Email:</b> <a href="mailto:trangdoan17032408@gmail.com" class="vintage-link">trangdoan17032408@gmail.com</a></div>
+        </div>
+        
+        <div class="vintage-btn-row" style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="mailto:trangdoan17032408@gmail.com" class="vintage-btn" aria-label="Send me an email">
+            <i class="fas fa-envelope" aria-hidden="true"></i> Email Me
+          </a>
+          <a href="tel:0769694655" class="vintage-btn" aria-label="Call me">
+            <i class="fas fa-phone" aria-hidden="true"></i> Call Me
+          </a>
+        </div>
+
+        <div class="vintage-icons" style="margin-top: 2rem; display: flex; gap: 1.5rem; justify-content: center;">
+          <a href="https://instagram.com/tua" class="vintage-icon" target="_blank" rel="noopener" aria-label="Follow me on Instagram">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="https://facebook.com/tua" class="vintage-icon" target="_blank" rel="noopener" aria-label="Follow me on Facebook">
+            <i class="fab fa-facebook" aria-hidden="true"></i>
+          </a>
+          <a href="https://pinterest.com/tua" class="vintage-icon" target="_blank" rel="noopener" aria-label="Follow me on Pinterest">
+            <i class="fab fa-pinterest" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
   <script>
-    function matchImage(images, baseName) {
-      baseName = baseName.toLowerCase();
-      return images.find(img => {
-        if (!img.public_id) return false;
-        const id = img.public_id.split('/').pop().toLowerCase();
-        return id === baseName || id === baseName + '.jpg' || id === baseName + '.jpeg' || id === baseName + '.png';
-      });
-    }
     document.addEventListener('DOMContentLoaded', async () => {
       try {
         const response = await fetch('/image-url/portfolio');
         const images = await response.json();
-        const small = matchImage(images, 'collaborate-1');
-        const large = matchImage(images, 'collaborate-2');
-        if (small) document.getElementById('collab-center-img').src = small.url;
-        if (large) document.getElementById('collab-right').style.backgroundImage = `url('${large.url}')`;
+        const img = images.find(img => img.public_id && img.public_id.split('/').pop().toLowerCase() === 'collaborate-1');
+        if (img) {
+          const imgElement = document.getElementById('collaborate-img-1');
+          imgElement.src = img.url;
+          imgElement.onload = () => {
+            imgElement.style.opacity = '1';
+            imgElement.style.transform = 'scale(1)';
+          };
+        }
       } catch (err) {
-        console.error('Failed to load collaborate images:', err);
-      }
-    });
-    // Burger menu toggle
-    const burgerMenu = document.getElementById('burger-menu');
-    const burgerOverlay = document.getElementById('burger-overlay');
-    burgerMenu.addEventListener('click', function() {
-      burgerOverlay.classList.toggle('active');
-      burgerMenu.classList.toggle('active');
-    });
-    burgerOverlay.addEventListener('click', function(e) {
-      if (e.target === burgerOverlay) {
-        burgerOverlay.classList.remove('active');
-        burgerMenu.classList.remove('active');
+        console.error('Failed to load collaborate image:', err);
       }
     });
   </script>

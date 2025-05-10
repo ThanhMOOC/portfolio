@@ -1,0 +1,476 @@
+/* === VINTAGE THEME VARIABLES === */
+:root {
+  /* Vintage Color Palette */
+  --vintage-cream: #f5f1e6;
+  --vintage-parchment: #e8e0d0;
+  --vintage-sepia: #d4c4a8;
+  --vintage-brown: #8b7355;
+  --vintage-dark: #4a3c2a;
+  --vintage-accent: #c17f59;
+  --vintage-gold: #d4af37;
+  --vintage-ink: #2c1810;
+  
+  /* Typography */
+  --font-vintage: 'Playfair Display', serif;
+  --font-vintage-script: 'Dancing Script', cursive;
+  --font-vintage-sans: 'Montserrat', sans-serif;
+  
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  
+  /* Effects */
+  --vintage-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  --vintage-border: 1px solid var(--vintage-brown);
+  --vintage-radius: 4px;
+}
+
+/* === BASE STYLES === */
+body {
+  background-color: var(--vintage-cream);
+  color: var(--vintage-ink);
+  font-family: var(--font-vintage-sans);
+  line-height: 1.6;
+}
+
+/* === TYPOGRAPHY === */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-vintage);
+  color: var(--vintage-dark);
+  letter-spacing: 0.05em;
+}
+
+h1 {
+  font-size: 3.5rem;
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  display: inline-block;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--vintage-gold);
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-md);
+}
+
+h3 {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* === VINTAGE CONTAINERS === */
+.vintage-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+  background-color: var(--vintage-parchment);
+  border: var(--vintage-border);
+  box-shadow: var(--vintage-shadow);
+  position: relative;
+}
+
+.vintage-container::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 1px solid var(--vintage-gold);
+  pointer-events: none;
+}
+
+/* === VINTAGE CARDS === */
+.vintage-card {
+  background-color: var(--vintage-cream);
+  border: var(--vintage-border);
+  border-radius: var(--vintage-radius);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.vintage-card:hover {
+  transform: translateY(-5px);
+}
+
+.vintage-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--vintage-gold);
+}
+
+/* === VINTAGE BUTTONS === */
+.vintage-btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--vintage-brown);
+  color: var(--vintage-cream);
+  font-family: var(--font-vintage);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: none;
+  border-radius: var(--vintage-radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.vintage-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.vintage-btn:hover {
+  background-color: var(--vintage-dark);
+  transform: translateY(-2px);
+}
+
+.vintage-btn:hover::before {
+  left: 100%;
+}
+
+/* === VINTAGE NAVIGATION === */
+.vintage-nav {
+  background-color: var(--vintage-dark);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.vintage-nav ul {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.vintage-nav a {
+  color: var(--vintage-cream);
+  text-decoration: none;
+  font-family: var(--font-vintage);
+  font-size: 1.1rem;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.vintage-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--vintage-gold);
+  transition: width 0.3s ease;
+}
+
+.vintage-nav a:hover::after {
+  width: 100%;
+}
+
+/* === VINTAGE IMAGES === */
+.vintage-img {
+  border: var(--vintage-border);
+  padding: 5px;
+  background-color: var(--vintage-cream);
+  box-shadow: var(--vintage-shadow);
+  transition: transform 0.3s ease;
+}
+
+.vintage-img:hover {
+  transform: scale(1.02);
+}
+
+/* === VINTAGE FORMS === */
+.vintage-input {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: var(--vintage-cream);
+  border: var(--vintage-border);
+  border-radius: var(--vintage-radius);
+  font-family: var(--font-vintage-sans);
+  color: var(--vintage-ink);
+  margin-bottom: var(--spacing-sm);
+}
+
+.vintage-input:focus {
+  outline: none;
+  border-color: var(--vintage-gold);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+/* === VINTAGE DECORATIONS === */
+.vintage-divider {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--vintage-gold),
+    transparent
+  );
+  margin: var(--spacing-lg) 0;
+}
+
+.vintage-quote {
+  font-family: var(--font-vintage-script);
+  font-size: 1.5rem;
+  color: var(--vintage-brown);
+  text-align: center;
+  margin: var(--spacing-lg) 0;
+  position: relative;
+  padding: 0 var(--spacing-xl);
+}
+
+.vintage-quote::before,
+.vintage-quote::after {
+  content: '"';
+  font-size: 3rem;
+  color: var(--vintage-gold);
+  position: absolute;
+  top: -1rem;
+}
+
+.vintage-quote::before {
+  left: 0;
+}
+
+.vintage-quote::after {
+  right: 0;
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+  :root {
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  .vintage-nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .vintage-container {
+    padding: var(--spacing-md);
+  }
+}
+
+/* === VINTAGE ANIMATIONS === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vintage-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* === VINTAGE UTILITY CLASSES === */
+.text-center {
+  text-align: center;
+}
+
+.text-gold {
+  color: var(--vintage-gold);
+}
+
+.bg-cream {
+  background-color: var(--vintage-cream);
+}
+
+.bg-parchment {
+  background-color: var(--vintage-parchment);
+}
+
+.border-gold {
+  border: 1px solid var(--vintage-gold);
+}
+
+.shadow-vintage {
+  box-shadow: var(--vintage-shadow);
+}
+
+/* === VINTAGE GALLERY === */
+.vintage-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-md);
+}
+
+.vintage-gallery .vintage-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border: var(--vintage-border);
+  padding: 8px;
+  background-color: var(--vintage-cream);
+  box-shadow: var(--vintage-shadow);
+  transition: all 0.3s ease;
+}
+
+.vintage-gallery .vintage-img:hover {
+  transform: scale(1.02);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* === VINTAGE LIST === */
+.vintage-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing-md) 0;
+}
+
+.vintage-list li {
+  position: relative;
+  padding-left: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-vintage-sans);
+  color: var(--vintage-ink);
+}
+
+.vintage-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--vintage-gold);
+  font-size: 1.5em;
+  line-height: 1;
+}
+
+/* === VINTAGE PRICE === */
+.vintage-price {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background-color: var(--vintage-parchment);
+  border: var(--vintage-border);
+  border-radius: var(--vintage-radius);
+}
+
+.vintage-price span {
+  font-family: var(--font-vintage);
+  font-size: 1.2rem;
+}
+
+.vintage-price b {
+  color: var(--vintage-gold);
+  font-size: 1.4rem;
+}
+
+/* === VINTAGE CONTENT === */
+.vintage-content {
+  font-family: var(--font-vintage-sans);
+  line-height: 1.8;
+  color: var(--vintage-ink);
+  text-align: justify;
+  padding: var(--spacing-md);
+}
+
+.vintage-content p {
+  margin-bottom: var(--spacing-md);
+}
+
+.vintage-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* === VINTAGE FRAME === */
+.vintage-frame {
+  position: relative;
+  padding: 10px;
+  background-color: var(--vintage-cream);
+  border: var(--vintage-border);
+  box-shadow: var(--vintage-shadow);
+  transition: all 0.3s ease;
+}
+
+.vintage-frame::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 1px solid var(--vintage-gold);
+  pointer-events: none;
+}
+
+.vintage-frame:hover {
+  transform: translateY(-5px);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.vintage-frame .vintage-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border: 1px solid var(--vintage-brown);
+}
+
+/* === VINTAGE GALLERY LAYOUT === */
+@media (max-width: 768px) {
+  .vintage-gallery {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .vintage-frame .vintage-img {
+    height: 300px;
+  }
+} 

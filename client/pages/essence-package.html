@@ -4,50 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Essence Package</title>
-  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/vintage-theme.css">
 </head>
-<body>
-  <div class="burger-menu" id="burger-menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <div class="burger-overlay" id="burger-overlay">
-    <nav class="burger-nav">
-      <a href="/pages/im-tua.html">Home</a>
-      <a href="/pages/tua-erre.html">TUA ERRE</a>
-      <a href="/pages/vagabond.html">VAGABOND</a>
-      <a href="/pages/essence-package.html">Essence</a>
-      <a href="/pages/soul-package.html">Soul</a>
-      <a href="/pages/signature-package.html">Signature</a>
-      <a href="/pages/collaborate.html">Collaborate</a>
-    </nav>
-  </div>
-  <div class="essence-bg">
-    <div class="essence-container">
-      <div class="essence-left">
-        <h1 class="essence-title">ESSENCE PACKAGE</h1>
-        <div class="essence-subtitle">A creative portrait experience for individuals, artists, and dreamers</div>
-        <ul class="essence-list">
-          <li>2–3 hour session</li>
-          <li>Moodboard & creative direction included</li>
-          <li>30+ edited high-resolution images</li>
-          <li>2–3 outfit changes</li>
-          <li>Suitable for creatives, entrepreneurs,<br>or personal storytelling</li>
-        </ul>
-        <div class="essence-price-row">
-          <span class="essence-price-icon">✨</span>
-          <span class="essence-price-text">Starting at <b>€400</b></span>
-        </div>
-      </div>
-      <div class="essence-right">
-        <img id="essence-img-1" class="essence-img essence-img--left" alt="Essence Portrait 1" />
-        <img id="essence-img-2" class="essence-img essence-img--right" alt="Essence Portrait 2" />
+<body class="bg-cream">
+  <nav class="vintage-nav">
+    <ul>
+      <li><a href="/pages/im-tua.html">Home</a></li>
+      <li><a href="/pages/tua-erre.html">TUA ERRE</a></li>
+      <li><a href="/pages/vagabond.html">VAGABOND</a></li>
+      <li><a href="/pages/essence-package.html">Essence</a></li>
+      <li><a href="/pages/soul-package.html">Soul</a></li>
+      <li><a href="/pages/signature-package.html">Signature</a></li>
+      <li><a href="/pages/collaborate.html">Collaborate</a></li>
+    </ul>
+  </nav>
+
+  <div class="vintage-container vintage-fade-in">
+    <div class="text-center">
+      <h1 class="text-gold">ESSENCE PACKAGE</h1>
+      <div class="vintage-divider"></div>
+      <p class="vintage-quote">A creative portrait experience for individuals, artists, and dreamers</p>
+    </div>
+
+    <div class="vintage-card">
+      <h2>Package Details</h2>
+      <div class="vintage-divider"></div>
+      <ul class="vintage-list">
+        <li>2–3 hour session</li>
+        <li>Moodboard & creative direction included</li>
+        <li>30+ edited high-resolution images</li>
+        <li>2–3 outfit changes</li>
+        <li>Suitable for creatives, entrepreneurs,<br>or personal storytelling</li>
+      </ul>
+      <div class="vintage-price">
+        <span class="text-gold">✨</span>
+        <span>Starting at <b>€400</b></span>
       </div>
     </div>
+
+    <div class="vintage-gallery">
+      <img id="essence-img-1" class="vintage-img" alt="Essence Portrait 1" />
+      <img id="essence-img-2" class="vintage-img" alt="Essence Portrait 2" />
+    </div>
   </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       try {
@@ -59,19 +61,6 @@
         if (img2) document.getElementById('essence-img-2').src = img2.url;
       } catch (err) {
         console.error('Failed to load essence package images:', err);
-      }
-    });
-    // Burger menu toggle
-    const burgerMenu = document.getElementById('burger-menu');
-    const burgerOverlay = document.getElementById('burger-overlay');
-    burgerMenu.addEventListener('click', function() {
-      burgerOverlay.classList.toggle('active');
-      burgerMenu.classList.toggle('active');
-    });
-    burgerOverlay.addEventListener('click', function(e) {
-      if (e.target === burgerOverlay) {
-        burgerOverlay.classList.remove('active');
-        burgerMenu.classList.remove('active');
       }
     });
   </script>

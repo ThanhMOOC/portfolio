@@ -4,52 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Soul Package</title>
-  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/base.css">
-  <link rel="stylesheet" href="../assets/css/soul-package.css">
-  <link rel="stylesheet" href="../assets/css/burger-menu.css">
+  <link rel="stylesheet" href="../assets/css/vintage-theme.css">
 </head>
-<body>
-  <div class="burger-menu" id="burger-menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <div class="burger-overlay" id="burger-overlay">
-    <nav class="burger-nav">
-      <a href="/pages/im-tua.html">Home</a>
-      <a href="/pages/tua-erre.html">TUA ERRE</a>
-      <a href="/pages/vagabond.html">VAGABOND</a>
-      <a href="/pages/essence-package.html">Essence</a>
-      <a href="/pages/soul-package.html">Soul</a>
-      <a href="/pages/signature-package.html">Signature</a>
-      <a href="/pages/collaborate.html">Collaborate</a>
-    </nav>
-  </div>
-  <section class="soul-section">
-    <div class="soul-col soul-col--text">
-      <h1 class="soul-title">SOUL PACKAGE</h1>
-      <div class="soul-subtitle" style="white-space: nowrap;">Perfect for capturing authentic moments and emotions</div>
-      <ul class="soul-list">
+<body class="bg-cream">
+  <nav class="vintage-nav">
+    <ul>
+      <li><a href="/pages/im-tua.html">Home</a></li>
+      <li><a href="/pages/tua-erre.html">TUA ERRE</a></li>
+      <li><a href="/pages/vagabond.html">VAGABOND</a></li>
+      <li><a href="/pages/essence-package.html">Essence</a></li>
+      <li><a href="/pages/soul-package.html">Soul</a></li>
+      <li><a href="/pages/signature-package.html">Signature</a></li>
+      <li><a href="/pages/collaborate.html">Collaborate</a></li>
+    </ul>
+  </nav>
+
+  <div class="vintage-container vintage-fade-in">
+    <div class="text-center">
+      <h1 class="text-gold">SOUL PACKAGE</h1>
+      <div class="vintage-divider"></div>
+      <p class="vintage-quote">Perfect for capturing authentic moments and emotions</p>
+    </div>
+
+    <div class="vintage-card">
+      <ul class="vintage-list">
         <li>2–4 hours of coverage</li>
         <li>50+ edited images</li>
         <li>Pre-shoot consultation</li>
         <li>Online gallery delivery</li>
         <li>Option to add photo book</li>
       </ul>
-      <div class="soul-price">
-        <span class="soul-price-icon">💰</span>
-        <span class="soul-price-text"><b>Starting at €600</b></span>
+      <div class="vintage-price">
+        <span class="vintage-price-icon">💰</span>
+        <span class="vintage-price-text">Starting at €600</span>
       </div>
     </div>
-    <div class="soul-col soul-col--image">
-      <div class="soul-image-container">
-        <img id="soul-img-1" class="soul-img soul-img--main" alt="Soul Package Preview 1" />
-        <img id="soul-img-2" class="soul-img soul-img--overlap" alt="Soul Package Preview 2" />
+
+    <div class="vintage-gallery">
+      <div class="vintage-frame">
+        <img id="soul-img-1" class="vintage-img" alt="Soul Package Preview 1" />
+      </div>
+      <div class="vintage-frame">
+        <img id="soul-img-2" class="vintage-img" alt="Soul Package Preview 2" />
       </div>
     </div>
-  </section>
+  </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
@@ -64,21 +65,8 @@
         console.error('Failed to load soul package images:', err);
       }
     });
-
-    // Burger menu toggle
-    const burgerMenu = document.getElementById('burger-menu');
-    const burgerOverlay = document.getElementById('burger-overlay');
-    burgerMenu.addEventListener('click', function() {
-      burgerOverlay.classList.toggle('active');
-      burgerMenu.classList.toggle('active');
-    });
-    burgerOverlay.addEventListener('click', function(e) {
-      if (e.target === burgerOverlay) {
-        burgerOverlay.classList.remove('active');
-        burgerMenu.classList.remove('active');
-      }
-    });
   </script>
 </body>
 </html>
+
 

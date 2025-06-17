@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Let's Collaborate</title>
@@ -9,7 +10,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="../assets/css/base.css">
   <link rel="stylesheet" href="../assets/css/pages.css">
+  <link rel="stylesheet" href="../assets/css/burger-menu.css">
 </head>
+
 <body>
   <div class="burger-menu" id="burger-menu">
     <span></span>
@@ -38,8 +41,10 @@
       <div class="collab-btn-row">
         <a href="mailto:trangdoan17032408@gmail.com" class="collab-btn">Contact Me</a>
         <div class="collab-icons">
-          <a href="mailto:trangdoan17032408@gmail.com" class="collab-icon" title="Email"><i class="fas fa-envelope"></i></a>
-          <a href="https://instagram.com/tua" target="_blank" class="collab-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="mailto:trangdoan17032408@gmail.com" class="collab-icon" title="Email"><i
+              class="fas fa-envelope"></i></a>
+          <a href="https://instagram.com/tua" target="_blank" class="collab-icon" title="Instagram"><i
+              class="fab fa-instagram"></i></a>
         </div>
       </div>
     </div>
@@ -48,40 +53,14 @@
     </div>
     <div id="collab-right" class="collab-right"></div>
   </section>
-  <script>
-    function matchImage(images, baseName) {
-      baseName = baseName.toLowerCase();
-      return images.find(img => {
-        if (!img.public_id) return false;
-        const id = img.public_id.split('/').pop().toLowerCase();
-        return id === baseName || id === baseName + '.jpg' || id === baseName + '.jpeg' || id === baseName + '.png';
-      });
-    }
-    document.addEventListener('DOMContentLoaded', async () => {
-      try {
-        const response = await fetch('/image-url/portfolio');
-        const images = await response.json();
-        const small = matchImage(images, 'collaborate-1');
-        const large = matchImage(images, 'collaborate-2');
-        if (small) document.getElementById('collab-center-img').src = small.url;
-        if (large) document.getElementById('collab-right').style.backgroundImage = `url('${large.url}')`;
-      } catch (err) {
-        console.error('Failed to load collaborate images:', err);
-      }
-    });
-    // Burger menu toggle
-    const burgerMenu = document.getElementById('burger-menu');
-    const burgerOverlay = document.getElementById('burger-overlay');
-    burgerMenu.addEventListener('click', function() {
-      burgerOverlay.classList.toggle('active');
-      burgerMenu.classList.toggle('active');
-    });
-    burgerOverlay.addEventListener('click', function(e) {
-      if (e.target === burgerOverlay) {
-        burgerOverlay.classList.remove('active');
-        burgerMenu.classList.remove('active');
-      }
-    });
+  <script type="module">
+    import { loadCollaborateImages } from '../assets/js/load-images.js';
+    document.addEventListener('DOMContentLoaded', loadCollaborateImages);
   </script>
+  
+  
+
+  <script src="../assets/js/burger-menu.js"></script>
 </body>
+
 </html>

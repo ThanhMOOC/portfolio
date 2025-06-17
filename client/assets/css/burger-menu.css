@@ -1,14 +1,34 @@
 /* Burger menu styles */
+:root {
+  --burger-menu-color: #f6f6c6;
+  --burger-menu-hover-color: #c2beaa;
+  --burger-overlay-bg: rgba(34, 34, 34, 0.92);
+  --burger-menu-size: 38px;
+  --burger-menu-mobile-size: 32px;
+  --burger-menu-spacing: 4px;
+  --burger-menu-radius: 2px;
+  --burger-menu-top: 32px;
+  --burger-menu-right: 40px;
+  --burger-menu-mobile-top: 18px;
+  --burger-menu-mobile-right: 16px;
+  --burger-nav-gap: 2.2rem;
+  --burger-nav-font-size: 2rem;
+  --burger-nav-mobile-font-size: 1.2rem;
+  --burger-transition: 0.3s;
+  --burger-z-index: 1002;
+  --burger-overlay-z-index: 1001;
+}
+
 .burger-menu {
   position: fixed;
-  top: 32px;
-  right: 40px;
-  width: 38px;
-  height: 38px;
+  top: var(--burger-menu-top);
+  right: var(--burger-menu-right);
+  width: var(--burger-menu-size);
+  height: var(--burger-menu-size);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  z-index: 1002;
+  z-index: var(--burger-z-index);
   cursor: pointer;
   background: none;
   border: none;
@@ -16,11 +36,11 @@
 
 .burger-menu span {
   display: block;
-  height: 4px;
+  height: var(--burger-menu-spacing);
   width: 100%;
-  background: var(--color-text-light);
-  border-radius: 2px;
-  transition: 0.3s;
+  background: var(--burger-menu-color);
+  border-radius: var(--burger-menu-radius);
+  transition: var(--burger-transition);
 }
 
 .burger-menu.active span:nth-child(1) {
@@ -37,15 +57,18 @@
 
 .burger-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(34, 34, 34, 0.92);
-  z-index: 1001;
+  background: var(--burger-overlay-bg);
+  z-index: var(--burger-overlay-z-index);
   display: none;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.3s;
+  transition: opacity var(--burger-transition);
 }
 
 .burger-overlay.active {
@@ -55,31 +78,32 @@
 .burger-nav {
   display: flex;
   flex-direction: column;
-  gap: 2.2rem;
+  gap: var(--burger-nav-gap);
   align-items: center;
 }
 
 .burger-nav a {
-  color: var(--color-text-light);
-  font-family: var(--font-primary);
-  font-size: 2rem;
+  color: var(--burger-menu-color);
+  font-family: 'Josefin Sans', Arial, sans-serif;
+  font-size: var(--burger-nav-font-size);
   text-decoration: none;
   letter-spacing: 0.12em;
   transition: color 0.2s;
 }
 
 .burger-nav a:hover {
-  color: var(--color-background-lighter);
+  color: var(--burger-menu-hover-color);
 }
 
 @media (max-width: 600px) {
   .burger-menu {
-    top: 18px;
-    right: 16px;
-    width: 32px;
-    height: 32px;
+    top: var(--burger-menu-mobile-top);
+    right: var(--burger-menu-mobile-right);
+    width: var(--burger-menu-mobile-size);
+    height: var(--burger-menu-mobile-size);
   }
+  
   .burger-nav a {
-    font-size: 1.2rem;
+    font-size: var(--burger-nav-mobile-font-size);
   }
 } 

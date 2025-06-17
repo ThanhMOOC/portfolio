@@ -50,31 +50,11 @@
     </div>
   </section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      try {
-        const response = await fetch('/image-url/portfolio');
-        const images = await response.json();
-        const img = images.find(img => img.public_id && img.public_id.split('/').pop().toLowerCase() === 'signature-1');
-        if (img) document.getElementById('signature-img').src = img.url;
-      } catch (err) {
-        console.error('Failed to load signature package image:', err);
-      }
-    });
-
-    // Burger menu toggle
-    const burgerMenu = document.getElementById('burger-menu');
-    const burgerOverlay = document.getElementById('burger-overlay');
-    burgerMenu.addEventListener('click', function() {
-      burgerOverlay.classList.toggle('active');
-      burgerMenu.classList.toggle('active');
-    });
-    burgerOverlay.addEventListener('click', function(e) {
-      if (e.target === burgerOverlay) {
-        burgerOverlay.classList.remove('active');
-        burgerMenu.classList.remove('active');
-      }
-    });
+  <script type="module">
+    import { loadSignatureImage } from '../assets/js/load-images.js';
+    document.addEventListener('DOMContentLoaded', loadSignatureImage);
   </script>
+  
+  <script src="../assets/js/burger-menu.js"></script>
 </body>
 </html>

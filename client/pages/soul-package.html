@@ -51,34 +51,12 @@
     </div>
   </section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      try {
-        const response = await fetch('/image-url/portfolio');
-        const images = await response.json();
-        const img1 = images.find(img => img.public_id && img.public_id.split('/').pop().toLowerCase() === 'soul-1');
-        const img2 = images.find(img => img.public_id && img.public_id.split('/').pop().toLowerCase() === 'soul-2');
-        if (img1) document.getElementById('soul-img-1').src = img1.url;
-        if (img2) document.getElementById('soul-img-2').src = img2.url;
-      } catch (err) {
-        console.error('Failed to load soul package images:', err);
-      }
-    });
-
-    // Burger menu toggle
-    const burgerMenu = document.getElementById('burger-menu');
-    const burgerOverlay = document.getElementById('burger-overlay');
-    burgerMenu.addEventListener('click', function() {
-      burgerOverlay.classList.toggle('active');
-      burgerMenu.classList.toggle('active');
-    });
-    burgerOverlay.addEventListener('click', function(e) {
-      if (e.target === burgerOverlay) {
-        burgerOverlay.classList.remove('active');
-        burgerMenu.classList.remove('active');
-      }
-    });
+  <script type="module">
+    import { loadSoulImages } from '../assets/js/load-images.js';
+    document.addEventListener('DOMContentLoaded', loadSoulImages);
   </script>
+  
+  <script src="../assets/js/burger-menu.js"></script>
 </body>
 </html>
 

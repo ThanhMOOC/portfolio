@@ -7,73 +7,8 @@
   <link href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/base.css">
-  <link rel="stylesheet" href="../assets/css/tuaerre-hero.css">
-  <style>
-    .page__container--tua-erre {
-      display: flex;
-      flex-direction: row;
-      min-height: 100vh;
-      padding: 5vh 5vw;
-      gap: 4vw;
-    }
-    .page__left--tua-erre {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      padding-top: 2vh;
-    }
-    .page__title--tua-erre {
-      font-family: var(--font-primary);
-      font-size: 2.5rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      color: var(--color-text-dark);
-      margin-bottom: 1vh;
-      line-height: 1.2;
-      text-transform: uppercase;
-    }
-    .tuaerre-center {
-      position: absolute;
-      top: 20% !important;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 1vw;
-    }
-    .tuaerre-title {
-      font-family: var(--font-primary);
-      font-size: 4vw;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      color: var(--color-text-dark);
-      text-transform: uppercase;
-    }
-    .tuaerre-dash {
-      font-family: var(--font-primary);
-      font-size: 4vw;
-      color: var(--color-text-dark);
-    }
-    .tuaerre-script {
-      font-family: var(--font-script);
-      font-size: 4vw;
-      color: var(--color-text-dark);
-    }
-    .tuaerre-hero .tuaerre-center {
-      top: 20% !important;
-      left: 50% !important;
-      transform: translate(-50%, -50%) !important;
-      width: auto !important;
-      text-align: center !important;
-      white-space: nowrap !important;
-    }
-    .tuaerre-hero .tuaerre-title {
-      font-size: 4vw !important;
-      white-space: nowrap !important;
-      display: inline-block !important;
-    }
-  </style>
+  <link rel="stylesheet" href="../assets/css/pages.css">
+  <link rel="stylesheet" href="../assets/css/burger-menu.css">
 </head>
 <body class="tuaerre-hero">
   <div class="burger-menu" id="burger-menu">
@@ -102,34 +37,11 @@
     PASSION FOR PHOTOGRAPHY DRIVES ME TO CAPTURE EVERY BEAUTIFUL<br>
     EXPRESSION OF NATURE
     </div>
-<script>
-  document.addEventListener('DOMContentLoaded', async () => {
-    try {
-      const response = await fetch('/image-url/portfolio');
-      const images = await response.json();
-        // Find the image for the tua-erre background (e.g., tua-erre-cover)
-        const bg = images.find(img => img.public_id.split('/').pop().toLowerCase() === 'tua-erre-cover');
-        if (bg) {
-          document.body.style.backgroundImage = `url('${bg.url}')`;
-        }
-    } catch (err) {
-        console.error('Failed to load tua-erre background image:', err);
-    }
-  });
-
-  // Burger menu toggle
-  const burgerMenu = document.getElementById('burger-menu');
-  const burgerOverlay = document.getElementById('burger-overlay');
-  burgerMenu.addEventListener('click', function() {
-    burgerOverlay.classList.toggle('active');
-    burgerMenu.classList.toggle('active');
-  });
-  burgerOverlay.addEventListener('click', function(e) {
-    if (e.target === burgerOverlay) {
-      burgerOverlay.classList.remove('active');
-      burgerMenu.classList.remove('active');
-    }
-  });
-</script>
+    <script type="module">
+      import { loadTuaErreBackground } from '../assets/js/load-images.js';
+      document.addEventListener('DOMContentLoaded', loadTuaErreBackground);
+    </script>
+    
+  <script src="../assets/js/burger-menu.js"></script>
 </body>
 </html>

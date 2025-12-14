@@ -3,9 +3,9 @@ const router = express.Router();
 const ImageController = require('../controllers/imageController');
 const path = require('path');
 
-// Serve the main page
+// Serve the main single-page application
 router.get('/', (req, res) => {
-  const filePath = path.join(__dirname, '../../../client/pages/tua-erre.html');
+  const filePath = path.join(__dirname, '../../../client/index.html');
   res.sendFile(filePath);
 });
 

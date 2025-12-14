@@ -16,8 +16,14 @@ class CloudinaryModel {
 
         const imageUrls = result.resources.map(resource => {
           const displayName = resource.context?.custom?.display_name || '';
+
+          let optimizedUrl = resource.secure_url;
+          if (optimizedUrl.includes('/upload/')) {
+             optimizedUrl = optimizedUrl.replace('/upload/', '/upload/f_auto,q_auto/');
+          }
+
           return {
-            url: resource.secure_url,
+            url: optimizedUrl,
             display_name: displayName,
             public_id: resource.public_id
           };

@@ -19,9 +19,50 @@ export async function fetchImages() {
 export function findImage(images, name) {
   const id = name.toLowerCase();
   return images.find(img => {
-    const file = img.public_id?.split('/').pop()?.toLowerCase();
-    return file === id || file === `${id}.jpg`;
+    const publicId = img.public_id?.toLowerCase() || '';
+    // Use .includes() to match even if folders are involved
+    return publicId.includes(id) || publicId.includes(`${id}.jpg`);
   });
+}
+
+/**
+ * Transform a Cloudinary URL to add blur, gamma, and shadow effects
+ * @param {string} url - Original Cloudinary URL
+ * @param {number} blurAmount - Blur intensity (default: 4000)
+ * @param {number} gammaAmount - Gamma correction value (default: 200, range: 0-200)
+ * @returns {string} Transformed URL with blur, gamma, and shadow
+ */
+export function addBlurToCloudinaryUrl(url, blurAmount = 4000, gammaAmount = 200) {
+  if (!url || !url.includes('cloudinary.com')) {
+    return url;
+  }
+  
+  // Extract the public_id from the URL
+  // Format: https://res.cloudinary.com/{cloud_name}/image/upload/{transformations}/{public_id}
+  const uploadIndex = url.indexOf('/upload/');
+  if (uploadIndex === -1) return url;
+  
+  const beforeUpload = url.substring(0, uploadIndex + 8); // Include '/upload/'
+  const afterUpload = url.substring(uploadIndex + 8);
+  
+  // Extract public_id (everything after the last transformation segment)
+  // If there are transformations, they're separated by '/'
+  const parts = afterUpload.split('/');
+  const publicId = parts[parts.length - 1];
+  
+  // Build new URL with blur, gamma, and shadow transformations
+  // Use e_blur for blur effect, e_gamma for gamma correction, e_shadow for shadow effect, c_fill for fill crop, w_1920/h_1080 for size, g_auto for gravity
+  // Combine with existing transformations if any (like f_auto,q_auto)
+  const existingTransforms = parts.length > 1 ? parts.slice(0, -1).join('/') : '';
+  const blurTransform = `e_blur:${blurAmount}/e_gamma:${gammaAmount}/e_shadow/c_fill,w_1920,h_1080,g_auto`;
+  
+  if (existingTransforms) {
+    // Prepend blur, gamma, and shadow to existing transformations
+    return `${beforeUpload}${blurTransform}/${existingTransforms}/${publicId}`;
+  } else {
+    // No existing transformations, just add blur, gamma, and shadow
+    return `${beforeUpload}${blurTransform}/${publicId}`;
+  }
 }
 
 // ----- Các hàm load hình ảnh theo trang -----
@@ -29,10 +70,12 @@ export function findImage(images, name) {
 export async function loadVagabondImages() {
   try {
     const images = await fetchImages();
-    const bg = findImage(images, 'vagabond-cover');
     const side = findImage(images, 'vagabond-1');
-    if (bg) document.body.style.background = `url('${bg.url}') center center / cover no-repeat`;
-    if (side) document.getElementById('vagabond-side-img').src = side.url;
+    // Background image removed - using unified vintage theme
+    if (side) {
+      const imgEl = document.getElementById('vagabond-side-img');
+      if (imgEl) imgEl.src = side.url;
+    }
   } catch (err) {
     console.error('Failed to load vagabond images:', err);
   }
@@ -56,9 +99,37 @@ export async function loadCollaborateImages() {
     const img1 = findImage(images, 'collaborate-1');
     const img2 = findImage(images, 'collaborate-2');
     if (img1) document.getElementById('collab-center-img').src = img1.url;
-    if (img2) document.getElementById('collab-right').style.backgroundImage = `url('${img2.url}')`;
+    // Note: collaborate-2 is now used as full-page background, not collab-right
   } catch (err) {
     console.error('Failed to load collaborate images:', err);
+  }
+}
+
+/**
+ * Load collaborate-2.jpg as full-page background from Cloudinary
+ */
+export async function loadFullPageBackground() {
+  try {
+    const images = await fetchImages();
+    const bgImage = findImage(images, 'collaborate-2');
+    
+    if (bgImage) {
+      // Apply blur transformation for subtle effect
+      const blurredUrl = addBlurToCloudinaryUrl(bgImage.url);
+      
+      // Apply to body element as background image
+      document.body.style.backgroundImage = `url('${blurredUrl}')`;
+      document.body.style.backgroundSize = 'cover';
+      document.body.style.backgroundPosition = 'center';
+      document.body.style.backgroundRepeat = 'no-repeat';
+      document.body.style.backgroundAttachment = 'fixed';
+      
+      console.log('Background image loaded:', blurredUrl);
+    } else {
+      console.warn('collaborate-2 image not found in Cloudinary');
+    }
+  } catch (err) {
+    console.error('Failed to load full-page background:', err);
   }
 }
 
@@ -97,12 +168,25 @@ export async function loadSignatureImage() {
 }
 
 export async function loadTuaErreBackground() {
+  // Background image removed - using unified vintage theme
+  // This function kept for compatibility but no longer sets background
+}
+
+// Load all images for single-page layout
+export async function loadAllImages() {
   try {
-    const images = await fetchImages();
-    const bg = findImage(images, 'tua-erre-cover');
-    if (bg) document.body.style.backgroundImage = `url('${bg.url}')`;
+    await Promise.all([
+      loadImTuaImages(),
+      loadTuaErreBackground(),
+      loadVagabondImages(),
+      loadEssenceImages(),
+      loadSoulImages(),
+      loadSignatureImage(),
+      loadCollaborateImages(),
+      loadFullPageBackground()
+    ]);
   } catch (err) {
-    console.error('Failed to load tua-erre background image:', err);
+    console.error('Failed to load some images:', err);
   }
 }
 

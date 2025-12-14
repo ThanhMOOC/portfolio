@@ -1,21 +1,42 @@
 /* === VARIABLES === */
 :root {
-  /* Colors */
-  --color-primary: #7a5a2f;
-  --color-primary-dark: #5a3e1a;
-  --color-primary-light: #b6a68a;
-  --color-secondary: #f6f6b2;
-  --color-text-dark: #3a2a1a;
-  --color-text-medium: #4d2e1a;
-  --color-text-light: #f6f6b2;
-  --color-background-light: #e29511;
-  --color-background-lighter: #c2beaa;
-  --color-device-dark: #222;
-  --color-device-medium: #444;
-  --color-device-light: #888;
-  --color-shadow: rgba(0, 0, 0, 0.10);
-  --color-shadow-strong: rgba(0, 0, 0, 0.18);
-  --color-shadow-stronger: rgba(0, 0, 0, 0.25);
+  /* Nostalgic Muted Palette - Very Soft, Low Contrast */
+  --color-bg-primary: #faf8f4;
+  --color-bg-secondary: #f7f5f0;
+  --color-bg-accent: #f4f1eb;
+  
+  --color-text-primary: #782a2a;
+  --color-text-secondary: #7d3939;
+  --color-text-light: #813d3d;
+  --color-text-inverse: #834747;
+  
+  /* Accent colors - muted gold/faded brown to harmonize with rust-red */
+  --color-accent-warm: #a67c52;
+  --color-accent-muted: #8d5a3a;
+  --color-accent-dark: #7d4a2a;
+  
+  /* Border colors - rust-red based with transparency */
+  --color-border-subtle: rgba(120, 42, 42, 0.08);
+  --color-border-soft: rgba(120, 42, 42, 0.12);
+  
+  /* Legacy colors (for compatibility) - Rust-red palette */
+  --color-primary: #7d3939;
+  --color-primary-dark: #782a2a;
+  --color-primary-light: #813d3d;
+  --color-secondary: #faf8f4;
+  --color-text-dark: #782a2a;
+  --color-text-medium: #7d3939;
+  --color-text-light: #813d3d;
+  --color-background-light: #faf8f4;
+  --color-background-lighter: #f7f5f0;
+  /* Device colors - rust-red based */
+  --color-device-dark: #782a2a;
+  --color-device-medium: #7d3939;
+  --color-device-light: #813d3d;
+  /* Shadow colors - rust-red based with transparency */
+  --color-shadow: rgba(120, 42, 42, 0.04);
+  --color-shadow-strong: rgba(120, 42, 42, 0.08);
+  --color-shadow-stronger: rgba(120, 42, 42, 0.12);
 
   /* Typography */
   --font-primary: 'Josefin Sans', Arial, sans-serif;
@@ -62,6 +83,8 @@
 
   /* Transitions */
   --transition-fast: 0.2s;
+  --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* === RESET & BASE STYLES === */
@@ -71,13 +94,48 @@
   font-weight: normal;
 }
 
-html, body {
-  height: 100%;
+html {
+  scroll-behavior: smooth;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  min-height: 100vh;
+}
+
+body {
   margin: 0;
   padding: 0;
   font-family: var(--font-primary);
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   font-weight: normal;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  transition: background-color 0.6s ease;
+  min-height: 100vh;
+}
+
+/* Full-page background image - set via JavaScript (collaborate-2.jpg) */
+body {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Ensure all content is above the overlay */
+.page-section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure all section elements have transparent backgrounds to show body background */
+section {
+  background-color: transparent;
 }
 
 /* Force normal font weight for all text elements except titles */
@@ -85,9 +143,9 @@ p, span, div, ul, li, strong, b, em, i {
   font-weight: normal !important;
 }
 
-/* Only allow bold for specific title elements */
+/* Only allow bold for specific title elements - softened */
 h1, h2, h3, h4, h5, h6, .page__title, .signature-title {
-  font-weight: 700;
+  font-weight: 500;
 }
 
 img {
@@ -100,6 +158,58 @@ a {
   color: inherit;
 }
 
+/* === UNIFIED PAGE SECTIONS === */
+.page-section {
+  min-height: 100vh;
+  position: relative;
+  background-color: transparent;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  scroll-margin-top: calc(var(--nav-height) + 40px);
+  border-top: 1px solid var(--color-border-subtle);
+  padding: 0;
+  margin: 0;
+  margin-bottom: 0;
+  overflow: visible;
+  z-index: 1;
+}
+
+.page-section:first-child {
+  border-top: none;
+}
+
+.page-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--color-border-subtle) 20%, 
+    var(--color-border-subtle) 80%, 
+    transparent 100%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.page-section:hover::before {
+  opacity: 1;
+}
+
+/* Soften all text elements for cohesive vintage feel */
+.page__title,
+.page__subtitle,
+.page__text {
+  opacity: 0.88;
+  transition: opacity 0.4s ease;
+}
+
+.page-section:hover .page__title,
+.page-section:hover .page__subtitle {
+  opacity: 0.95;
+}
+
 /* === COMMON LAYOUT PATTERNS === */
 .page__container {
   display: flex;
@@ -108,9 +218,10 @@ a {
   align-items: flex-start;
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: var(--spacing-xxxl) var(--container-padding);
+  padding: calc(var(--spacing-xxxl) + 20px) var(--container-padding);
   min-height: 100vh;
   box-sizing: border-box;
+  transition: padding var(--transition-smooth);
 }
 
 .page__left {
@@ -381,19 +492,7 @@ a {
   }
 }
 
-/* Burger menu animation update for CodePen-like effect */
-.burger-menu span {
-  transition: all 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
-}
-.burger-menu.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-.burger-menu.active span:nth-child(2) {
-  opacity: 0;
-}
-.burger-menu.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -6px);
-}  /* === COMMON UTILITY CLASSES === */
+/* === COMMON UTILITY CLASSES === */
 .text-center {
   text-align: center;
 }

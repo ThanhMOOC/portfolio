@@ -111,22 +111,23 @@ export async function loadCollaborateImages() {
 export async function loadFullPageBackground() {
   try {
     const images = await fetchImages();
-    const bgImage = findImage(images, 'collaborate-2');
+    const bgImage = findImage(images, 'lights');
     
     if (bgImage) {
-      // Apply blur transformation for subtle effect
-      const blurredUrl = addBlurToCloudinaryUrl(bgImage.url);
+      // Use the original URL directly, without any transformations
+      const imageUrl = bgImage.url;
       
       // Apply to body element as background image
-      document.body.style.backgroundImage = `url('${blurredUrl}')`;
+      document.body.style.backgroundImage = `url('${imageUrl}')`;
       document.body.style.backgroundSize = 'cover';
       document.body.style.backgroundPosition = 'center';
       document.body.style.backgroundRepeat = 'no-repeat';
       document.body.style.backgroundAttachment = 'fixed';
       
-      console.log('Background image loaded:', blurredUrl);
+      console.log('Background image loaded:', imageUrl);
     } else {
-      console.warn('collaborate-2 image not found in Cloudinary');
+      // Note: The warning message still refers to collaborate-2, let's update it to 'lights.jpg'
+      console.warn('lights.jpg image not found in Cloudinary');
     }
   } catch (err) {
     console.error('Failed to load full-page background:', err);

@@ -1,50 +1,43 @@
 /* Glassmorphism Navigation - Frosted Glass Theme */
 :root {
-  --nav-bg-glass: rgba(250, 248, 244, 0.28);
-  --nav-bg-glass-hover: rgba(250, 248, 244, 0.75);
+  --nav-bg-glass: rgba(250, 248, 244, 0.01);
   --nav-blur: blur(12px);
   --nav-border: rgba(217, 160, 27, 0.35);
-  --nav-text-color: rgb(217, 160, 27);
-  --nav-text-hover: rgb(190, 140, 23);
-  --nav-text-active: rgb(190, 140, 23);
-  --nav-height: 70px;
-  --nav-padding: 20px 40px;
-  --nav-mobile-padding: 15px 20px;
-  --nav-font-size: 0.95rem;
-  --nav-letter-spacing: 0.12em;
+  --nav-text-color: rgba(248, 241, 225, 0.92);
+  --nav-active-bg-alpha: 0.5;
+  --nav-active-bg-alpha-current: 0.75;
+  --nav-active-y-offset: 0.1em;
+  --nav-height: clamp(55px, 8vh, 70px);
   --nav-z-index: 1000;
-  --nav-border-radius: 20px;
+  --nav-border-radius: clamp(14px, 2vw, 20px);
   --nav-shadow: 0 8px 32px rgba(120, 42, 42, 0.06);
 }
 
 .main-navigation {
   position: fixed;
-  top: 20px;
+  top: clamp(8px, 2vh, 20px);
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 40px);
-  max-width: 1200px;
+  width: clamp(90%, 95vw, calc(100% - clamp(20px, 3vw, 40px)));
+  max-width: min(clamp(1000px, 80vw, 1400px), 95vw);
   height: var(--nav-height);
   z-index: var(--nav-z-index);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  box-sizing: border-box;
-  
-  /* Frosted Glass Effect */
+
   background: var(--nav-bg-glass);
   backdrop-filter: var(--nav-blur);
   -webkit-backdrop-filter: var(--nav-blur);
   border: 1px solid var(--nav-border);
   border-radius: var(--nav-border-radius);
   box-shadow: var(--nav-shadow);
-  
+
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
 
-/* ✨ LIGHT SWEEP – ĐÃ LÀM NỔI HƠN */
+/* Light sweep */
 .main-navigation::before {
   content: '';
   position: absolute;
@@ -70,110 +63,70 @@
 
 .main-navigation:hover {
   box-shadow: 0 14px 45px rgba(120, 42, 42, 0.1);
-  transform: translateX(-50%) translateY(2px);
+  transform: translateX(-50%) translateY(clamp(1px, 0.3vh, 2px));
 }
 
 .main-navigation nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0;
   width: 100%;
   height: 100%;
-  padding: 0 2rem;
+  padding: 0 clamp(1rem, 2vw, 2rem);
   position: relative;
   z-index: 2;
 }
+
+
+
+
 
 .main-navigation nav a {
   color: var(--nav-text-color);
   font-family: 'Josefin Sans', Arial, sans-serif;
   font-size: var(--nav-font-size);
-  font-weight: normal;
-  text-decoration: none;
   letter-spacing: var(--nav-letter-spacing);
   text-transform: uppercase;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+
+  padding: clamp(0.5rem, 1vh, 0.75rem) clamp(0.75rem, 1.5vw, 1.5rem);
+  margin: 0 clamp(0.15rem, 0.3vw, 0.25rem);
+  border-radius: clamp(10px, 1.5vw, 12px);
+
   position: relative;
-  padding: 0.75rem 1.5rem;
-  margin: 0 0.25rem;
-  border-radius: 12px;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  text-shadow:
+    0 0.08em 0.22em rgba(0, 0, 0, 0.40),
+    0 0 0.6em rgba(0, 0, 0, 0.20);
+
+  transition: background-color 180ms ease, box-shadow 180ms ease;
 }
 
-.main-navigation nav a::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  width: 100%;
-  height: 100%;
-  background: rgba(120, 42, 42, 0.06);
-  border-radius: 12px;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: -1;
+/* Cumulative active outline: links stay highlighted once reached */
+.main-navigation nav a.reached {
+  border-radius: 9999px;
+  background: rgba(120, 42, 42, var(--nav-active-bg-alpha));
+  box-shadow: inset 0 0 0 1px var(--nav-border);
 }
 
-.main-navigation nav a:hover {
-  color: var(--nav-text-hover);
-  transform: translateY(-2px);
-}
-
-.main-navigation nav a:hover::before {
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.main-navigation nav a::after {
-  content: '';
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 1.5px;
-  background: var(--nav-text-active);
-  border-radius: 2px;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 0.6;
-}
-
-.main-navigation nav a:hover::after,
-.main-navigation nav a.active::after {
-  width: calc(100% - 3rem);
-}
-
+/* Current section (still keeps reached, but stands out) */
 .main-navigation nav a.active {
-  color: var(--nav-text-active);
-  font-weight: 500;
+  border-radius: 9999px;
+  background: rgba(120, 42, 42, var(--nav-active-bg-alpha-current));
+  box-shadow: inset 0 0 0 2px var(--nav-border);
 }
 
-.main-navigation nav a.active::before {
-  transform: translate(-50%, -50%) scale(1);
-  background: rgba(120, 42, 42, 0.08);
+
+
+.main-navigation nav a:visited {
+  color: var(--nav-text-color);
 }
 
-.page-section {
-  scroll-margin-top: calc(var(--nav-height) + 40px);
-}
-
-/* Responsive giữ nguyên */
-@media (max-width: 900px) {
-  .main-navigation {
-    top: 10px;
-    width: calc(100% - 20px);
-    height: 60px;
-    border-radius: 16px;
-  }
-}
-
-@media (max-width: 600px) {
-  .main-navigation {
-    top: 8px;
-    width: calc(100% - 16px);
-    height: 55px;
-    border-radius: 14px;
-  }
+.main-navigation nav a:focus-visible {
+  color: var(--nav-text-color);
+  outline: none;
 }

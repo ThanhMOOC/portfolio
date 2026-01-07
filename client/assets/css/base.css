@@ -1,11 +1,80 @@
 /* === BASE CSS - UPDATED FOR GLASSMORPHISM === */
 
+/* Fallback background color */
+body {
+  background-color: #b8b4ae;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Dreamy overlays: vignette + subtle grain (no layout impact) */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Soft vignette + gentle bloom */
+body::before {
+  background:
+    radial-gradient(
+      120% 120% at 50% 20%,
+      rgba(255, 255, 255, 0.10) 0%,
+      rgba(255, 255, 255, 0.02) 38%,
+      rgba(0, 0, 0, 0.16) 100%
+    );
+  mix-blend-mode: soft-light;
+  opacity: 0.75;
+}
+
+/* Very light film grain texture */
+body::after {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.030) 0,
+      rgba(255, 255, 255, 0.030) 1px,
+      rgba(0, 0, 0, 0.030) 2px,
+      rgba(0, 0, 0, 0.030) 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.020) 0,
+      rgba(255, 255, 255, 0.020) 1px,
+      rgba(0, 0, 0, 0.020) 2px,
+      rgba(0, 0, 0, 0.020) 3px
+    );
+  mix-blend-mode: overlay;
+  opacity: 0.20;
+}
+
+/* Keep actual page content above overlays */
+body > header,
+body > main {
+  position: relative;
+  z-index: 1;
+}
+
 /* Glassmorphism Variables */
 :root {
   --glass-bg: rgba(255, 255, 255, 0.15);
   --glass-border: rgba(255, 255, 255, 0.3);
   --glass-blur: 12px;
   --glass-shadow: 0 8px 32px rgba(0,0,0,0.12);
+
+  /* Shared radius token (used across frames) */
+  --border-radius-xl: clamp(26px, 3vw, 44px);
+
+  /* Liquid glass (section frames) */
+  --section-glass-bg: rgba(255, 255, 255, 0.045);
+  --section-glass-border: rgba(255, 255, 255, 0.12);
+  --section-glass-blur: 10px;
+  --section-glass-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 /* Glass frame for images */
@@ -61,19 +130,11 @@
 .section-street .glass-frame,
 .section-home .glass-frame {
   width: 100%;
-  max-width: 600px;
+  max-width: min(600px, 90vw);
   height: auto;
 }
 
-/* Media queries for responsive scaling */
-@media (max-width: 1000px) {
-  .glass-frame {
-    max-width: 90%;
-  }
-}
-
-@media (max-width: 600px) {
-  .glass-frame {
-    max-width: 98%;
-  }
+/* Responsive adjustments */
+.gallery .glass-frame {
+  max-width: clamp(80%, 90vw, 100%);
 }

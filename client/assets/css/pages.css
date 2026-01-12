@@ -1,3 +1,114 @@
+.vertical-thumbnails-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  justify-content: space-between;
+}
+/* --- SLIDESHOW + THUMBNAIL DỌC WABI-SABI --- */
+.slideshow-thumbnails-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  position: relative;
+}
+
+.slideshow-thumbnails-row .slideshow {
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+.vertical-thumbnails {
+  align-items: flex-start;
+}
+}
+
+.vertical-thumbnails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 320px;
+  min-width: 56px;
+  justify-content: space-between;
+  gap: 0;
+}
+
+.vertical-thumbnails .thumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 220px;
+  height: 220px;
+  width: 48px;
+  flex-shrink: 0;
+}
+
+.vertical-thumbnails .thumbnail-img {
+  width: 44px;
+  height: 64px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.vertical-thumbnails .thumb-arrow {
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+}
+/* --- THUMBNAIL SLIDESHOW WABI-SABI --- */
+.thumbnails-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.thumbnails {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  max-width: 420px;
+}
+
+.thumbnail-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border 0.2s, transform 0.2s;
+}
+
+.thumbnail-img.active {
+  /* Không border vàng khi active */
+  transform: scale(1.08);
+  z-index: 1;
+}
+
+.thumb-arrow {
+  background: rgba(0,0,0,0.15);
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.thumb-arrow:hover {
+  background: rgba(0,0,0,0.35);
+}
 /* === PAGE.CSS - UPDATED FOR GLASSMORPHISM === */
 
 /* -------------------- */

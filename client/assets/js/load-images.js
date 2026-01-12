@@ -5,7 +5,11 @@ class Slideshow {
     this.images = images;
     this.currentIndex = 0;
     this.zoomLevel = 1;
-    
+    // thumbnail logic chỉ cho wabi-sabi
+    if (sectionName === 'wabi-sabi') {
+      this.thumbnailStart = 0;
+      this.maxThumbnails = 6;
+    }
     this.init();
   }
 
@@ -23,6 +27,20 @@ class Slideshow {
     this.closeBtn = document.getElementById(`${this.sectionName}-close`);
     this.zoomInBtn = document.getElementById(`${this.sectionName}-zoom-in`);
     this.zoomOutBtn = document.getElementById(`${this.sectionName}-zoom-out`);
+
+      // Thumbnails cho wabi-sabi
+      if (this.sectionName === 'wabi-sabi') {
+        this.thumbnailsWrapper = document.getElementById('wabi-sabi-thumbnails');
+        this.thumbPrevBtn = document.getElementById('wabi-sabi-thumb-prev');
+        this.thumbNextBtn = document.getElementById('wabi-sabi-thumb-next');
+        this.renderThumbnails();
+        if (this.thumbPrevBtn) {
+          this.thumbPrevBtn.addEventListener('click', () => this.scrollThumbnails(-1));
+        }
+        if (this.thumbNextBtn) {
+          this.thumbNextBtn.addEventListener('click', () => this.scrollThumbnails(1));
+        }
+      }
 
     if (!this.imgElement || this.images.length === 0) return;
 
@@ -239,3 +257,43 @@ async function loadFullPageBackground() {
 }
 
 export { loadAllImages, loadFullPageBackground };
+
+// --- Thêm các hàm thumbnail cho wabi-sabi vào prototype ---
+Slideshow.prototype.renderThumbnails = function() {
+  if (!this.thumbnailsWrapper) return;
+  this.thumbnailsWrapper.innerHTML = '';
+  const end = Math.min(this.thumbnailStart + this.maxThumbnails, this.images.length);
+  for (let i = this.thumbnailStart; i < end; i++) {
+    const thumb = document.createElement('img');
+    // Tạo URL thumbnail Cloudinary (w_60,h_60,c_fill)
+    let thumbUrl = this.images[i].url;
+    if (thumbUrl.includes('/upload/')) {
+      thumbUrl = thumbUrl.replace('/upload/', '/upload/w_60,h_60,c_fill/');
+    }
+    thumb.src = thumbUrl;
+    thumb.className = 'thumbnail-img';
+    thumb.alt = this.images[i].display_name || `Thumbnail ${i + 1}`;
+    thumb.dataset.index = i;
+    if (i === this.currentIndex) thumb.classList.add('active');
+    thumb.addEventListener('click', () => this.showImage(i));
+    this.thumbnailsWrapper.appendChild(thumb);
+  }
+};
+
+Slideshow.prototype.updateActiveThumbnail = function() {
+  if (!this.thumbnailsWrapper) return;
+  const thumbs = this.thumbnailsWrapper.querySelectorAll('.thumbnail-img');
+  thumbs.forEach((thumb) => {
+    thumb.classList.toggle('active', Number(thumb.dataset.index) === this.currentIndex);
+  });
+};
+
+Slideshow.prototype.scrollThumbnails = function(direction) {
+  // direction: -1 (prev), 1 (next)
+  const maxStart = Math.max(0, this.images.length - this.maxThumbnails);
+  this.thumbnailStart += direction;
+  if (this.thumbnailStart < 0) this.thumbnailStart = 0;
+  if (this.thumbnailStart > maxStart) this.thumbnailStart = maxStart;
+  this.renderThumbnails();
+  this.updateActiveThumbnail();
+};

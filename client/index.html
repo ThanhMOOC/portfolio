@@ -90,11 +90,23 @@
 
         <div class="gallery">
           <div class="slideshow-container">
-            <div class="slideshow">
-              <img id="wabi-sabi-img" src="" alt="Wabi-sabi Image" class="slideshow-image">
+            <div class="slideshow-thumbnails-row">
+              <div class="slideshow">
+                <img id="wabi-sabi-img" src="" alt="Wabi-sabi Image" class="slideshow-image">
+                <a class="prev" id="wabi-sabi-prev">&#10094;</a>
+                <a class="next" id="wabi-sabi-next">&#10095;</a>
+              </div>
+              <!-- Thumbnails dọc bên phải -->
+              <div class="thumbnails-wrapper vertical-thumbnails">
+                <div class="vertical-thumbnails-inner">
+                  <button class="thumb-arrow thumb-arrow-prev" id="wabi-sabi-thumb-prev">&#9650;</button>
+                  <div class="thumbnails" id="wabi-sabi-thumbnails">
+                    <!-- JS sẽ render các thumbnail vào đây -->
+                  </div>
+                  <button class="thumb-arrow thumb-arrow-next" id="wabi-sabi-thumb-next">&#9660;</button>
+                </div>
+              </div>
             </div>
-            <a class="prev" id="wabi-sabi-prev">&#10094;</a>
-            <a class="next" id="wabi-sabi-next">&#10095;</a>
           </div>
         </div>
 

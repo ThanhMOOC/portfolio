@@ -5,42 +5,23 @@ class Slideshow {
     this.images = images;
     this.currentIndex = 0;
     this.zoomLevel = 1;
-    // thumbnail logic chỉ cho wabi-sabi
-    if (sectionName === 'wabi-sabi') {
-      this.thumbnailStart = 0;
-      this.maxThumbnails = 6;
-    }
     this.init();
   }
 
   init() {
     // Get elements
-    this.imgElement = document.getElementById(`${this.sectionName}-img`);
-    this.prevBtn = document.getElementById(`${this.sectionName}-prev`);
-    this.nextBtn = document.getElementById(`${this.sectionName}-next`);
+    this.imgElement = this.getById(`${this.sectionName}-img`);
+    this.prevBtn = this.getById(`${this.sectionName}-prev`);
+    this.nextBtn = this.getById(`${this.sectionName}-next`);
     this.slideshow = document.querySelector(`#${this.sectionName} .slideshow`);
     this.slideshowContainer = document.querySelector(`#${this.sectionName} .slideshow-container`);
-    this.popup = document.getElementById(`${this.sectionName}-popup`);
-    this.popupImg = document.getElementById(`${this.sectionName}-popup-img`);
-    this.popupPrevBtn = document.getElementById(`${this.sectionName}-popup-prev`);
-    this.popupNextBtn = document.getElementById(`${this.sectionName}-popup-next`);
-    this.closeBtn = document.getElementById(`${this.sectionName}-close`);
-    this.zoomInBtn = document.getElementById(`${this.sectionName}-zoom-in`);
-    this.zoomOutBtn = document.getElementById(`${this.sectionName}-zoom-out`);
-
-      // Thumbnails cho wabi-sabi
-      if (this.sectionName === 'wabi-sabi') {
-        this.thumbnailsWrapper = document.getElementById('wabi-sabi-thumbnails');
-        this.thumbPrevBtn = document.getElementById('wabi-sabi-thumb-prev');
-        this.thumbNextBtn = document.getElementById('wabi-sabi-thumb-next');
-        this.renderThumbnails();
-        if (this.thumbPrevBtn) {
-          this.thumbPrevBtn.addEventListener('click', () => this.scrollThumbnails(-1));
-        }
-        if (this.thumbNextBtn) {
-          this.thumbNextBtn.addEventListener('click', () => this.scrollThumbnails(1));
-        }
-      }
+    this.popup = this.getById(`${this.sectionName}-popup`);
+    this.popupImg = this.getById(`${this.sectionName}-popup-img`);
+    this.popupPrevBtn = this.getById(`${this.sectionName}-popup-prev`);
+    this.popupNextBtn = this.getById(`${this.sectionName}-popup-next`);
+    this.closeBtn = this.getById(`${this.sectionName}-close`);
+    this.zoomInBtn = this.getById(`${this.sectionName}-zoom-in`);
+    this.zoomOutBtn = this.getById(`${this.sectionName}-zoom-out`);
 
     if (!this.imgElement || this.images.length === 0) return;
 
@@ -48,36 +29,22 @@ class Slideshow {
     this.showImage(0);
 
     // Event listeners cho navigation buttons
-    if (this.prevBtn) {
-      this.prevBtn.addEventListener('click', () => this.prevImage());
-    }
-    if (this.nextBtn) {
-      this.nextBtn.addEventListener('click', () => this.nextImage());
-    }
+    this.bindClick(this.prevBtn, () => this.prevImage());
+    this.bindClick(this.nextBtn, () => this.nextImage());
 
     // Event listeners cho popup navigation buttons
-    if (this.popupPrevBtn) {
-      this.popupPrevBtn.addEventListener('click', () => this.prevImage(true));
-    }
-    if (this.popupNextBtn) {
-      this.popupNextBtn.addEventListener('click', () => this.nextImage(true));
-    }
+    this.bindClick(this.popupPrevBtn, () => this.prevImage(true));
+    this.bindClick(this.popupNextBtn, () => this.nextImage(true));
 
     // Event listeners cho popup
     if (this.imgElement && this.popup && this.popupImg) {
-      this.imgElement.addEventListener('click', () => this.openPopup());
+      this.bindClick(this.imgElement, () => this.openPopup());
     }
-    if (this.closeBtn) {
-      this.closeBtn.addEventListener('click', () => this.closePopup());
-    }
+    this.bindClick(this.closeBtn, () => this.closePopup());
 
     // Zoom controls
-    if (this.zoomInBtn) {
-      this.zoomInBtn.addEventListener('click', () => this.zoomIn());
-    }
-    if (this.zoomOutBtn) {
-      this.zoomOutBtn.addEventListener('click', () => this.zoomOut());
-    }
+    this.bindClick(this.zoomInBtn, () => this.zoomIn());
+    this.bindClick(this.zoomOutBtn, () => this.zoomOut());
 
     // Close popup khi click outside
     if (this.popup) {
@@ -98,6 +65,16 @@ class Slideshow {
         if (e.key === '-') this.zoomOut();
       }
     });
+  }
+
+  getById(id) {
+    return document.getElementById(id);
+  }
+
+  bindClick(element, handler) {
+    if (element) {
+      element.addEventListener('click', handler);
+    }
   }
 
   getOrientation(width, height) {
@@ -141,7 +118,6 @@ class Slideshow {
       const image = this.images[this.currentIndex];
       this.imgElement.src = image.url;
       this.imgElement.alt = image.display_name || `${this.sectionName} image ${this.currentIndex + 1}`;
-      
       // Update frame class based on image orientation
       if (image.width && image.height) {
         this.updateFrameClass(image.width, image.height);
@@ -152,7 +128,6 @@ class Slideshow {
   nextImage(fromPopup = false) {
     this.showImage(this.currentIndex + 1);
     if (this.popup && this.popup.style.display === 'flex') {
-      // Reset zoom khi chuyển hình trong popup
       this.zoomLevel = 1;
       this.updatePopupImage();
     }
@@ -161,7 +136,6 @@ class Slideshow {
   prevImage(fromPopup = false) {
     this.showImage(this.currentIndex - 1);
     if (this.popup && this.popup.style.display === 'flex') {
-      // Reset zoom khi chuyển hình trong popup
       this.zoomLevel = 1;
       this.updatePopupImage();
     }
@@ -204,8 +178,14 @@ class Slideshow {
   }
 }
 
+const getApiBase = () => {
+  if (window.location.origin === 'null') return 'http://127.0.0.1:8000';
+  if (window.location.port && window.location.port !== '8000') return 'http://127.0.0.1:8000';
+  return '';
+};
+
 async function fetchImages(folder) {
-  const response = await fetch(`/image-url/${folder}`);
+  const response = await fetch(`${getApiBase()}/image-url/${folder}`);
   if (!response.ok) {
     throw new Error(`Failed to fetch images from ${folder}`);
   }
@@ -213,28 +193,34 @@ async function fetchImages(folder) {
 }
 
 async function loadAllImages() {
-  const sections = ['portrait', 'wabi-sabi', 'street-photo'];
+  const sections = [
+    { id: 'portrait', folder: 'portrait' },
+    { id: 'wabi-sabi', folder: 'wabi-sabi' },
+    { id: 'street-photo', folder: 'street' }
+  ];
 
   for (const section of sections) {
     try {
-      const images = await fetchImages(section);
+      const images = await fetchImages(section.folder);
       
       if (images && images.length > 0) {
-        // Tạo slideshow cho mỗi section
-        new Slideshow(section, images);
+        if (section.id === 'wabi-sabi') {
+          renderWabiSabiRow(images);
+        } else {
+          new Slideshow(section.id, images);
+        }
       } else {
-        console.warn(`No images found for section: ${section}`);
+        console.warn(`No images found for section: ${section.id}`);
       }
     } catch (error) {
-      console.error(`Error loading images for section ${section}:`, error);
+      console.error(`Error loading images for section ${section.id}:`, error);
     }
   }
 }
 
 async function loadFullPageBackground() {
   try {
-    // Gọi endpoint riêng để lấy hình nền (ảnh từ portfolio root)
-    const response = await fetch('/image-url/background');
+    const response = await fetch(`${getApiBase()}/image-url/background`);
     if (!response.ok) {
       console.warn('Background image not found, using fallback color');
       return;
@@ -242,7 +228,6 @@ async function loadFullPageBackground() {
     
     const backgroundImage = await response.json();
     
-    // Set background image
     if (backgroundImage.url) {
       document.body.style.backgroundImage = `url(${backgroundImage.url})`;
       document.body.style.backgroundSize = 'cover';
@@ -258,42 +243,21 @@ async function loadFullPageBackground() {
 
 export { loadAllImages, loadFullPageBackground };
 
-// --- Thêm các hàm thumbnail cho wabi-sabi vào prototype ---
-Slideshow.prototype.renderThumbnails = function() {
-  if (!this.thumbnailsWrapper) return;
-  this.thumbnailsWrapper.innerHTML = '';
-  const end = Math.min(this.thumbnailStart + this.maxThumbnails, this.images.length);
-  for (let i = this.thumbnailStart; i < end; i++) {
-    const thumb = document.createElement('img');
-    // Tạo URL thumbnail Cloudinary (w_60,h_60,c_fill)
-    let thumbUrl = this.images[i].url;
+function renderWabiSabiRow(images) {
+  const row = document.getElementById('wabi-sabi-row');
+  if (!row) return;
+
+  row.innerHTML = '';
+
+  images.forEach((image, index) => {
+    const img = document.createElement('img');
+    let thumbUrl = image.url;
     if (thumbUrl.includes('/upload/')) {
-      thumbUrl = thumbUrl.replace('/upload/', '/upload/w_60,h_60,c_fill/');
+      thumbUrl = thumbUrl.replace('/upload/', '/upload/w_60,h_80,c_fill/');
     }
-    thumb.src = thumbUrl;
-    thumb.className = 'thumbnail-img';
-    thumb.alt = this.images[i].display_name || `Thumbnail ${i + 1}`;
-    thumb.dataset.index = i;
-    if (i === this.currentIndex) thumb.classList.add('active');
-    thumb.addEventListener('click', () => this.showImage(i));
-    this.thumbnailsWrapper.appendChild(thumb);
-  }
-};
-
-Slideshow.prototype.updateActiveThumbnail = function() {
-  if (!this.thumbnailsWrapper) return;
-  const thumbs = this.thumbnailsWrapper.querySelectorAll('.thumbnail-img');
-  thumbs.forEach((thumb) => {
-    thumb.classList.toggle('active', Number(thumb.dataset.index) === this.currentIndex);
+    img.src = thumbUrl;
+    img.alt = image.display_name || `Wabi-sabi ${index + 1}`;
+    img.className = 'wabi-sabi-thumb';
+    row.appendChild(img);
   });
-};
-
-Slideshow.prototype.scrollThumbnails = function(direction) {
-  // direction: -1 (prev), 1 (next)
-  const maxStart = Math.max(0, this.images.length - this.maxThumbnails);
-  this.thumbnailStart += direction;
-  if (this.thumbnailStart < 0) this.thumbnailStart = 0;
-  if (this.thumbnailStart > maxStart) this.thumbnailStart = maxStart;
-  this.renderThumbnails();
-  this.updateActiveThumbnail();
-};
+}

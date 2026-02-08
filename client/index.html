@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +14,8 @@
   <link rel="stylesheet" href="assets/css/pages.css">
   <link rel="stylesheet" href="assets/css/navigation.css">
 </head>
+
 <body>
-  <!-- Navigation -->
   <header class="main-navigation" role="banner">
     <nav role="navigation" aria-label="Main navigation">
       <a href="#home" data-section="home">Home</a>
@@ -28,25 +29,18 @@
 
   <main>
 
-    <!-- Home -->
     <section id="home" class="page-section section-home">
-
       <div class="section-glass">
-
         <header class="section-header">
           <h1 class="page__title">TUA ERRE – CAMILLE</h1>
           <p class="page__subtitle">Photographer & Visual Storyteller</p>
         </header>
-
+        <!-- Removed Liquid Blob SVG here -->
       </div>
-
     </section>
 
-    <!-- Portrait -->
     <section id="portrait" class="page-section section-portrait portrait-vertical">
-
       <div class="section-glass">
-
         <header class="section-header">
           <h2 class="page__title">Portrait</h2>
           <p class="page__subtitle">Human essence & emotion</p>
@@ -55,14 +49,15 @@
         <div class="gallery">
           <div class="slideshow-container">
             <div class="slideshow">
-              <img id="portrait-img" src="" alt="Portrait Image" class="slideshow-image">
+              <div style="position:relative;">
+                <img id="portrait-img" src="" alt="Portrait Image" class="slideshow-image">
+              </div>
             </div>
             <a class="prev" id="portrait-prev">&#10094;</a>
             <a class="next" id="portrait-next">&#10095;</a>
           </div>
         </div>
 
-        <!-- Popup for full-size image -->
         <div id="portrait-popup" class="popup-container" style="display: none;">
           <span class="close-btn" id="portrait-close">&times;</span>
           <img class="popup-content" id="portrait-popup-img">
@@ -73,64 +68,28 @@
             <button id="portrait-zoom-out">-</button>
           </div>
         </div>
-
       </div>
-
     </section>
 
-    <!-- Wabi-sabi -->
-    <section id="wabi-sabi" class="page-section section-wabi-sabi landscape">
-
+    <section id="wabi-sabi" class="page-section section-wabi-sabi">
       <div class="section-glass">
-
         <header class="section-header">
           <h2 class="page__title">Wabi-sabi</h2>
-          <p class="page__subtitle">Silence of places</p>
+          <p class="page__subtitle">Quiet imperfection</p>
         </header>
 
-        <div class="gallery">
-          <div class="slideshow-container">
-            <div class="slideshow-thumbnails-row">
-              <div class="slideshow">
-                <img id="wabi-sabi-img" src="" alt="Wabi-sabi Image" class="slideshow-image">
-                <a class="prev" id="wabi-sabi-prev">&#10094;</a>
-                <a class="next" id="wabi-sabi-next">&#10095;</a>
-              </div>
-              <!-- Thumbnails dọc bên phải -->
-              <div class="thumbnails-wrapper vertical-thumbnails">
-                <div class="vertical-thumbnails-inner">
-                  <button class="thumb-arrow thumb-arrow-prev" id="wabi-sabi-thumb-prev">&#9650;</button>
-                  <div class="thumbnails" id="wabi-sabi-thumbnails">
-                    <!-- JS sẽ render các thumbnail vào đây -->
-                  </div>
-                  <button class="thumb-arrow thumb-arrow-next" id="wabi-sabi-thumb-next">&#9660;</button>
-                </div>
-              </div>
+        <div class="wabi-sabi-carousel" id="wabi-sabi-carousel" aria-label="Wabi-sabi parallax carousel">
+          <div class="wabi-sabi-stage">
+            <div class="wabi-sabi-container">
+              <div class="wabi-sabi-ring" id="wabi-sabi-ring"></div>
             </div>
           </div>
         </div>
-
-        <!-- Popup for full-size image -->
-        <div id="wabi-sabi-popup" class="popup-container" style="display: none;">
-          <span class="close-btn" id="wabi-sabi-close">&times;</span>
-          <img class="popup-content" id="wabi-sabi-popup-img">
-          <a class="popup-prev" id="wabi-sabi-popup-prev">&#10094;</a>
-          <a class="popup-next" id="wabi-sabi-popup-next">&#10095;</a>
-          <div class="zoom-controls">
-            <button id="wabi-sabi-zoom-in">+</button>
-            <button id="wabi-sabi-zoom-out">-</button>
-          </div>
-        </div>
-
       </div>
-
     </section>
 
-    <!-- Street Photo -->
     <section id="street-photo" class="page-section section-street">
-
       <div class="section-glass">
-
         <header class="section-header">
           <h2 class="page__title">Street Photo</h2>
           <p class="page__subtitle">Unposed moments</p>
@@ -146,7 +105,6 @@
           </div>
         </div>
 
-        <!-- Popup for full-size image -->
         <div id="street-photo-popup" class="popup-container" style="display: none;">
           <span class="close-btn" id="street-photo-close">&times;</span>
           <img class="popup-content" id="street-photo-popup-img">
@@ -157,22 +115,21 @@
             <button id="street-photo-zoom-out">-</button>
           </div>
         </div>
-
       </div>
-
     </section>
 
-    <!-- About -->
     <section id="about" class="page-section section--home" aria-label="About section">
-
       <div class="section-glass">
         <div class="page__container">
           <div class="page__left">
             <h1 class="page__title">I'M TUA</h1>
             <div class="page__subtitle">Photographer & Visual Storyteller</div>
             <div class="page__text">
-              <p>Based in the heart of France, I specialize in capturing authentic moments that tell your unique story. With a passion for natural light and candid photography, I create images that feel genuine and timeless.</p>
-              <p>Whether it's a portrait session, a special event, or a creative collaboration, I'm here to help bring your vision to life through my lens.</p>
+              <p>Based in the heart of France, I specialize in capturing authentic moments that tell your unique story.
+                With a passion for natural light and candid photography, I create images that feel genuine and timeless.
+              </p>
+              <p>Whether it's a portrait session, a special event, or a creative collaboration, I'm here to help bring
+                your vision to life through my lens.</p>
             </div>
           </div>
           <div class="page__right">
@@ -181,48 +138,74 @@
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" class="page-section section--collaborate" aria-label="Contact section">
+    <section id="contact" class="page-section section-contact" aria-label="Contact section">
+      <div class="section-glass contact-glass-wrapper">
+        <div class="contact-grid">
+          <div class="contact-info">
+            <div class="glass-card info-card">
+              <h2 class="contact-title">Get in touch</h2>
+              <p class="contact-desc">
+                Based in the heart of France. I specialize in capturing authentic moments.
+                Let's create something beautiful together.
+              </p>
 
-      <div class="section-glass">
-        <section class="collab-section">
-          <div class="collab-left">
-            <div class="collab-title">LET'S</div>
-            <span class="collab-script">Collaborate</span>
-            <div class="collab-label">Phone</div>
-            <div class="collab-value">07 69 69 46 55</div>
-            <div class="collab-label">Email</div>
-            <div class="collab-value">trangdoan17032408@gmail.com</div>
-            <div class="collab-btn-row">
-              <a href="mailto:trangdoan17032408@gmail.com" class="collab-btn">Contact Me</a>
-              <div class="collab-icons">
-                <a href="mailto:trangdoan17032408@gmail.com" class="collab-icon" title="Email" aria-label="Send email">
-                  <i class="fas fa-envelope"></i>
-                </a>
-                <a href="https://instagram.com/tua" target="_blank" class="collab-icon" title="Instagram" aria-label="Visit Instagram">
-                  <i class="fab fa-instagram"></i>
-                </a>
+              <div class="contact-details">
+                <div class="detail-item">
+                  <i class="fas fa-envelope detail-icon"></i>
+                  <a href="mailto:trangdoan17032408@gmail.com">trangdoan17032408@gmail.com</a>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-phone detail-icon"></i>
+                  <span>07 69 69 46 55</span>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-map-marker-alt detail-icon"></i>
+                  <span>France</span>
+                </div>
+              </div>
+
+              <div class="social-links">
+                <a href="https://instagram.com/tua" target="_blank" class="social-btn" aria-label="Instagram"><i
+                    class="fab fa-instagram"></i></a>
+                <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-btn" aria-label="Email"><i class="fas fa-envelope"></i></a>
               </div>
             </div>
           </div>
-          <div class="collab-center">
-            <img id="collab-center-img" class="collab-center-img" src="" alt="Collaborate Preview">
+
+          <div class="contact-form-wrapper">
+            <div class="glass-card form-card">
+              <form id="contactForm" class="contact-form">
+                <div class="form-row">
+                  <div class="form-group">
+                    <input type="text" id="name" placeholder="Name" required class="glass-input" aria-label="Your Name">
+                  </div>
+                  <div class="form-group">
+                    <input type="email" id="email" placeholder="Email" required class="glass-input"
+                      aria-label="Your Email Address">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="text" id="subject" placeholder="Subject" class="glass-input" aria-label="Subject">
+                </div>
+                <div class="form-group">
+                  <textarea id="message" rows="5" placeholder="Message" required class="glass-input glass-textarea"
+                    aria-label="Your Message"></textarea>
+                </div>
+                <button type="submit" class="glass-button">
+                  Send Message <i class="fas fa-paper-plane"></i>
+                </button>
+              </form>
+            </div>
           </div>
-          <div id="collab-right" class="collab-right"></div>
-        </section>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <!-- Scripts -->
   <script type="module" src="assets/js/scroll-navigation.js"></script>
-  <script type="module">
-    import { loadAllImages, loadFullPageBackground } from './assets/js/load-images.js';
-    document.addEventListener('DOMContentLoaded', () => {
-      loadAllImages();
-      loadFullPageBackground();
-    });
-  </script>
+  <script type="module" src="assets/js/init-page.js"></script>
 </body>
+
 </html>

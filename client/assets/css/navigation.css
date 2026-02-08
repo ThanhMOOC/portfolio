@@ -1,25 +1,25 @@
 /* Glassmorphism Navigation - Frosted Glass Theme */
 :root {
   --nav-bg-glass: rgba(250, 248, 244, 0.01);
-  --nav-blur: blur(12px);
+  --nav-blur: blur(0.75rem);
   --nav-border: rgba(217, 160, 27, 0.35);
   --nav-text-color: rgba(248, 241, 225, 0.92);
   --nav-active-bg-alpha: 0.5;
   --nav-active-bg-alpha-current: 0.75;
   --nav-active-y-offset: 0.1em;
-  --nav-height: clamp(55px, 8vh, 70px);
+  --nav-height: clamp(3.4375rem, 8vh, 4.375rem);
   --nav-z-index: 1000;
-  --nav-border-radius: clamp(14px, 2vw, 20px);
-  --nav-shadow: 0 8px 32px rgba(120, 42, 42, 0.06);
+  --nav-border-radius: clamp(0.875rem, 2vw, 1.25rem);
+  --nav-shadow: 0 0.5rem 2rem rgba(120, 42, 42, 0.06);
 }
 
 .main-navigation {
   position: fixed;
-  top: clamp(8px, 2vh, 20px);
+  top: clamp(0.5rem, 2vh, 1.25rem);
   left: 50%;
   transform: translateX(-50%);
-  width: clamp(90%, 95vw, calc(100% - clamp(20px, 3vw, 40px)));
-  max-width: min(clamp(1000px, 80vw, 1400px), 95vw);
+  width: clamp(90%, 95vw, calc(100% - clamp(1.25rem, 3vw, 2.5rem)));
+  max-width: min(clamp(62.5rem, 80vw, 87.5rem), 95vw);
   height: var(--nav-height);
   z-index: var(--nav-z-index);
   display: flex;
@@ -51,7 +51,7 @@
     rgba(255, 235, 200, 0.1) 30%,
     transparent 85%
   );
-  filter: blur(3px);
+  filter: blur(0.1875rem);
   transition: left 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
   pointer-events: none;
   z-index: 1;
@@ -62,8 +62,8 @@
 }
 
 .main-navigation:hover {
-  box-shadow: 0 14px 45px rgba(120, 42, 42, 0.1);
-  transform: translateX(-50%) translateY(clamp(1px, 0.3vh, 2px));
+  box-shadow: 0 0.875rem 2.8125rem rgba(120, 42, 42, 0.1);
+  transform: translateX(-50%) translateY(clamp(0.0625rem, 0.3vh, 0.125rem));
 }
 
 .main-navigation nav {
@@ -77,10 +77,6 @@
   z-index: 2;
 }
 
-
-
-
-
 .main-navigation nav a {
   color: var(--nav-text-color);
   font-family: 'Josefin Sans', Arial, sans-serif;
@@ -91,7 +87,7 @@
 
   padding: clamp(0.5rem, 1vh, 0.75rem) clamp(0.75rem, 1.5vw, 1.5rem);
   margin: 0 clamp(0.15rem, 0.3vw, 0.25rem);
-  border-radius: clamp(10px, 1.5vw, 12px);
+  border-radius: clamp(0.625rem, 1.5vw, 0.75rem);
 
   position: relative;
   z-index: 2;
@@ -119,8 +115,6 @@
   background: rgba(120, 42, 42, var(--nav-active-bg-alpha-current));
   box-shadow: inset 0 0 0 2px var(--nav-border);
 }
-
-
 
 .main-navigation nav a:visited {
   color: var(--nav-text-color);

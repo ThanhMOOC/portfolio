@@ -1,0 +1,120 @@
+/* === LAYOUT.CSS - Khung sườn chung === */
+
+:root {
+  /* Chiều rộng tối đa của lớp kính */
+  --glass-max-width: 1400px; 
+}
+
+/* -------------------- */
+/* GENERAL PAGE LAYOUT  */
+/* -------------------- */
+
+.page-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  /* Padding rộng rãi để không bị dính Header */
+  padding: calc(var(--nav-height) + 2rem) 1rem 2rem 1rem;
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  overflow: hidden; 
+}
+
+/* === LỚP KÍNH (QUAN TRỌNG) === */
+.page-section > .section-glass {
+  position: relative;
+  
+  /* 1. CHIỀU NGANG: 90% màn hình, max 1400px */
+  width: min(90vw, var(--glass-max-width));
+  margin: 0 auto;
+
+  /* 2. CHIỀU CAO: TỰ DO (Auto) */
+  height: auto; 
+  min-height: 0;
+  
+  /* Padding bên trong kính */
+  padding: clamp(1.5rem, 4vw, 3rem);
+  
+  border-radius: var(--border-radius-xl);
+  box-sizing: border-box;
+  isolation: isolate;
+  
+  /* Flex column để căn giữa nội dung */
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+/* Lớp nền mờ */
+.page-section > .section-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      var(--section-glass-bg) 40%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
+  border: 1px solid var(--section-glass-border);
+  box-shadow: var(--section-glass-shadow);
+  backdrop-filter: blur(var(--section-glass-blur)) saturate(1.35);
+  -webkit-backdrop-filter: blur(var(--section-glass-blur)) saturate(1.35);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Lớp phản quang */
+.page-section > .section-glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      120% 80% at 20% 10%,
+      rgba(255, 255, 255, 0.26) 0%,
+      rgba(255, 255, 255, 0.08) 35%,
+      rgba(255, 255, 255, 0) 70%
+    );
+  mix-blend-mode: screen;
+  filter: saturate(1.03) brightness(1.03);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Đảm bảo nội dung hiển thị trên kính */
+.page-section > .section-glass > * {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+/* Tiêu đề Section */
+.section-header {
+  text-align: center;
+  margin-bottom: clamp(1.5rem, 4vh, 3rem);
+  width: 100%;
+}
+
+.section-header h2 {
+  font-family: var(--font-primary);
+  font-size: clamp(2rem, 5vw, 3.5rem); 
+  color: var(--color-text-secondary);
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+  line-height: 1.2;
+}
+
+.section-header p {
+  font-family: var(--font-secondary);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--color-text-primary);
+  opacity: 0.85;
+}

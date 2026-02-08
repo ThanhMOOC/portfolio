@@ -36,16 +36,16 @@ body::after {
     repeating-linear-gradient(
       0deg,
       rgba(255, 255, 255, 0.030) 0,
-      rgba(255, 255, 255, 0.030) 1px,
-      rgba(0, 0, 0, 0.030) 2px,
-      rgba(0, 0, 0, 0.030) 3px
+      rgba(255, 255, 255, 0.030) 0.0625rem,
+      rgba(0, 0, 0, 0.030) 0.125rem,
+      rgba(0, 0, 0, 0.030) 0.1875rem
     ),
     repeating-linear-gradient(
       90deg,
       rgba(255, 255, 255, 0.020) 0,
-      rgba(255, 255, 255, 0.020) 1px,
-      rgba(0, 0, 0, 0.020) 2px,
-      rgba(0, 0, 0, 0.020) 3px
+      rgba(255, 255, 255, 0.020) 0.0625rem,
+      rgba(0, 0, 0, 0.020) 0.125rem,
+      rgba(0, 0, 0, 0.020) 0.1875rem
     );
   mix-blend-mode: overlay;
   opacity: 0.20;
@@ -62,18 +62,18 @@ body > main {
 :root {
   --glass-bg: rgba(255, 255, 255, 0.15);
   --glass-border: rgba(255, 255, 255, 0.3);
-  --glass-blur: 12px;
-  --glass-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  --glass-blur: 0.75rem;
+  --glass-shadow: 0 0.5rem 2rem rgba(0,0,0,0.12);
 
   /* Shared radius token (used across frames) */
-  --border-radius-xl: clamp(26px, 3vw, 44px);
+  --border-radius-xl: clamp(1.625rem, 3vw, 2.75rem);
 
   /* Liquid glass (section frames) */
   --section-glass-bg: rgba(255, 255, 255, 0.045);
   --section-glass-border: rgba(255, 255, 255, 0.12);
-  --section-glass-blur: 10px;
+  --section-glass-blur: 0.625rem;
   --section-glass-shadow:
-    0 18px 50px rgba(0, 0, 0, 0.10),
+    0 1.125rem 3.125rem rgba(0, 0, 0, 0.10),
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
@@ -94,7 +94,7 @@ body > main {
 
 .glass-frame:hover {
   transform: scale(1.02);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+  box-shadow: 0 0.75rem 2.5rem rgba(0,0,0,0.18);
 }
 
 /* Gallery layout adjustments */
@@ -130,7 +130,7 @@ body > main {
 .section-street .glass-frame,
 .section-home .glass-frame {
   width: 100%;
-  max-width: min(600px, 90vw);
+  max-width: min(37.5rem, 90vw);
   height: auto;
 }
 

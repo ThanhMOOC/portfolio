@@ -54,6 +54,21 @@ class ScrollNavigation {
     this.setupDockBounceEffect();    
   }
 
+  getNavHeight() {
+    const nav = document.querySelector('.main-navigation');
+    return nav ? nav.offsetHeight : 60;
+  }
+
+  scrollToSection(targetSection) {
+    const navHeight = this.getNavHeight();
+    const targetPosition = targetSection.offsetTop - navHeight;
+
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    });
+  }
+
   setupActiveIndicator() {
     if (!this.navEl) return;
 
@@ -149,14 +164,7 @@ class ScrollNavigation {
           history.pushState({ section: targetId }, '', `#${targetId}`);
           
           // Scroll to section
-          const nav = document.querySelector('.main-navigation');
-          const navHeight = nav ? nav.offsetHeight : 60;
-          const targetPosition = targetSection.offsetTop - navHeight;
-          
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
+          this.scrollToSection(targetSection);
           
           // Update active state immediately
           this.setActiveLink(link);
@@ -264,18 +272,6 @@ class ScrollNavigation {
     activeLink.classList.add('active');
     activeLink.setAttribute('aria-current', 'page');
 
-    // Progress highlight: keep items up to the current section highlighted.
-    // When scrolling back, items after the current one lose the highlight.
-    const links = Array.from(this.navLinks);
-    const activeIndex = links.indexOf(activeLink);
-    if (activeIndex !== -1) {
-      for (let i = 0; i <= activeIndex; i++) {
-        links[i].classList.add('reached');
-      }
-    } else {
-      activeLink.classList.add('reached');
-    }
-
     this.activeLinkEl = activeLink;
   }
 
@@ -298,13 +294,7 @@ class ScrollNavigation {
       if (targetSection) {
         // Scroll to section after a short delay to ensure page is loaded
         setTimeout(() => {
-          const nav = document.querySelector('.main-navigation');
-          const navHeight = nav ? nav.offsetHeight : 60;
-          const targetPosition = targetSection.offsetTop - navHeight;
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
+          this.scrollToSection(targetSection);
           this.setActiveSection(hash);
         }, 300);
         return;
@@ -327,14 +317,7 @@ class ScrollNavigation {
         const targetSection = document.getElementById(hash);
         if (targetSection) {
           this.isScrolling = true;
-          const nav = document.querySelector('.main-navigation');
-          const navHeight = nav ? nav.offsetHeight : 60;
-          const targetPosition = targetSection.offsetTop - navHeight;
-          
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
+          this.scrollToSection(targetSection);
           
           this.setActiveSection(hash);
           
@@ -374,14 +357,7 @@ class ScrollNavigation {
         
         const nextSection = this.sections[nextIndex];
         if (nextSection) {
-          const nav = document.querySelector('.main-navigation');
-          const navHeight = nav ? nav.offsetHeight : 60;
-          const targetPosition = nextSection.offsetTop - navHeight;
-          
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
+          this.scrollToSection(nextSection);
           
           this.setActiveSection(nextSection.id);
         }

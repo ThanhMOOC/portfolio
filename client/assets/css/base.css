@@ -60,8 +60,8 @@ body > main {
 
 /* Glassmorphism Variables */
 :root {
-  --glass-bg: rgba(255, 255, 255, 0.15);
-  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-bg: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.22);
   --glass-blur: 0.75rem;
   --glass-shadow: 0 0.5rem 2rem rgba(0,0,0,0.12);
 
@@ -69,12 +69,12 @@ body > main {
   --border-radius-xl: clamp(1.625rem, 3vw, 2.75rem);
 
   /* Liquid glass (section frames) */
-  --section-glass-bg: rgba(255, 255, 255, 0.045);
-  --section-glass-border: rgba(255, 255, 255, 0.12);
+  --section-glass-bg: rgba(255, 255, 255, 0.03);
+  --section-glass-border: rgba(255, 255, 255, 0.09);
   --section-glass-blur: 0.625rem;
   --section-glass-shadow:
-    0 1.125rem 3.125rem rgba(0, 0, 0, 0.10),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    0 1rem 2.5rem rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
 }
 
 /* Glass frame for images */

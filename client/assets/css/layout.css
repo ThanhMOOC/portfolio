@@ -2,7 +2,9 @@
 
 :root {
   /* Chiều rộng tối đa của lớp kính */
-  --glass-max-width: 1400px; 
+  --glass-max-width: 1100px;
+  /* Chiều cao cố định của lớp kính */
+  --glass-height: clamp(520px, 70vh, 720px);
 }
 
 /* -------------------- */
@@ -28,13 +30,12 @@
 .page-section > .section-glass {
   position: relative;
   
-  /* 1. CHIỀU NGANG: 90% màn hình, max 1400px */
+  /* 1. CHIỀU NGANG: 90% màn hình, max 1100px */
   width: min(90vw, var(--glass-max-width));
   margin: 0 auto;
 
-  /* 2. CHIỀU CAO: TỰ DO (Auto) */
-  height: auto; 
-  min-height: 0;
+  /* 2. CHIỀU CAO: CỐ ĐỊNH (KHÔNG AUTO SCALE) */
+  height: var(--glass-height);
   
   /* Padding bên trong kính */
   padding: clamp(1.5rem, 4vw, 3rem);

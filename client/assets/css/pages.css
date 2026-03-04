@@ -1,12 +1,12 @@
 :root {
-  /* Kích thước hình gốc - Dev chỉ cần chỉnh ở đây */
-  --img-portrait-w: 320px;
-  --img-portrait-h: 480px;
-  --img-landscape-w: 800px;
-  --img-landscape-h: 533px;
+  --page-text-primary: rgba(248, 241, 225, 0.95);
+  --page-text-secondary: rgba(236, 226, 203, 0.82);
+  --page-text-muted: rgba(220, 206, 178, 0.72);
 
-  --section-glass-blur: 5px;
-  --section-glass-bg: rgba(255, 255, 255, 0.01);
+  --section-glass-blur: 6px;
+  --section-glass-bg: rgba(255, 255, 255, 0.06);
+  --section-glass-border: rgba(255, 255, 255, 0.26);
+  --section-glass-shadow: 0 18px 45px rgba(12, 16, 28, 0.34);
 }
 
 .page-section {
@@ -14,104 +14,213 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 80px 20px;
+  padding: calc(var(--nav-height) + 2rem) 1.2rem 2rem;
 }
 
-/* Kính tự co giãn theo nội dung hình */
 .section-glass {
   position: relative;
-  width: fit-content; /* Quan trọng: ôm theo hình */
-  max-width: 95vw;
-  padding: 2rem;
-  border-radius: 2rem;
+  width: min(94vw, 1120px);
+  border-radius: 1.8rem;
+  padding: clamp(1.2rem, 2.6vw, 2rem);
+  isolation: isolate;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  isolation: isolate;
+  gap: 1rem;
 }
 
 .section-glass::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--section-glass-bg);
-  backdrop-filter: blur(var(--section-glass-blur));
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.22);
-  z-index: -1;
   border-radius: inherit;
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.17) 0%, var(--section-glass-bg) 46%, rgba(255, 255, 255, 0.03) 100%);
+  backdrop-filter: blur(var(--section-glass-blur)) saturate(1.2);
+  -webkit-backdrop-filter: blur(var(--section-glass-blur)) saturate(1.2);
+  border: 1px solid var(--section-glass-border);
+  box-shadow: var(--section-glass-shadow);
+  z-index: -1;
 }
 
-/* Slideshow Container */
-.slideshow-container {
-  position: relative;
+.section-header {
+  margin: 0;
+}
+
+.section-header .page__title,
+.page__title {
+  margin: 0;
+  color: var(--page-text-primary);
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.34);
+}
+
+.section-header .page__subtitle,
+.page__subtitle,
+.page__text p,
+.contact-title,
+.detail-item,
+.detail-item a,
+.glass-button,
+.glass-input,
+.contact-form ::placeholder {
+  color: var(--page-text-secondary);
+}
+
+.gallery-tabs {
+  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.35rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.gallery-tab {
+  border: 1px solid rgba(243, 230, 200, 0.28);
+  background: rgba(248, 241, 225, 0.05);
+  color: var(--page-text-secondary);
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: all 0.25s ease;
+  flex: 0 0 auto;
+}
+
+.gallery-tab:hover,
+.gallery-tab.is-active {
+  background: rgba(205, 167, 98, 0.26);
+  color: var(--page-text-primary);
+  border-color: rgba(243, 230, 200, 0.45);
+}
+
+.gallery-panel-wrap {
+  position: relative;
+  width: 100%;
+  height: clamp(420px, 64vh, 760px);
   overflow: hidden;
-  border-radius: 1rem;
-  background: rgba(0,0,0,0.06);
-  transition: width 0.5s ease, height 0.5s ease;
 }
 
-/* Loading state */
-.loader {
+.gallery-panel {
   position: absolute;
-  z-index: 5;
-  color: white;
-  font-size: 2rem;
+  inset: 0;
   display: none;
-}
-.loading .loader { display: block; }
-.loading .slideshow-image { opacity: 0.3; }
-
-/* Khóa kích thước hình */
-.frame--portrait .slideshow-image {
-  width: var(--img-portrait-w);
-  height: var(--img-portrait-h);
-  object-fit: contain;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.3rem;
 }
 
-.frame--landscape .slideshow-image {
-  width: var(--img-landscape-w);
-  height: var(--img-landscape-h);
-  object-fit: contain;
+.gallery-panel.is-active {
+  display: block;
 }
 
-/* Mobile responsive */
-@media (max-width: 768px) {
-  :root {
-    --img-portrait-w: 260px;
-    --img-portrait-h: 390px;
-    --img-landscape-w: 300px;
-    --img-landscape-h: 200px;
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 0.85rem;
+}
+
+.gallery-card {
+  display: block;
+  border-radius: 0.85rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.26);
+  aspect-ratio: 4 / 5;
+}
+
+.gallery-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.gallery-card:hover .gallery-card__img {
+  transform: scale(1.03);
+}
+
+.gallery-empty {
+  color: var(--page-text-muted);
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(10%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(-10%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutLeft {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(-10%); opacity: 0; }
+}
+
+@keyframes slideOutRight {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(10%); opacity: 0; }
+}
+
+.slide-in-left { animation: slideInLeft 300ms ease both; }
+.slide-in-right { animation: slideInRight 300ms ease both; }
+.slide-out-left { animation: slideOutLeft 300ms ease both; }
+.slide-out-right { animation: slideOutRight 300ms ease both; }
+
+.contact-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.glass-card {
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1rem;
+}
+
+.glass-input {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.75rem;
+}
+
+.glass-button {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 0.75rem;
+  background: rgba(190, 150, 85, 0.23);
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-panel-wrap {
+    height: clamp(360px, 58vh, 650px);
   }
 }
 
-.slideshow-image {
-  display: block;
-  transition: opacity 0.4s ease;
-}
+@media (max-width: 640px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
-/* Các UI khác giữ nguyên logic */
-.prev, .next {
-  position: absolute;
-  cursor: pointer;
-  padding: 1rem;
-  color: white;
-  background: rgba(0,0,0,0.14);
-  z-index: 10;
+  .gallery-card {
+    aspect-ratio: 1 / 1.2;
+  }
 }
-.next { right: 0; }
-.prev { left: 0; }
-
-.popup-container {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.95);
-  z-index: 2000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.popup-content { max-height: 90vh; max-width: 90vw; }

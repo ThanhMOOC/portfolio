@@ -1,10 +1,11 @@
 {
 	"folders": [
 		{
-			"path": "../../.."
+			"name": "portfolio",
+			"path": "."
 		},
 		{
-			"path": "../../../../base44_portfolio"
+			"path": "../../MAALSI/CESI_MongoDB_2026"
 		}
 	],
 	"settings": {}

@@ -1,76 +1,3 @@
-class Slideshow {
-  constructor(sectionId, images) {
-    this.sectionId = sectionId;
-    this.images = images;
-    this.currentIndex = 0;
-    this.isMobile = window.innerWidth <= 768;
-
-    this.elems = {
-      container: document.querySelector(`[data-slideshow="${sectionId}"]`),
-      img: document.getElementById(`${sectionId}-img`),
-      prev: document.getElementById(`${sectionId}-prev`),
-      next: document.getElementById(`${sectionId}-next`),
-      popup: document.getElementById(`${sectionId}-popup`),
-      popupImg: document.getElementById(`${sectionId}-popup-img`)
-    };
-
-    if (this.elems.img) this.init();
-  }
-
-  init() {
-    this.showImage(0);
-    this.elems.prev?.addEventListener('click', () => this.changeStep(-1));
-    this.elems.next?.addEventListener('click', () => this.changeStep(1));
-    this.elems.img?.addEventListener('click', () => this.togglePopup(true));
-    document.getElementById(`${this.sectionId}-close`)?.addEventListener('click', () => this.togglePopup(false));
-  }
-
-  // Tối ưu hóa URL Cloudinary cho Mobile
-  getOptimizedUrl(url) {
-    if (!url.includes('cloudinary')) return url;
-    const transform = this.isMobile ? 'w_600,c_limit,q_auto,f_auto' : 'w_1200,c_limit,q_auto,f_auto';
-    return url.replace('/upload/', `/upload/${transform}/`);
-  }
-
-  async showImage(index) {
-    this.elems.container?.classList.add('loading');
-
-    this.currentIndex = (index + this.images.length) % this.images.length;
-    const data = this.images[this.currentIndex];
-
-    // Khung tự thay đổi class dựa trên orientation
-    const orientation = data.width > data.height ? 'landscape' : 'portrait';
-    this.elems.container?.classList.remove('frame--portrait', 'frame--landscape');
-    this.elems.container?.classList.add(`frame--${orientation}`);
-
-    const optimizedUrl = this.getOptimizedUrl(data.url);
-
-    // Đợi hình tải xong mới tắt loading
-    await this.preloadImage(optimizedUrl);
-
-    this.elems.img.src = optimizedUrl;
-    this.elems.container?.classList.remove('loading');
-  }
-
-  preloadImage(url) {
-    return new Promise(resolve => {
-      const img = new Image();
-      img.onload = resolve;
-      img.src = url;
-    });
-  }
-
-  changeStep(step) {
-    this.showImage(this.currentIndex + step);
-  }
-
-  togglePopup(show) {
-    if (!this.elems.popup) return;
-    this.elems.popup.style.display = show ? 'flex' : 'none';
-    if (show) this.elems.popupImg.src = this.images[this.currentIndex].url;
-  }
-}
-
 const getApiBase = () => (window.location.port && window.location.port !== '8000') ? 'http://127.0.0.1:8000' : '';
 
 function getNonCropBackgroundUrl(url) {
@@ -78,28 +5,187 @@ function getNonCropBackgroundUrl(url) {
 
   const vw = Math.max(window.innerWidth || 1920, 1);
   const vh = Math.max(window.innerHeight || 1080, 1);
-
-  // c_fit: giữ nguyên tỉ lệ, không crop.
-  // f_auto,q_auto,dpr_auto: tối ưu chất lượng/dung lượng theo thiết bị.
   const transform = `c_fit,w_${vw},h_${vh},f_auto,q_auto,dpr_auto`;
   return url.replace('/upload/', `/upload/${transform}/`);
 }
 
-async function loadAllImages() {
-  const configs = [
-    { id: 'portrait', folder: 'portrait' },
-    { id: 'street-photo', folder: 'street' }
-  ];
+function getThumbUrl(url) {
+  if (!url || !url.includes('cloudinary') || !url.includes('/upload/')) return url;
+  return url.replace('/upload/', '/upload/w_800,c_limit,f_auto,q_auto,dpr_auto/');
+}
 
-  for (const cfg of configs) {
-    try {
-      const res = await fetch(`${getApiBase()}/image-url/${cfg.folder}`);
-      const images = await res.json();
-      if (images.length) new Slideshow(cfg.id, images);
-    } catch (e) {
-      console.error(`Failed ${cfg.id}`, e);
+function shuffleArray(list) {
+  const arr = [...list];
+  for (let i = arr.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+class TabbedGallery {
+  constructor() {
+    this.tabs = Array.from(document.querySelectorAll('.gallery-tab'));
+    this.panels = Array.from(document.querySelectorAll('.gallery-panel'));
+    this.activeTab = 'all';
+
+    if (!this.tabs.length || !this.panels.length) return;
+
+    this.bindEvents();
+  }
+
+  bindEvents() {
+    this.tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const nextTab = tab.dataset.tab;
+        if (!nextTab || nextTab === this.activeTab) return;
+
+        const currentIndex = this.tabs.findIndex((x) => x.dataset.tab === this.activeTab);
+        const nextIndex = this.tabs.findIndex((x) => x.dataset.tab === nextTab);
+        const direction = nextIndex > currentIndex ? 'left' : 'right';
+
+        this.switchTo(nextTab, direction);
+      });
+    });
+  }
+
+  switchTo(nextTab, direction) {
+    const activeTabEl = this.tabs.find((t) => t.dataset.tab === this.activeTab);
+    const nextTabEl = this.tabs.find((t) => t.dataset.tab === nextTab);
+    const activePanel = this.panels.find((p) => p.dataset.panel === this.activeTab);
+    const nextPanel = this.panels.find((p) => p.dataset.panel === nextTab);
+
+    if (!activeTabEl || !nextTabEl || !activePanel || !nextPanel) return;
+
+    activeTabEl.classList.remove('is-active');
+    activeTabEl.setAttribute('aria-selected', 'false');
+
+    nextTabEl.classList.add('is-active');
+    nextTabEl.setAttribute('aria-selected', 'true');
+
+    activePanel.classList.remove('is-active', 'slide-in-left', 'slide-in-right');
+    activePanel.classList.add(direction === 'left' ? 'slide-out-left' : 'slide-out-right');
+
+    nextPanel.classList.remove('slide-out-left', 'slide-out-right', 'slide-in-left', 'slide-in-right');
+    nextPanel.style.display = 'block';
+    nextPanel.removeAttribute('aria-hidden');
+    nextPanel.classList.add('is-active', direction === 'left' ? 'slide-in-left' : 'slide-in-right');
+
+    const cleanup = () => {
+      this.panels.forEach((panel) => {
+        if (panel.dataset.panel !== nextTab) {
+          panel.classList.remove('is-active', 'slide-out-left', 'slide-out-right', 'slide-in-left', 'slide-in-right');
+          panel.style.display = 'none';
+          panel.setAttribute('aria-hidden', 'true');
+        }
+      });
+
+      nextPanel.classList.remove('slide-in-left', 'slide-in-right');
+      this.activeTab = nextTab;
+      nextPanel.scrollTop = 0;
+    };
+
+    window.setTimeout(cleanup, 320);
+  }
+}
+
+function createCard(image) {
+  const card = document.createElement('a');
+  card.className = 'gallery-card';
+  card.href = image.url;
+  card.target = '_blank';
+  card.rel = 'noopener noreferrer';
+  card.title = image.display_name || image.public_id || 'Open image';
+
+  const img = document.createElement('img');
+  img.className = 'gallery-card__img';
+  img.src = getThumbUrl(image.url);
+  img.alt = image.display_name || 'Portfolio image';
+  img.loading = 'lazy';
+  img.decoding = 'async';
+
+  card.appendChild(img);
+  return card;
+}
+
+function renderGrid(gridId, images) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+
+  grid.innerHTML = '';
+
+  if (!images.length) {
+    const empty = document.createElement('p');
+    empty.className = 'gallery-empty';
+    empty.textContent = 'No images available yet.';
+    grid.appendChild(empty);
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+  images.forEach((image) => fragment.appendChild(createCard(image)));
+  grid.appendChild(fragment);
+}
+
+function categoryFromFolder(folder) {
+  const key = String(folder || '').toLowerCase();
+  if (key.includes('portrait')) return 'portrait';
+  if (key.includes('wabi') || key.includes('sabi')) return 'wabi-sabi';
+  if (key.includes('street')) return 'street-photo';
+  return null;
+}
+
+async function loadAllImages() {
+  const categorized = {
+    portrait: [],
+    'wabi-sabi': [],
+    'street-photo': []
+  };
+
+  try {
+    const res = await fetch(`${getApiBase()}/image-url/portfolio`);
+    const tree = await res.json();
+
+    Object.entries(tree || {}).forEach(([folder, images]) => {
+      const category = categoryFromFolder(folder);
+      if (!category || !Array.isArray(images)) return;
+      categorized[category].push(...images);
+    });
+  } catch (error) {
+    console.error('Failed loading portfolio tree', error);
+  }
+
+  if (!categorized['wabi-sabi'].length || !categorized.portrait.length || !categorized['street-photo'].length) {
+    const fallbackConfigs = [
+      { category: 'portrait', folder: 'portrait' },
+      { category: 'wabi-sabi', folder: 'wabi-sabi' },
+      { category: 'street-photo', folder: 'street' }
+    ];
+
+    for (const cfg of fallbackConfigs) {
+      if (categorized[cfg.category].length) continue;
+      try {
+        const res = await fetch(`${getApiBase()}/image-url/${cfg.folder}`);
+        const images = await res.json();
+        if (Array.isArray(images)) categorized[cfg.category] = images;
+      } catch (error) {
+        console.error(`Failed loading ${cfg.category}`, error);
+      }
     }
   }
+
+  const all = shuffleArray([
+    ...categorized.portrait,
+    ...categorized['wabi-sabi'],
+    ...categorized['street-photo']
+  ]);
+
+  renderGrid('gallery-grid-all', all);
+  renderGrid('gallery-grid-portrait', categorized.portrait);
+  renderGrid('gallery-grid-wabi-sabi', categorized['wabi-sabi']);
+  renderGrid('gallery-grid-street-photo', categorized['street-photo']);
+
+  new TabbedGallery();
 }
 
 async function loadFullPageBackground() {
@@ -110,15 +196,16 @@ async function loadFullPageBackground() {
       const optimizedBgUrl = getNonCropBackgroundUrl(data.url);
       Object.assign(document.body.style, {
         backgroundImage: `url(${optimizedBgUrl})`,
-        // contain: không cắt ảnh, chấp nhận có khoảng trống nếu khác tỉ lệ màn hình
-        backgroundSize: 'contain',
+        backgroundSize: 'cover',
         backgroundAttachment: 'fixed',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center center',
         backgroundColor: '#b8b4ae'
       });
     }
-  } catch (e) { }
+  } catch (error) {
+    console.error('Failed loading background image', error);
+  }
 }
 
 export { loadAllImages, loadFullPageBackground };

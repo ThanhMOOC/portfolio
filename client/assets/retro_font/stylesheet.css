@@ -1,0 +1,90 @@
+@font-face {
+    font-family: 'SG85-CHI SON 1';
+    src: url('SG85-CHISON1.woff2') format('woff2'),
+        url('SG85-CHISON1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SG85-CHI SON 2';
+    src: url('SG85-CHISON2.woff2') format('woff2'),
+        url('SG85-CHISON2.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SG85-HIEN KHANH 2';
+    src: url('SG85-HIENKHANH2.woff2') format('woff2'),
+        url('SG85-HIENKHANH2.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SG85-HIEN KHANH 1';
+    src: url('SG85-HIENKHANH1.woff2') format('woff2'),
+        url('SG85-HIENKHANH1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SG85-HIEN KHANH 3';
+    src: url('SG85-HIENKHANH3.woff2') format('woff2'),
+        url('SG85-HIENKHANH3.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SG85-HONG KY 1';
+    src: url('SG85-HONGKY1.woff2') format('woff2'),
+        url('SG85-HONGKY1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SG85-HONG KY 2';
+    src: url('SG85-HONGKY2.woff2') format('woff2'),
+        url('SG85-HONGKY2.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SG85-PHAT TAI';
+    src: url('SG85-PHATTAI.woff2') format('woff2'),
+        url('SG85-PHATTAI.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SG85-Saigon 1985';
+    src: url('SG85Saigon1985.woff2') format('woff2'),
+        url('SG85Saigon1985.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SG85-CUA HANG';
+    src: url('SG85-CUAHANG.woff2') format('woff2'),
+        url('SG85-CUAHANG.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

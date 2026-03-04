@@ -12,98 +12,64 @@
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/pages.css">
   <link rel="stylesheet" href="assets/css/navigation.css">
+  <link rel="stylesheet" href="assets/retro_font/stylesheet.css">
+  <!-- Restore saved font immediately to avoid flash of unstyled content -->
+  <script>
+    (function () {
+      var f = localStorage.getItem('portfolio-retro-font');
+      if (f) {
+        var s = document.createElement('style');
+        s.textContent = "body { font-family: '" + f + "', 'Josefin Sans', Arial, sans-serif; }";
+        document.head.appendChild(s);
+      }
+    })();
+  </script>
 </head>
 <body>
-  <header class="main-navigation" role="banner">
+  <div class="main-navigation" role="navigation" aria-label="Main navigation">
     <nav role="navigation">
       <a href="#home" data-section="home">Home</a>
-      <a href="#portrait" data-section="portrait">Portrait</a>
-      <a href="#wabi-sabi" data-section="wabi-sabi">Wabi-sabi</a>
-      <a href="#street-photo" data-section="street-photo">Street Photo</a>
+      <a href="#gallery" data-section="gallery">Gallery</a>
       <a href="#about" data-section="about">About</a>
       <a href="#contact" data-section="contact">Contact</a>
     </nav>
-  </header>
+  </div>
 
   <main>
     <section id="home" class="page-section section-home">
       <div class="section-glass">
-        <header class="section-header">
+        <div class="section-header">
           <h1 class="page__title">TUA ERRE – CAMILLE</h1>
           <p class="page__subtitle">Photographer & Visual Storyteller</p>
-        </header>
-      </div>
-    </section>
-
-    <section id="portrait" class="page-section section-portrait">
-      <div class="section-glass">
-        <header class="section-header">
-          <h2 class="page__title">Portrait</h2>
-          <p class="page__subtitle">Human essence & emotion</p>
-        </header>
-        <div class="gallery">
-          <div class="slideshow-container" data-slideshow="portrait">
-            <div class="loader"><i class="fas fa-spinner fa-spin"></i></div>
-            <div class="slideshow">
-                <img id="portrait-img" src="" alt="Portrait" class="slideshow-image">
-            </div>
-            <a class="prev" id="portrait-prev">&#10094;</a>
-            <a class="next" id="portrait-next">&#10095;</a>
-          </div>
-        </div>
-        <div id="portrait-popup" class="popup-container" style="display: none;">
-          <span class="close-btn" id="portrait-close">&times;</span>
-          <img class="popup-content" id="portrait-popup-img">
-          <a class="popup-prev" id="portrait-popup-prev">&#10094;</a>
-          <a class="popup-next" id="portrait-popup-next">&#10095;</a>
-          <div class="zoom-controls">
-            <button id="portrait-zoom-in">+</button>
-            <button id="portrait-zoom-out">-</button>
-          </div>
         </div>
       </div>
     </section>
 
-    <section id="wabi-sabi" class="page-section section-wabi-sabi">
-        <div class="section-glass">
-          <header class="section-header">
-            <h2 class="page__title">Wabi-sabi</h2>
-            <p class="page__subtitle">Quiet imperfection</p>
-          </header>
-          <div class="wabi-sabi-carousel" id="wabi-sabi-carousel">
-            <div class="wabi-sabi-stage">
-              <div class="wabi-sabi-container">
-                <div class="wabi-sabi-ring" id="wabi-sabi-ring"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </section>
-
-    <section id="street-photo" class="page-section section-street">
+    <section id="gallery" class="page-section section-gallery">
       <div class="section-glass">
-        <header class="section-header">
-          <h2 class="page__title">Street Photo</h2>
-          <p class="page__subtitle">Unposed moments</p>
-        </header>
-        <div class="gallery">
-          <div class="slideshow-container" data-slideshow="street">
-            <div class="loader"><i class="fas fa-spinner fa-spin"></i></div>
-            <div class="slideshow">
-                <img id="street-photo-img" src="" alt="Street" class="slideshow-image">
-            </div>
-            <a class="prev" id="street-photo-prev">&#10094;</a>
-            <a class="next" id="street-photo-next">&#10095;</a>
-          </div>
+        <div class="section-header">
+          <h2 class="page__title">Gallery</h2>
+          <p class="page__subtitle">Curated visual stories</p>
         </div>
-        <div id="street-photo-popup" class="popup-container" style="display: none;">
-          <span class="close-btn" id="street-photo-close">&times;</span>
-          <img class="popup-content" id="street-photo-popup-img">
-          <a class="popup-prev" id="street-photo-popup-prev">&#10094;</a>
-          <a class="popup-next" id="street-photo-popup-next">&#10095;</a>
-          <div class="zoom-controls">
-            <button id="street-photo-zoom-in">+</button>
-            <button id="street-photo-zoom-out">-</button>
+        <div class="gallery-tabs" role="tablist" aria-label="Gallery filters">
+          <button class="gallery-tab is-active" role="tab" aria-selected="true" data-tab="all">All</button>
+          <button class="gallery-tab" role="tab" aria-selected="false" data-tab="portrait">Portrait</button>
+          <button class="gallery-tab" role="tab" aria-selected="false" data-tab="wabi-sabi">Wabi-sabi</button>
+          <button class="gallery-tab" role="tab" aria-selected="false" data-tab="street-photo">Street Photo</button>
+        </div>
+
+        <div class="gallery-panel-wrap" id="gallery-panel-wrap">
+          <div class="gallery-panel is-active" role="tabpanel" data-panel="all">
+            <div class="gallery-grid" id="gallery-grid-all"></div>
+          </div>
+          <div class="gallery-panel" role="tabpanel" data-panel="portrait" aria-hidden="true">
+            <div class="gallery-grid" id="gallery-grid-portrait"></div>
+          </div>
+          <div class="gallery-panel" role="tabpanel" data-panel="wabi-sabi" aria-hidden="true">
+            <div class="gallery-grid" id="gallery-grid-wabi-sabi"></div>
+          </div>
+          <div class="gallery-panel" role="tabpanel" data-panel="street-photo" aria-hidden="true">
+            <div class="gallery-grid" id="gallery-grid-street-photo"></div>
           </div>
         </div>
       </div>
@@ -150,5 +116,6 @@
 
   <script type="module" src="assets/js/scroll-navigation.js"></script>
   <script type="module" src="assets/js/init-page.js"></script>
+  <script type="module" src="assets/js/font-switcher.js"></script>
 </body>
 </html>

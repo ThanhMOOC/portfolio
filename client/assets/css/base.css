@@ -5,6 +5,18 @@ body {
   background-color: #b8b4ae;
   position: relative;
   isolation: isolate;
+  color: rgba(248, 241, 225, 0.92);
+}
+
+h1, h2, h3, h4, h5, h6,
+p,
+a,
+span,
+button,
+input,
+textarea,
+label {
+  color: inherit;
 }
 
 /* Dreamy overlays: vignette + subtle grain (no layout impact) */
@@ -52,7 +64,6 @@ body::after {
 }
 
 /* Keep actual page content above overlays */
-body > header,
 body > main {
   position: relative;
   z-index: 1;
